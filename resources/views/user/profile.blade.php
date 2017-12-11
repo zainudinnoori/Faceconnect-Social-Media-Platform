@@ -56,7 +56,7 @@
 									<div class="tbl info-tbl">
 										<div class="tbl-row">
 											<div class="tbl-cell">
-												<p class="title">Dan Counsell</p>
+												<p class="title">{{ Auth::user()->name }}</p>
 												<p>Company Founder</p>
 											</div>
 											<div class="tbl-cell tbl-cell-stat">
