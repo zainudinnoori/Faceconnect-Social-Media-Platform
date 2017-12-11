@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Auth;
+use App\User;
 use App\Post;
-class userController extends Controller
+use Illuminate\Http\Request;
+
+class postController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('user.profile',compact('posts'));
+        //
     }
 
     /**
@@ -25,7 +25,7 @@ class userController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -36,7 +36,12 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post= new Post;
+        $post::create([
+            'user_id' => Auth::id(),
+            'body' => request('post_body'),
+        ]);
+        return back();
     }
 
     /**
@@ -70,15 +75,7 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if($request->image != null)
-        {
-            $imagename= time().".".$request->image->getClientOriginalExtension();
-            $request->image->move(public_path('images'),$imagename);
-            $user= Auth::user();
-            $user->image=$imagename;
-            $user->save();
-            return back();
-         }
+        //
     }
 
     /**

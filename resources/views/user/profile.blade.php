@@ -229,8 +229,11 @@
 
 						<div class="tab-content no-styled profile-tabs">
 							<div role="tabpanel" class="tab-pane active" id="tabs-2-tab-1">
-								<form class="box-typical">
-									<input type="text" class="write-something" placeholder="What`s on your mind"/>
+
+
+								<form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
+									{{ csrf_field() }}
+									<input type="text" name="post_body" class="write-something" placeholder="What`s on your mind"/>
 									<div class="box-typical-footer">
 										<div class="tbl">
 											<div class="tbl-row">
@@ -252,6 +255,7 @@
 										</div>
 									</div>
 								</form><!--.box-typical-->
+
 
 								<article class="box-typical profile-post">
 									<div class="profile-post-header">
@@ -397,19 +401,19 @@
 										</div>
 									</div>
 								</article>
-
+								@foreach($posts as $post)
 								<article class="box-typical profile-post">
 									<div class="profile-post-header">
 										<div class="user-card-row">
 											<div class="tbl-row">
 												<div class="tbl-cell tbl-cell-photo">
 													<a href="#">
-														<img src="images/photo-64-2.jpg" alt="">
+														<img src=images/{{ $post->user->image }} alt="no Pic">
 													</a>
 												</div>
 												<div class="tbl-cell">
-													<div class="user-card-row-name"><a href="#">Tim Collins</a></div>
-													<div class="color-blue-grey-lighter">3 days ago - 23 min read</div>
+													<div class="user-card-row-name"><a href="#">{{ $post->user->name }}</a></div>
+													<div class="color-blue-grey-lighter">{{ $post->created_at->diffForHumans() }}</div>
 												</div>
 											</div>
 										</div>
@@ -419,7 +423,7 @@
 									</div>
 									<div class="profile-post-content">
 										<p class="profile-post-content-note">Added 4 new pictures</p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+										<p>{{ $post->body }} </p>
 										<div class="profile-post-gall-fluid profile-post-gall-grid" data-columns>
 											<div class="col">
 												<a class="fancybox" rel="gall-1" href="images/gall-img-1.jpg">
@@ -455,15 +459,18 @@
 									</div>
 									<div class="box-typical-footer profile-post-meta">
 										<a href="#" class="meta-item">
-											<i class="font-icon font-icon-heart"></i>
+											<i class="fa fa-heart"></i>
 											45 Like
 										</a>
 										<a href="#" class="meta-item">
-											<i class="font-icon font-icon-comment"></i>
+											<i class="fa fa-comment"></i>
 											18 Comment
 										</a>
 									</div>
-								</article>	
+								</article>
+								@endforeach()
+
+
 										<div class="form-group row">
 											<div class="col-xl-2">
 												<label class="form-label">
