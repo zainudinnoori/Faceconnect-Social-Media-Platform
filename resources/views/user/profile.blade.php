@@ -48,7 +48,7 @@
 	<div class="page-content">
 		<div class="profile-header-photo">
 			<div class="profile-header-photo-in">
-				<div class="tbl-cell">
+				<div class="tbl-cell" style="background-image: url(images/{{ Auth::user()->image }});">
 					<div class="info-block">
 						<div class="container-fluid">
 							<div class="row">
@@ -85,11 +85,21 @@
 					</div>
 				</div>
 			</div>
+
+	
+		<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
+			{{ csrf_field() }}
+			{{ method_field('PUT') }}
+
 			<button type="button" class="change-cover">
-				<i class="icon-picture"></i>
-				Change cover
-				<input type="file"/>
+				Change cover <img src="images/upload_icon.png" width="30px" height="30px">
+				<input type="file" name="cover-photo"/>
 			</button>
+	
+
+		</form>
+
+
 		</div><!--.profile-header-photo-->
 
 		<div class="container-fluid">
@@ -97,14 +107,22 @@
 				<div class="col-xl-3 col-lg-4">
 					<aside class="profile-side">
 						<section class="box-typical profile-side-user">
-							<button type="button" class="avatar-preview avatar-preview-128">
-								<img src="images/avatar-1-256.png" alt=""/>
-								<span class="update">
-									<i class="icon-picture"></i>
-									Update photo
-								</span>
-								<input type="file"/>
-							</button>
+
+							<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
+								{{ csrf_field() }}
+								{{ method_field('PUT') }}
+								<button type="button" class="avatar-preview avatar-preview-128">
+									<img src="images/{{ Auth::user()->image }}" alt="Your pic"/>
+									<span class="update">
+										<i class="icon-picture"></i>
+										Update photo
+									</span>
+									<input type="file" name="image"/>
+								</button>
+								<button type="submit"><img src="images/upload_icon.png" width="30px" height="30px"></button>
+							</form>
+
+
 							<button type="button" class="btn btn-rounded">Send a Message</button>
 							<div class="btn-group">
 								<button type="button"
@@ -143,7 +161,7 @@
 						<section class="box-typical">
 							<header class="box-typical-header-sm bordered">About</header>
 							<div class="box-typical-inner">
-								<p>Maecenas sed diam eget risus varius blandit sit amet non magna. Vestibulum id ligula porta felis euismod semper.</p>
+								<p>{{ Auth::user()->about }}</p>
 							</div>
 						</section>
 
@@ -162,31 +180,19 @@
 							<div class="box-typical-inner">
 								<p class="line-with-icon">
 									<i class="icon-pushpin"></i>
-									New York
+									{{ Auth::user()->clocation }} , {{ Auth::user()->ccountry }}
 								</p>
 								<p class="line-with-icon">
 									<i class="font-icon font-icon-users-two"></i>
-									Group1, Group2
+									{{ Auth::user()->email }}
 								</p>
 								<p class="line-with-icon">
 									<i class="font-icon font-icon-case-3"></i>
-									Symfony, PHP, JavaScript, Java, Android, SQL, OOP, OOD
-								</p>
-								<p class="line-with-icon">
-									<i class="font-icon font-icon-learn"></i>
-									VSU, Compiter Science, Master
-								</p>
-								<p class="line-with-icon">
-									<i class="font-icon font-icon-github"></i>
-									<a href="#">Nickname</a>
-								</p>
-								<p class="line-with-icon">
-									<i class="fa fa-globe"></i>
-									<a href="#">example.com</a>
+									{{ Auth::user()->dob }}
 								</p>
 								<p class="line-with-icon">
 									<i class="font-icon font-icon-calend"></i>
-									Registered 8 month ago
+									{{ Auth::user()->created_at->diffForHumans() }}
 								</p>
 							</div>
 						</section>

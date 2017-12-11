@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class userController extends Controller
 {
@@ -68,7 +69,15 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->image != null)
+        {
+            $imagename= time().".".$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images'),$imagename);
+            $user= Auth::user();
+            $user->image=$imagename;
+            $user->save();
+            return back();
+         }
     }
 
     /**
