@@ -31,8 +31,8 @@
 	<header class="site-header">
 	    <div class="container-fluid">
 	        <a href="#" class="site-logo">
-	            <img class="hidden-md-down" src="images/logo-2.png" alt="">
-	            <img class="hidden-lg-up" src="images/logo-2-mob.png" alt="">
+	            <img class="hidden-md-down" src="images/Logo.jpg" alt="logo">
+	            <img class="hidden-lg-up" src="Logo.jpg" alt="">
 	        </a>
 	        <button class="hamburger hamburger--htla">
 	            <span>toggle menu</span>
@@ -140,7 +140,6 @@
 									<a class="dropdown-item" href="#"><span class="font-icon font-icon-comments"></span>Third Party Test</a>
 								</div>
 							</div>
-							<div class="bottom-txt">Standing: 154</div>
 						</section>
 					
 						<section class="box-typical profile-side-stat">
