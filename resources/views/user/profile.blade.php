@@ -233,7 +233,7 @@
 
 								<form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
 									{{ csrf_field() }}
-									<input type="text" name="post_body" class="write-something" placeholder="What`s on your mind"/>
+									<textarea class="write-something" name="post_body"  placeholder="What`s on your mind"></textarea>
 									<div class="box-typical-footer">
 										<div class="tbl">
 											<div class="tbl-row">
@@ -256,19 +256,19 @@
 									</div>
 								</form><!--.box-typical-->
 
-
+							@foreach($posts as $post)
 								<article class="box-typical profile-post">
 									<div class="profile-post-header">
 										<div class="user-card-row">
 											<div class="tbl-row">
 												<div class="tbl-cell tbl-cell-photo">
 													<a href="#">
-														<img src="images/photo-64-2.jpg" alt="">
+														<img src= images/{{ $post->user->image }} alt="">
 													</a>
 												</div>
 												<div class="tbl-cell">
-													<div class="user-card-row-name"><a href="#">Tim Collins</a></div>
-													<div class="color-blue-grey-lighter">3 days ago - 23 min read</div>
+													<div class="user-card-row-name"><a href="#">{{ $post->user->name }}</a></div>
+													<div class="color-blue-grey-lighter">{{ $post->created_at->diffForHumans() }}</div>
 												</div>
 											</div>
 										</div>
@@ -278,7 +278,7 @@
 									</div>
 									<div class="profile-post-content">
 										<p class="profile-post-content-note">Subminted a new post</p>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+										<p>{{ $post->body }} </p>
 									</div>
 									<div class="box-typical-footer profile-post-meta">
 										<a href="#" class="meta-item">
@@ -401,6 +401,7 @@
 										</div>
 									</div>
 								</article>
+								@endforeach
 								@foreach($posts as $post)
 								<article class="box-typical profile-post">
 									<div class="profile-post-header">
