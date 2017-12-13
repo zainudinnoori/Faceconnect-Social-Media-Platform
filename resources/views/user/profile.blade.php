@@ -29,13 +29,10 @@
 				<div class="tbl-row">
 					<div class="tbl-cell">
 						<button type="button" class="btn-icon">
-							<i class="fa fa-globe"></i>
+							<i class="font-icon fa fa-picture-o"></i>
 						</button>
 						<button type="button" class="btn-icon">
-							<i class="font-icon fa-globe"></i>
-						</button>
-						<button type="button" class="btn-icon">
-							<i class=" fa fa-globe"></i>
+							<i class="font-icon fa fa-video-camera"></i>
 						</button>
 					</div>
 					<div class="tbl-cell tbl-cell-action">
@@ -165,7 +162,7 @@
 					<div class="box-typical-footer">
 						<div class="tbl">
 							<div class="tbl-row">
-								<div class="tbl-cell">
+								<!-- <div class="tbl-cell">
 									<button type="button" class="btn-icon">
 										<i class="font-icon font-icon-earth"></i>
 									</button>
@@ -178,7 +175,7 @@
 									<button type="button" class="btn-icon">
 										<i class="font-icon font-icon-video-fill"></i>
 									</button>
-								</div>
+								</div> -->
 								<div class="tbl-cell tbl-cell-action">
 									<button type="submit" class="btn btn-rounded">Send</button>
 								</div>
