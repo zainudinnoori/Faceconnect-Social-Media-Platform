@@ -202,21 +202,6 @@
 						</div><!--.tabs-section-nav-->
 						<div class="tab-content no-styled profile-tabs">
 							@yield('profilecontent')
-								<div class="form-group row">
-									<div class="col-xl-2">
-										<label class="form-label">
-											<a href="#">Add new skill</a>
-										</label>
-									</div>
-									<div class="col-xl-4">
-										<div class="input-group">
-											<input type="text" class="form-control" value="Logo design">
-											<span class="input-group-btn">
-												<button class="btn btn-grey" type="button">Add</button>
-											</span>
-										</div>
-									</div>
-								</div>
 								<script>
 									$(document).ready(function(){
 										$("#range-slider-1").ionRangeSlider({
@@ -253,11 +238,12 @@
 
 									});
 								</script>
+								</div>
 							</section>
-							<section class="box-typical-section profile-settings-btns">
+<!-- 							<section class="box-typical-section profile-settings-btns">
 								<button type="submit" class="btn btn-rounded">Save Changes</button>
 								<button type="button" class="btn btn-rounded btn-grey">Cancel</button>
-							</section>
+							</section> -->
 						</div>
 					</div><!--.tab-pane-->
 				</div><!--.tab-content-->

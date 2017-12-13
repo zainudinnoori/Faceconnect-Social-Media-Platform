@@ -21,7 +21,9 @@
 		</li>
 	</ul>
 	@endsection
-
+	<article class="box-typical profile-post">
+		
+	</article>
 	
 </div>									
 @endsection
