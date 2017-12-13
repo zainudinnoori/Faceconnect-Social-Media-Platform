@@ -24,3 +24,18 @@ Route::resource('profile','userController');
 Route::resource('post','postController');
 
 Route::resource('comment','commentController');
+
+Route::get('/setting',function(){
+	return view('user.profilesetting');
+});
+
+Route::get('/photos',function(){
+	return view('user.profilephotos');
+});
+
+Route::get('logout',function(){
+
+	Auth::logout();
+});
+
+
