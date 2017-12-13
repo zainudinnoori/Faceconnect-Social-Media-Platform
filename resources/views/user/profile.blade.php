@@ -151,25 +151,27 @@
 							<header class="box-typical-header-sm bordered">Info</header>
 							<div class="box-typical-inner">
 								<p class="line-with-icon">
-									<i class="font-icon fa fa-globe"></i>
+									<i class="font-icon fa fa-map-marker"></i>
 									{{ Auth::user()->clocation }} , {{ Auth::user()->ccountry }}
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon font-icon-users-two"></i>
+									<i class="font-icon fa fa-envelope"></i>
+									 
 									{{ Auth::user()->email }}
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon font-icon-case-3"></i>
-									{{ Auth::user()->dob }}
+									<i class="font-icon fa fa-birthday-cake"></i>
+									dob
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon font-icon-case-3"></i>
+									<i class="font-icon fa fa-user-circle"></i>
 									{{ Auth::user()->gender }}
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon fa fa-calender"></i>
+									<i class="font-icon fa fa-calendar-check-o"></i>
 									{{ Auth::user()->created_at->diffForHumans() }}
 								</p>
+
 							</div>
 						</section>
 
@@ -215,13 +217,10 @@
 											<div class="tbl-row">
 												<div class="tbl-cell">
 													<button type="button" class="btn-icon">
-														<i class="fa fa-globe"></i>
+													<i class="font-icon fa fa-picture-o"></i>
 													</button>
 													<button type="button" class="btn-icon">
-														<i class="font-icon fa-globe"></i>
-													</button>
-													<button type="button" class="btn-icon">
-														<i class=" fa fa-globe"></i>
+												<i class="font-icon fa fa-video-camera "></i>
 													</button>
 												</div>
 												<div class="tbl-cell tbl-cell-action">
@@ -356,7 +355,7 @@
 									<div class="box-typical-footer">
 										<div class="tbl">
 											<div class="tbl-row">
-												<div class="tbl-cell">
+												<!-- <div class="tbl-cell">
 													<button type="button" class="btn-icon">
 														<i class="font-icon font-icon-earth"></i>
 													</button>
@@ -369,7 +368,7 @@
 													<button type="button" class="btn-icon">
 														<i class="font-icon font-icon-video-fill"></i>
 													</button>
-												</div>
+												</div> -->
 												<div class="tbl-cell tbl-cell-action">
 													<button type="submit" class="btn btn-rounded">Send</button>
 												</div>
@@ -395,7 +394,7 @@
 											</div>
 										</div>
 										<a href="#" class="shared">
-											<i class="font-icon font-icon-share"></i>
+											<i class="fa fa-share-alt"></i>
 										</a>
 									</div>
 									<div class="profile-post-content">
