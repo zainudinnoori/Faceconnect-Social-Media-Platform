@@ -2,7 +2,7 @@
 
 namespace App;
 use App\User;
-use Comment;
+use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model

@@ -15,7 +15,7 @@ class userController extends Controller
      */
     public function index()
     {
-        $comment= Comment
+        // $comment= Comment
         $posts = Post::orderBy('created_at','decs')->get();
         return view('user.profile',compact('posts'));
     }
