@@ -170,25 +170,27 @@
 							<header class="box-typical-header-sm bordered">Info</header>
 							<div class="box-typical-inner">
 								<p class="line-with-icon">
-									<i class="font-icon fa fa-globe"></i>
+									<i class="font-icon fa fa-map-marker"></i>
 									{{ Auth::user()->clocation }} , {{ Auth::user()->ccountry }}
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon font-icon-users-two"></i>
+									<i class="font-icon fa fa-envelope"></i>
+									 
 									{{ Auth::user()->email }}
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon font-icon-case-3"></i>
-									{{ Auth::user()->dob }}
+									<i class="font-icon fa fa-birthday-cake"></i>
+									dob
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon font-icon-case-3"></i>
+									<i class="font-icon fa fa-user-circle"></i>
 									{{ Auth::user()->gender }}
 								</p>
 								<p class="line-with-icon">
-									<i class="font-icon font-icon-calend"></i>
+									<i class="font-icon fa fa-calendar-check-o"></i>
 									{{ Auth::user()->created_at->diffForHumans() }}
 								</p>
+
 							</div>
 						</section>
 
