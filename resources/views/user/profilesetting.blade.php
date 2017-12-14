@@ -95,7 +95,12 @@
 					<tr>
 						<td>Date of birth</td>
 						<td>
-							<input class="editable-inputs" disabled style="border-color:transparent;" type="" value="{{ Auth::user()->dob }}" name="dob">
+							{{-- <select>
+								@for($i=1 ; $i<=31; $i++)
+									<option>{{ $i }}</option>
+								@endfor
+							</select> --}}
+							{{-- <input class="editable-inputs" disabled style="border-color:transparent;" type="" value="{{ Auth::user()->dob }}" name="dob"> --}}
 						</td>
 						<td>
 							<button  style="border: 0;background-color: transparent;" type="submit" class="comment-row-item-action edit">
@@ -119,7 +124,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>About</td>
+						<td>Write about your self</td>
 						<td>
 							<textarea class="write-something editable-inputs" disabled style="border-color:transparent;" name="about"> 
 								{{ Auth::user()->about }} 
