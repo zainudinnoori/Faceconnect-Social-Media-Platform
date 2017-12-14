@@ -16,8 +16,8 @@ class photoController extends Controller
     public function index()
     {
 
-        $user= Auth::user();
-        $photos= Photo::all();
+        $photos= Auth::user()->photos;
+
         // dd($photos);
         return view('user.profilephotos', compact('photos'));
 

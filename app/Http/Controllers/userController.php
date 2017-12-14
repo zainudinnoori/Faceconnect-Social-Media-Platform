@@ -83,6 +83,7 @@ class userController extends Controller
             return back();
          }
 
+         $dob= 
          $user= User::find($id);
          $user->name= request('name');
          $user->email=request('email');

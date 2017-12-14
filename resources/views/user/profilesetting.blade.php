@@ -95,7 +95,7 @@
 					<tr>
 						<td>Date of birth</td>
 						<td>
-							<input class="editable-inputs" disabled style="border-color:transparent;" type="" value="{{ Auth::user()->dob }}" name="dob">
+							<input class="editable-inputs" disabled style="border-color:transparent;" type="" value="{{ Auth::user()->dob }}" id="datepicker" name="dob">
 						</td>
 						<td>
 							<button  style="border: 0;background-color: transparent;" type="submit" class="comment-row-item-action edit">
@@ -111,6 +111,7 @@
 								<option>Female</option>
 							</select>
 							{{-- <input class="editable-inputs" disabled style="border-color:transparent;" type="" value="{{ Auth::user()->gender }}" name="gender"> --}}
+							
 						</td>
 						<td>
 							<button  style="border: 0;background-color: transparent;" type="submit" class="comment-row-item-action edit">
@@ -173,6 +174,11 @@
 		
 
   	}
+
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+
 	</script>
 
 @endsection

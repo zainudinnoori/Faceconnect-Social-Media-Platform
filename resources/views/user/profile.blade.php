@@ -72,7 +72,7 @@
 							$photos=$post->photos;						
 					?>
 					@foreach($photos as $photo)
-						<div> <img width="200px" height="200px" src= images/{{ $photo->photo }}> </div>
+						<img width="200px" height="200px" class="img img-responsive" src= images/{{ $photo->photo }}>
 					@endforeach
 				</div>
 				<div class="box-typical-footer profile-post-meta">
