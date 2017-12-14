@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Post;
 use App\Comment;
+use App\Photo;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -36,5 +37,10 @@ class User extends Authenticatable
     public function comments(){
 
         return $this->hasMany(Comment::class);
+    }
+
+    public function photos(){
+
+        return $this->hasMany(Photo::class);
     }
 }

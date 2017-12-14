@@ -29,9 +29,7 @@ Route::get('/setting',function(){
 	return view('user.profilesetting');
 });
 
-Route::get('/photos',function(){
-	return view('user.profilephotos');
-});
+Route::get('/photos','photoController@index');
 
 Route::get('logout',function(){
 

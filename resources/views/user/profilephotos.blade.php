@@ -22,7 +22,14 @@
 	</ul>
 	@endsection
 	<article class="box-typical profile-post">
-		
+		<ul style="list-style: none ;padding: 10px">
+			@foreach($photos as $photo)
+				<li  style="display: inline;padding: 20px" >
+					<img  class="img img-responsive" style="padding: 5px; border: 1px solid blue;margin:5px"" src="images/{{ $photo->photo }}"  height="200px" width="200px" alt="no pic">
+					{{-- {{ $photo->created_at->toFormattedDateString() }} --}}
+				</li>
+			@endforeach
+		</ul>
 	</article>
 	
 </div>									

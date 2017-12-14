@@ -16,7 +16,7 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#tabs-2-tab-3" role="tab" data-toggle="tab">
+				<a class="nav-link" href="/photos" role="tab" data-toggle="tab">
 					<span class="nav-link-in">Photos</span>
 				</a>
 			</li>
@@ -31,8 +31,11 @@
 						<button type="button" class="btn-icon">
 							<i class="font-icon fa fa-picture-o"></i>
 						</button>
+						
 						<button type="button" class="btn-icon">
-							<i class="font-icon fa fa-video-camera"></i>
+							<i class="font-icon fa fa-video-camera"><input type="file" name="images[]" multiple ></i>
+							
+							
 						</button>
 					</div>
 					<div class="tbl-cell tbl-cell-action">
@@ -65,6 +68,12 @@
 				<div class="profile-post-content">
 					<p class="profile-post-content-note">Subminted a new post</p>
 					<p>{{ $post->body }} </p>
+					<?php
+							$photos=$post->photos;						
+					?>
+					@foreach($photos as $photo)
+						<div> <img width="200px" height="200px" src= images/{{ $photo->photo }}> </div>
+					@endforeach
 				</div>
 				<div class="box-typical-footer profile-post-meta">
 					<a href="#" class="meta-item">
@@ -96,9 +105,6 @@
 							</div>
 							<div class="comment-row-item-content">
 								<p>{{ $comment->body }}</p>
-
-								
-
 								<button type="submit" class="comment-row-item-action edit">
 									<i class="fa fa-pencil"></i>
 								</button>

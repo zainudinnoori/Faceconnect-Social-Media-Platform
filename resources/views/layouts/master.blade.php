@@ -259,8 +259,12 @@
 	<!-- <div class="circle-progress-bar pieProgress" role="progressbar" data-goal="100" data-barcolor="#ac6bec" data-barsize="10" aria-valuemin="0" aria-valuemax="100">
 	    <span class="pie_progress__number">0%</span> -->
 	<!-- </div> --> 
-
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
 	<script src="js/lib/salvattore/salvattore.min.js"></script>
+	@yield('scripts')
 
 </body>
 

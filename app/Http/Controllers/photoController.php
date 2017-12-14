@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
-use App\User;
-use App\Post;
-Use App\Photo;
-use Illuminate\Http\Request;
 
-class postController extends Controller
+use Illuminate\Http\Request;
+use Auth;
+use App\Photo;
+use App\Post;
+class photoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,12 @@ class postController extends Controller
      */
     public function index()
     {
-        //
+
+        $user= Auth::user();
+        $photos= Photo::all();
+        // dd($photos);
+        return view('user.profilephotos', compact('photos'));
+
     }
 
     /**
@@ -26,7 +30,7 @@ class postController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -37,29 +41,7 @@ class postController extends Controller
      */
     public function store(Request $request)
     {
-        $post= new Post;
-        $post::create([
-            'user_id' => Auth::id(),
-            'body' => request('post_body'),
-        ]);
-        $postid= Post::latest()->first()->id;
-        if(! is_null(request('images')))
-        {
-            $photos=request('images');
-            foreach ($photos as $photo)
-             {
-                // dd($photos);
-                $photoName= time().".".$photo->getClientOriginalExtension();
-                $photo->move(public_path('images'),$photoName);
-                $photo= new Photo;
-                $photo::create([
-                    'user_id' => Auth::id(),
-                    'post_id' => $postid,
-                    'photo' => $photoName,
-                ]);
-            }
-        }
-        return back();
+        //
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Post;
 use App\Comment;
+use App\User;
 class userController extends Controller
 {
     /**
@@ -81,6 +82,17 @@ class userController extends Controller
             $user->save();
             return back();
          }
+
+         $user= User::find($id);
+         $user->name= request('name');
+         $user->email=request('email');
+         $user->clocation=request('clocation');
+         $user->ccountry=request('ccountry');
+         $user->dob= request('dob');
+         $user->about= request('about');
+         $user->gender= request('gender');
+         $user->save();
+         return back();
     }
 
     /**
