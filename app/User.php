@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Post;
 use App\Comment;
 use App\Photo;
+use App\User;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -42,5 +43,15 @@ class User extends Authenticatable
     public function photos(){
 
         return $this->hasMany(Photo::class);
+    }
+
+    public function follow()
+    {
+      return $this->belongsToMany(User::class, 'user_follows', 'user_id', 'follow_id');
+    }
+
+    public function followers()
+    {
+      return $this->belongsToMany(User::class, 'user_follows', 'follow_id', 'user_id');
     }
 }

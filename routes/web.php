@@ -16,20 +16,33 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::resource('profile','userController');
+Route::resource('profile','profileController');
 
 Route::resource('post','postController');
 
 Route::resource('comment','commentController');
 
-Route::get('/setting',function(){
-	return view('user.profilesetting');
-});
+Route::get('/setting','profileController@show');
 
 Route::get('/photos','photoController@index');
+
+Route::get('home','HomeController@home')->name('home');
+
+Route::get('/user/{id}','usersController@index');
+Route::get('/user/{id}/photos','usersController@showphotos');
+
+Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'AutoCompleteController@index'));
+
+Route::get('searchajax',array('as'=>'searchajax','uses'=>'AutoCompleteController@autoComplete'));
+
+Route::get('followers','followersController@index')->name('followers');
+Route::Post('/follow/store','followersController@follow');
+
+Route::get('followings','followersController@followings')->name('followings');
+
 
 Route::get('logout',function(){
 

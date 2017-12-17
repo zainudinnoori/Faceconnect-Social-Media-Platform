@@ -73,120 +73,22 @@
 	        <span>toggle menu</span>
 	    </button>
 	    <div class="site-header-content">
-          	  <div class="site-header-content-in">
-				@include('layouts.header')
+	        <div class="site-header-content-in">
+	        	@include('layouts.header')
 	        </div><!--site-header-content-in-->
 	    </div><!--.site-header-content-->
 	</div><!--.container-fluid-->
 </header><!--.site-header-->
 <div class="page-content">
-		<div class="profile-header-photo">
-			<div class="profile-header-photo-in">
-				<div class="tbl-cell" style="background-image: url(/images/{{ Auth::user()->image }});">
-					<div class="info-block">
-						<div class="container-fluid">
-							<div class="row">
-								<div class="col-xl-9 col-xl-offset-3 col-lg-8 col-lg-offset-4 col-md-offset-0">
-									<div class="tbl info-tbl">
-										<div class="tbl-row">
-											<div class="tbl-cell">
-												<p class="title">{{ Auth::user()->name }}</p>
-												<p>Company Founder</p>
-											</div>
-											<div class="tbl-cell tbl-cell-stat">
-												<div class="inline-block">
-													<p class="title">{{count(Auth::user()->followers)  }}</p>
-													<p>Followers</p>
-												</div>
-											</div>
-											<div class="tbl-cell tbl-cell-stat">
-												<div class="inline-block">
-													<p class="title">{{count(Auth::user()->photos)  }}</p>
-													<p>Photos</p>
-												</div>
-											</div>
-											<div class="tbl-cell tbl-cell-stat">
-												<div class="inline-block">
-													<p class="title">0	</p>
-													<p>Videos</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-				<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
-					{{ csrf_field() }}
-					{{ method_field('PUT') }}
-
-					<button type="button" class="change-cover">
-						Change cover <img src="/images/upload_icon.png" width="30px" height="30px">
-						<input type="file" name="cover-photo"/>
-					</button>
-				</form>
-		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xl-3 col-lg-4">
-					<aside class="profile-side">
-						<section class="box-typical profile-side-user">
+				<div class="col-xl-2 col-lg-3">
+					<aside class="profile-side" style="margin:0px 0 20px;position:relative">
 
-							<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
-								{{ csrf_field() }}
-								{{ method_field('PUT') }}
-								<button type="button" class="avatar-preview avatar-preview-128">
-									<img src="/images/{{ Auth::user()->image }}" alt="Your pic"/>
-									<span class="update">
-										<i class="icon-picture"></i>
-										Update photo
-									</span>
-									<input type="file" name="image"/>
-								</button>
-								<button type="submit"><img src="/images/upload_icon.png" width="30px" height="30px"></button>
-							</form>
-							{{-- <button>send a meesage</button> --}}
-						</section>
-					
-						<section class="box-typical profile-side-stat">
-							<div class="tbl">
-								<div class="tbl-row">
-									<div class="tbl-cell">
-										<span class="number">{{count(Auth::user()->followers)  }}</span>
-										followers
-									</div>
-									<div class="tbl-cell">
-										<span class="number">{{ count($followings) }}</span>
-										following
-									</div>
-								</div>
-							</div>
-						</section>
-
-						<section class="box-typical">
-							<header class="box-typical-header-sm bordered">About</header>
-							<div class="box-typical-inner">
-								<p>{{ Auth::user()->about }}</p>
-							</div>
-						</section>
-
-						<section class="box-typical">
-							<header class="box-typical-header-sm bordered">Recommendation</header>
-							<div class="box-typical-inner">
-								<p>All stream</p>
-								<p>Connected Apps</p>
-								<p>Photos</p>
-								<p>Most recent</p>
-							</div>
-						</section>
-
-						<section class="box-typical">
+						<section class="box-typical" >
 							<header class="box-typical-header-sm bordered">Info</header>
 							<div class="box-typical-inner">
-								<p class="line-with-icon">
+								{{--<p class="line-with-icon">
 									<i class="font-icon fa fa-map-marker"></i>
 									{{ Auth::user()->clocation }} , {{ Auth::user()->ccountry }}
 								</p>
@@ -206,7 +108,7 @@
 								<p class="line-with-icon">
 									<i class="font-icon fa fa-calendar-check-o"></i>
 									{{ Auth::user()->created_at->diffForHumans() }}
-								</p>
+								</p> --}}
 
 							</div>
 						</section>
@@ -256,6 +158,10 @@
 										});
 
 									});
+
+										$(document).ready(function(){
+										    $('[data-toggle="tooltip"]').tooltip();   
+										});
 								</script>
 								</div>
 							</section>
@@ -283,7 +189,8 @@
 	<script src="js/lib/salvattore/salvattore.min.js"></script>
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		 <script>
+
+	 <script>
 	   $(document).ready(function() {
 	    src = "{{ route('searchajax') }}";
 	     $("#namanyay-search-box").autocomplete({
@@ -305,6 +212,7 @@
 	    });
 	});
 	</script>
+
 	@yield('scripts')
 
 </body>

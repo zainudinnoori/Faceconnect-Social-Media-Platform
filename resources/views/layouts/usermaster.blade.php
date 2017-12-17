@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>{{ Auth::user()->name." ".'Profile' }}</title>
+	<title>{{ $user->name." ".'Profile' }}</title>
 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -63,17 +63,15 @@
 <header class="site-header">
 	<div class="container-fluid">
 	    <a href="#" class="site-logo">
-	        <img class="hidden-md-down" src="images/Logo.jpg" alt="logo">
-	        <img class="hidden-lg-up" src="Logo.jpg" alt="">
+	        <img class="hidden-md-down" src="/images/Logo.jpg" alt="logo">
+	        <!-- <img class="hidden-lg-up" src="/images/Logo.jpg" alt=""> -->
 	    </a>
-
-		
 
 	    <button class="hamburger hamburger--htla">
 	        <span>toggle menu</span>
 	    </button>
 	    <div class="site-header-content">
-          	  <div class="site-header-content-in">
+            <div class="site-header-content-in">
 				@include('layouts.header')
 	        </div><!--site-header-content-in-->
 	    </div><!--.site-header-content-->
@@ -82,7 +80,7 @@
 <div class="page-content">
 		<div class="profile-header-photo">
 			<div class="profile-header-photo-in">
-				<div class="tbl-cell" style="background-image: url(/images/{{ Auth::user()->image }});">
+				<div class="tbl-cell" style="background-image: url(/images/{{ $user->image }});">
 					<div class="info-block">
 						<div class="container-fluid">
 							<div class="row">
@@ -90,24 +88,24 @@
 									<div class="tbl info-tbl">
 										<div class="tbl-row">
 											<div class="tbl-cell">
-												<p class="title">{{ Auth::user()->name }}</p>
+												<p class="title">{{ $user->name }}</p>
 												<p>Company Founder</p>
 											</div>
 											<div class="tbl-cell tbl-cell-stat">
 												<div class="inline-block">
-													<p class="title">{{count(Auth::user()->followers)  }}</p>
+													<p class="title followers-count" >{{count($user->followers)}}</p>
 													<p>Followers</p>
 												</div>
 											</div>
 											<div class="tbl-cell tbl-cell-stat">
 												<div class="inline-block">
-													<p class="title">{{count(Auth::user()->photos)  }}</p>
+													<p class="title">{{count($user->photos)}}</p>
 													<p>Photos</p>
 												</div>
 											</div>
 											<div class="tbl-cell tbl-cell-stat">
 												<div class="inline-block">
-													<p class="title">0	</p>
+													<p class="title">0</p>
 													<p>Videos</p>
 												</div>
 											</div>
@@ -124,10 +122,11 @@
 					{{ method_field('PUT') }}
 
 					<button type="button" class="change-cover">
-						Change cover <img src="/images/upload_icon.png" width="30px" height="30px">
+						Change cover <img src="images/upload_icon.png" width="30px" height="30px">
 						<input type="file" name="cover-photo"/>
 					</button>
 				</form>
+				<!-- <button>send a mess</button> -->
 		</div>
 		<div class="container-fluid">
 			<div class="row">
@@ -139,7 +138,7 @@
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
 								<button type="button" class="avatar-preview avatar-preview-128">
-									<img src="/images/{{ Auth::user()->image }}" alt="Your pic"/>
+									<img src="/images/{{ $user->image }}" alt="Your pic"/>
 									<span class="update">
 										<i class="icon-picture"></i>
 										Update photo
@@ -148,14 +147,23 @@
 								</button>
 								<button type="submit"><img src="/images/upload_icon.png" width="30px" height="30px"></button>
 							</form>
-							{{-- <button>send a meesage</button> --}}
+								
+							<span><button class="btn btn-primary" style="margin:5px">Send a message</button></span><br>
+
+
+							<span>
+								<button class="btn btn-success" id="follow-me"  style="margin:2px">
+									{{ $status }}
+								</button>
+							</span>
+
 						</section>
 					
 						<section class="box-typical profile-side-stat">
 							<div class="tbl">
 								<div class="tbl-row">
 									<div class="tbl-cell">
-										<span class="number">{{count(Auth::user()->followers)  }}</span>
+										<span class="followers-count number">{{count($user->followers)}}</span>
 										followers
 									</div>
 									<div class="tbl-cell">
@@ -169,7 +177,7 @@
 						<section class="box-typical">
 							<header class="box-typical-header-sm bordered">About</header>
 							<div class="box-typical-inner">
-								<p>{{ Auth::user()->about }}</p>
+								<p>{{ $user->about }}</p>
 							</div>
 						</section>
 
@@ -188,24 +196,24 @@
 							<div class="box-typical-inner">
 								<p class="line-with-icon">
 									<i class="font-icon fa fa-map-marker"></i>
-									{{ Auth::user()->clocation }} , {{ Auth::user()->ccountry }}
+									{{ $user->clocation }} , {{ Auth::user()->ccountry }}
 								</p>
 								<p class="line-with-icon">
 									<i class="font-icon fa fa-envelope"></i>
 									 
-									{{ Auth::user()->email }}
+									{{ $user->email }}
 								</p>
 								<p class="line-with-icon">
 									<i class="font-icon fa fa-birthday-cake"></i>
-									{{ Auth::user()->dob}}
+									{{ $user->dob}}
 								</p>
 								<p class="line-with-icon">
 									<i class="font-icon fa fa-user-circle"></i>
-									{{ Auth::user()->gender }}
+									{{ $user->gender }}
 								</p>
 								<p class="line-with-icon">
 									<i class="font-icon fa fa-calendar-check-o"></i>
-									{{ Auth::user()->created_at->diffForHumans() }}
+									{{ $user->created_at->diffForHumans() }}
 								</p>
 
 							</div>
@@ -256,6 +264,9 @@
 										});
 
 									});
+
+
+					
 								</script>
 								</div>
 							</section>
@@ -295,14 +306,45 @@
 	                    term : request.term
 	                },
 	                success: function(data) {
-	                    response(data);
-	                   
+	                    response(data);    
 	                }
 	            });
 	        },
 	        minLength: 2,
 	       
 	    });
+	});
+
+		$(document).ready(function() {
+		$('#follow-me').on('click',function(e) {
+
+			var following_user_id =  {{ $user->id }} ;
+			var data = {following_user_id:following_user_id, _token:'{{ csrf_token() }}'};
+			var request = $.ajax({
+				url: "/follow/store",
+				type: "POST",
+				data: data,
+				dataType:"html"
+				});
+			request.done(function( msg ) {
+			    var response = JSON.parse(msg);
+			    if(response.msg == "followed")
+			    {
+			    	$('#follow-me').empty().html("Un follow");
+			    	$('.followers-count').empty().html(response.count);
+			    }
+			    if(response.msg == "unfollowed")
+			    {
+			    	$('#follow-me').empty().html("Follow");
+			    	$('.followers-count').empty().html(response.count);
+			    }
+			});
+			request.fail(function( jqXHR, textStatus ) {
+			    console.log( "Request failed: " + testStatus );
+			    // var response = JSON.parse(msg);
+
+			});
+		});
 	});
 	</script>
 	@yield('scripts')
