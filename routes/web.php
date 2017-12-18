@@ -43,6 +43,7 @@ Route::Post('/follow/store','followersController@follow');
 
 Route::get('followings','followersController@followings')->name('followings');
 
+Route::post('like/store','likeController@store');
 
 Route::get('logout',function(){
 

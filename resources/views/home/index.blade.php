@@ -11,7 +11,8 @@
 <div role="tabpanel" class="tab-pane active" id="tabs-2-tab-1">
 	<form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
 		{{ csrf_field() }}
-		<textarea class="write-something" name="post_body" rows="5" placeholder="What`s on your mind"></textarea>
+		<textarea class="write-something" name="post_body" rows="3" placeholder="What`s on your mind"></textarea>
+		<img id="image-display" src="#" />
 		<div class="box-typical-footer">
 			<div class="tbl">
 				<div class="tbl-row">
@@ -19,14 +20,16 @@
 
 						<div class="image-upload">
 						    <label for="file-input">
-							        <i style="color: lightblue" class="font-icon fa fa-picture-o"></i>
+							        <i style="color:lightblue" class="font-icon fa fa-picture-o"></i>
 						    </label>
-						    <input type="file" id="file-input" name="images[]" multiple >
+						    <input type="file" id="file-input" onchange="readURL(this);" name="images[]" multiple >
 						</div>
 						
+    						
 							{{-- <i class="font-icon fa fa-video-camera">
 								
 							</i> --}}
+
 				
 						</button>
 					</div>
@@ -67,16 +70,44 @@
 						<img width="200px" height="200px" class="img img-responsive" src= images/{{ $photo->photo }}>
 					@endforeach
 				</div>
+
+
+				<?php
+		       		$like= $Like::where(['user_id'=> Auth::id() , 'post_id'=> $post->id])->first();
+		       		$count_like=count($post->likes);
+			        if(is_null($like))
+			        {
+			           $is_liked = false;
+			        }
+			        else
+			        {
+			           $is_liked = true;
+			        }
+				?>
+
 				<div class="box-typical-footer profile-post-meta">
-					<a href="#" class="meta-item">
-						<i class="fa fa-heart"></i>
-						45 Like
+
+					<a href="#" class="meta-item" data-user_id="{{ \Auth::id() }}" 
+						data-post-id="{{ $post->id }}" id="store_like">
+
+						@if($is_liked == true)
+						<i class="fa fa-heart" style="color:red"></i>
+						@else
+						<i class="fa fa-heart" style="color:gray"></i>
+						@endif
+						
 					</a>
+					<span style="margin-left: -10px" id="no_of_likes">{{$count_like}}</span>&nbsp&nbsp&nbsp
+
 					<a href="#" class="meta-item">
-						<i class="fa fa-comment"></i>
+						<i class="fa fa-comment"></i>&nbsp
 						{{ count($post->comments) }}
 					</a>
+
 				</div>
+
+
+
 				<?php
 					$comments = $post->comments;
 				?>
@@ -183,3 +214,53 @@
 			@endforeach
 		</div>									
 @endsection
+@section('scripts')
+<script type="text/javascript">
+	var flag= false
+	$(document).ready(function() {
+		$('#store_like').on('click',function(e) {
+		    var user_id = $(this).attr('data-user_id');
+		    var post_id = $(this).attr('data-post-id');
+		    var data = {user_id:user_id, post_id:post_id, _token:'{{ csrf_token() }}'};
+		    var request = $.ajax({
+		        url: "/like/store",
+		        type: "POST",
+		        data: data,
+		        dataType:"html"
+		        });
+		        request.done(function( msg ) {
+		            var response = JSON.parse(msg);
+		            $('#no_of_likes').empty().html(response.no_of_likes);
+		            if(response.msg === "Liked")
+		            {
+		            	$('#store_like').empty().html('<i class="fa fa-heart" style="color:red">');
+		            }
+		            else
+		            {
+		            	$('#store_like').empty().html('<i class="fa fa-heart" style="color:gray">');
+		            }
+		        });
+		        request.fail(function( jqXHR, textStatus ) {
+		            console.log( "Request failed: " + testStatus );
+		        });
+		    });
+		});
+
+	     function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+               
+                reader.onload = function (e) {
+                    $('#image-display')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+					
+</script>
+@endsection
+
