@@ -62,10 +62,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $dob = $data['birthday_year']."-".$data['birthday_month']."-".$data['birthday_day'];
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'dob' => $dob,
+            'gender' =>$data['gender'],
         ]);
     }
 }
