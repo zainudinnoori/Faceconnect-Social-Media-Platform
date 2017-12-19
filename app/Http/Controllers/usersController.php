@@ -14,9 +14,9 @@ class usersController extends Controller
     	$user = User::find($id);
     	if($user->id === Auth::id())
 		{
-
+            $followings=Auth::user()->follow;
 			$posts = Post::where('user_id',Auth::id())->get();
-			return view('home.profile',compact('posts'));
+			return view('home.profile',compact('posts','followings'));
 		}
 		else
 		{

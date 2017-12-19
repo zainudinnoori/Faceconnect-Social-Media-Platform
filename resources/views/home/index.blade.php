@@ -1,13 +1,6 @@
 @extends('layouts.homemaster')
 @section('profilecontent')
-<style type="text/css">
-.image-upload > input
-{
-    display: none;
 
-}
-
-</style>
 <div role="tabpanel" class="tab-pane active" id="tabs-2-tab-1">
 	<form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
 		{{ csrf_field() }}
@@ -87,8 +80,8 @@
 
 				<div class="box-typical-footer profile-post-meta">
 
-					<a href="#" class="meta-item" data-user_id="{{ \Auth::id() }}" 
-						data-post-id="{{ $post->id }}" id="store_like">
+					<a class="meta-item store_like" data-user_id="{{ \Auth::id() }}" 
+						data-post-id="{{ $post->id }}" id='like_{{ $post->id }}'>
 
 						@if($is_liked == true)
 						<i class="fa fa-heart" style="color:red"></i>
@@ -97,9 +90,9 @@
 						@endif
 						
 					</a>
-					<span style="margin-left: -10px" id="no_of_likes">{{$count_like}}</span>&nbsp&nbsp&nbsp
+					<span style="margin-left: -10px" id="no_of_likes{{ $post->id }}">{{$count_like}}</span>&nbsp&nbsp&nbsp
 
-					<a href="#" class="meta-item">
+					<a class="meta-item">
 						<i class="fa fa-comment"></i>&nbsp
 						{{ count($post->comments) }}
 					</a>
@@ -137,48 +130,6 @@
 							</div>
 						</div><!--.comment-row-item-->
 					</form>
-				
-{{-- 
-					<div class="comment-row-item">
-						<div class="avatar-preview avatar-preview-32">
-							<a href="#">
-								<img src="images/avatar-2-64.png" alt="">
-							</a>
-						</div>
-						<div class="tbl comment-row-item-header">
-							<div class="tbl-row">
-								<div class="tbl-cell tbl-cell-name">Vasilisa</div>
-								<div class="tbl-cell tbl-cell-date">04.07.15, 20:02 PM</div>
-							</div>
-						</div>
-						<div class="comment-row-item-content">
-							<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy...</p>
-							<button type="button" class="comment-row-item-action edit">
-								<i class="fa fa-pencil"></i>
-							</button>
-							<button type="button" class="comment-row-item-action del">
-								<i class="fa fa-trash-o"></i>
-							</button>
-							<div class="comment-row-item quote">
-								<div class="avatar-preview avatar-preview-32">
-									<a href="#">
-										<img src="images/photo-64-2.jpg" alt="">
-									</a>
-								</div>
-								<div class="tbl comment-row-item-header">
-									<div class="tbl-row">
-										<div class="tbl-cell tbl-cell-name">Adam Oliver</div>
-										<div class="tbl-cell tbl-cell-date">04.07.15, 20:02 PM</div>
-									</div>
-								</div>
-								<div class="comment-row-item-content">
-									<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet...</p>
-								</div>
-							</div><!--.comment-row-item-->
-						</div>
-					</div><!--.comment-row-item-->
- --}}
-
 				</div><!--.comment-rows-container-->
 				@endforeach
 
@@ -189,20 +140,6 @@
 					<div class="box-typical-footer">
 						<div class="tbl">
 							<div class="tbl-row">
-								<!-- <div class="tbl-cell">
-									<button type="button" class="btn-icon">
-										<i class="font-icon font-icon-earth"></i>
-									</button>
-									<button type="button" class="btn-icon">
-										<i class="font-icon font-icon-picture"></i>
-									</button>
-									<button type="button" class="btn-icon">
-										<i class="font-icon font-icon-calend"></i>
-									</button>
-									<button type="button" class="btn-icon">
-										<i class="font-icon font-icon-video-fill"></i>
-									</button>
-								</div> -->
 								<div class="tbl-cell tbl-cell-action">
 									<button type="submit" class="btn btn-rounded">Send</button>
 								</div>
@@ -216,9 +153,9 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-	var flag= false
 	$(document).ready(function() {
-		$('#store_like').on('click',function(e) {
+			$('.store_like').on('click',function(e) {
+				console.log('this');
 		    var user_id = $(this).attr('data-user_id');
 		    var post_id = $(this).attr('data-post-id');
 		    var data = {user_id:user_id, post_id:post_id, _token:'{{ csrf_token() }}'};
@@ -230,14 +167,14 @@
 		        });
 		        request.done(function( msg ) {
 		            var response = JSON.parse(msg);
-		            $('#no_of_likes').empty().html(response.no_of_likes);
+		            $('#no_of_likes'+post_id).empty().html(response.no_of_likes);
 		            if(response.msg === "Liked")
 		            {
-		            	$('#store_like').empty().html('<i class="fa fa-heart" style="color:red">');
+		            	$('#like_'+post_id).empty().html('<i class="fa fa-heart" style="color:red">');
 		            }
 		            else
 		            {
-		            	$('#store_like').empty().html('<i class="fa fa-heart" style="color:gray">');
+		            	$('#like_'+post_id).empty().html('<i class="fa fa-heart" style="color:gray">');
 		            }
 		        });
 		        request.fail(function( jqXHR, textStatus ) {

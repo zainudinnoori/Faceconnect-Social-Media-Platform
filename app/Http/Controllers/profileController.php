@@ -7,6 +7,7 @@ use Auth;
 use App\Post;
 use App\Comment;
 use App\User;
+ use App\Notifications\InvoicePaid;
 class profileController extends Controller
 {
     /**
@@ -16,6 +17,7 @@ class profileController extends Controller
      */
     public function index()
     {
+
         $followings=Auth::user()->follow;
         $posts = Post::where('user_id',Auth::id())->get();
         return view('home.profile',compact('posts','followings'));
@@ -23,6 +25,9 @@ class profileController extends Controller
 
     public function show()
     {
+       
+
+        
         $followings=Auth::user()->follow;
         return view('home.profilesetting',compact('followings'));
     }
@@ -37,23 +42,39 @@ class profileController extends Controller
             $user->image=$imagename;
             $user->save();
             return back();
+        }
+
+        if($request->coverimage != null)
+        {
+            $imagename= time().".".$request->coverimage->getClientOriginalExtension();
+            $request->coverimage->move(public_path('images'),$imagename);
+            $user= Auth::user();
+            $user->cover_image=$imagename;
+            $user->save();
+            return back();
          }
 
-         $dob= 
-         $user= User::find($id);
-         $user->name= request('name');
-         $user->email=request('email');
-         $user->clocation=request('clocation');
-         $user->ccountry=request('ccountry');
-         $user->dob= request('dob');
-         $user->about= request('about');
-         $user->gender= request('gender');
-         $user->save();
+         if(request('name')!=null)
+         {
+             $user= User::find($id);
+             $user->name= request('name');
+             $user->email=request('email');
+             $user->clocation=request('clocation');
+             $user->ccountry=request('ccountry');
+             $user->dob= request('dob');
+             $user->about= request('about');
+             $user->gender= request('gender');
+             $user->save();
+             return back();
+         }
          return back();
     }
 
-    public function destroy($id)
+    public function search()
     {
-        //
+       $query=request('search_text');
+        $users = User::where('name', 'LIKE', '%' . $query . '%')->get();
+        // dd($user);
+        return view('home.searchresult',compact('users'));
     }
 }

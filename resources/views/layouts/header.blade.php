@@ -22,8 +22,10 @@
 </span>&nbsp &nbsp
 
 <span>
-	<i class="fa fa-globe fa-lg" style="color:blue" aria-hidden="true" title="Notifications!" ></i>
+	<i class="fa fa-globe fa-lg" style="color:blue" aria-hidden="true" title="Notifications!" >
+		<?php $notifications = Auth::user()->notifications?>
+		<sup style="color: black">{{ count($notifications) }}</sup></i>
 
-<span class="col-lg-offset-1">
-	<a href="/logout"><b>Logout</b></a>
-</span>
+	<span class="col-lg-offset-1">
+		<a href="/logout"><b>Logout</b></a>
+	</span>

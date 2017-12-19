@@ -138,9 +138,9 @@
 					<tr>
 						<td>Write about your self</td>
 						<td>
-							<textarea class="write-something editable-inputs" disabled style="border-color:transparent;" name="about"> 
-								{{ Auth::user()->about }} 
-							</textarea>
+							<textarea class="write-something editable-inputs" disabled style="border-color:transparent;" name="about">{{ Auth::user()->about }} </textarea>
+								
+							
 						</td>
 						<td>
 							<button  style="border: 0;background-color: transparent;" type="submit" class="comment-row-item-action edit">
@@ -150,7 +150,7 @@
 					</tr>
 					<tr>
 						<td colspan="3">
-							<button onclick="update()" class="btn btn-group btn-warning center-block">Save Changes</button>
+							<button onclick="update()" id="save-changes" class="btn btn-group btn-warning center-block">Save Changes</button>
 						</td>
 					</tr>
 

@@ -39,12 +39,12 @@
 			<div class="tbl">
 				<div class="tbl-row">
 					<div class="tbl-cell">
-						<button type="button" class="btn-icon">
-							<i class="font-icon fa fa-picture-o"></i>
-						</button>
-						
-						<button type="button" class="btn-icon">
-							<i class="font-icon fa fa-video-camera"><input type="file" name="images[]" multiple ></i>
+						<div class="image-upload">
+						    <label for="file-input">
+							        <i style="color:lightblue" class="font-icon fa fa-picture-o"></i>
+						    </label>
+						    <input type="file" id="file-input" onchange="readURL(this);" name="images[]" multiple >
+						</div>
 							
 							
 						</button>
@@ -201,4 +201,22 @@
 			</article>
 			@endforeach
 		</div>									
+@endsection
+@section('scripts')
+<script type="text/javascript">
+     function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+               
+                reader.onload = function (e) {
+                    $('#image-display')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(150);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        </script>
 @endsection

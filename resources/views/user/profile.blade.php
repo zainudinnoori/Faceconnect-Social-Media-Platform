@@ -7,7 +7,7 @@
         <ul class="nav" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" href="/profile" role="tab" data-toggle="tab">
-                    <span class="nav-link-in">My Posts</span>
+                    <span class="nav-link-in">Posts</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -16,7 +16,7 @@
                 </a>
             </li>
     @endsection
-    <form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
+{{--     <form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
         {{ csrf_field() }}
         <textarea class="write-something" name="post_body"  placeholder="What`s on your mind"></textarea>
         <div class="box-typical-footer">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-    </form><!--.box-typical-->
+    </form><!--.box-typical--> --}}
         @foreach($posts as $post)
             <article class="box-typical profile-post">
                 <div class="profile-post-header">
@@ -47,7 +47,7 @@
                         <div class="tbl-row">
                             <div class="tbl-cell tbl-cell-photo">
                                 <a href="#">
-                                    <img src= images/{{ $post->user->image }} alt="">
+                                    <img src= /images/{{ $post->user->image }} alt="">
                                 </a>
                             </div>
                             <div class="tbl-cell">
@@ -89,7 +89,7 @@
                         <div class="comment-row-item">
                             <div class="avatar-preview avatar-preview-32">
                                 <a href="#">
-                                    <img src= images/{{ $comment->user->image }} alt="noPic">
+                                    <img src= /images/{{ $comment->user->image }} alt="noPic">
                                 </a>
                             </div>
                             <div class="tbl comment-row-item-header">

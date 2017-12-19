@@ -35,9 +35,8 @@ Route::get('/user/{id}','usersController@index');
 Route::get('/user/{id}/photos','usersController@showphotos');
 
 Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'AutoCompleteController@index'));
-
 Route::get('searchajax',array('as'=>'searchajax','uses'=>'AutoCompleteController@autoComplete'));
-
+Route::get('search','profileController@search');
 Route::get('followers','followersController@index')->name('followers');
 Route::Post('/follow/store','followersController@follow');
 
@@ -45,9 +44,15 @@ Route::get('followings','followersController@followings')->name('followings');
 
 Route::post('like/store','likeController@store');
 
+
 Route::get('logout',function(){
 
 	Auth::logout();
 });
+Route::get('/welcome',function(){
+	$user = App\User::find(1); 
+	return view('welcome',compact('user'));
+});
+
 
 

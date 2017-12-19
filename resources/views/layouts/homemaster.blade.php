@@ -54,7 +54,12 @@
 		border: 0 none;
    		 width: 200px;
 		}
+	
+		.image-upload > input
+{
+    display: none;
 
+}
 		
  
 </style>

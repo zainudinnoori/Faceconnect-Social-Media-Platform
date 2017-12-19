@@ -117,15 +117,6 @@
 					</div>
 				</div>
 			</div>
-				<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
-					{{ csrf_field() }}
-					{{ method_field('PUT') }}
-
-					<button type="button" class="change-cover">
-						Change cover <img src="images/upload_icon.png" width="30px" height="30px">
-						<input type="file" name="cover-photo"/>
-					</button>
-				</form>
 				<!-- <button>send a mess</button> -->
 		</div>
 		<div class="container-fluid">
@@ -134,19 +125,11 @@
 					<aside class="profile-side">
 						<section class="box-typical profile-side-user">
 
-							<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
-								{{ csrf_field() }}
-								{{ method_field('PUT') }}
-								<button type="button" class="avatar-preview avatar-preview-128">
-									<img src="/images/{{ $user->image }}" alt="Your pic"/>
-									<span class="update">
-										<i class="icon-picture"></i>
-										Update photo
-									</span>
-									<input type="file" name="image"/>
-								</button>
-								<button type="submit"><img src="/images/upload_icon.png" width="30px" height="30px"></button>
-							</form>
+
+									<img src="/images/{{ $user->image }}" alt="Your pic" class="avatar-preview avatar-preview-128 img img-circle"/>
+
+
+
 								
 							<span><button class="btn btn-primary" style="margin:5px">Send a message</button></span><br>
 

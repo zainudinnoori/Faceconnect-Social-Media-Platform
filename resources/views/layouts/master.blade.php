@@ -55,7 +55,11 @@
    		 width: 200px;
 		}
 
-		
+		.image-upload > input
+{
+    display: none;
+
+}
  
 </style>
 </head>
@@ -82,7 +86,7 @@
 <div class="page-content">
 		<div class="profile-header-photo">
 			<div class="profile-header-photo-in">
-				<div class="tbl-cell" style="background-image: url(/images/{{ Auth::user()->image }});">
+				<div class="tbl-cell" style="background-image: url(/images/{{ Auth::user()->cover_image }});">
 					<div class="info-block">
 						<div class="container-fluid">
 							<div class="row">
@@ -119,15 +123,17 @@
 					</div>
 				</div>
 			</div>
-				<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
-					{{ csrf_field() }}
-					{{ method_field('PUT') }}
-
-					<button type="button" class="change-cover">
-						Change cover <img src="/images/upload_icon.png" width="30px" height="30px">
-						<input type="file" name="cover-photo"/>
-					</button>
-				</form>
+				
+			<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
+				{{ csrf_field() }}
+				{{ method_field('PUT') }}
+				<button type="button" class="change-cover">
+					Change cover 
+					<input type="file" name="coverimage"/>
+				</button>
+				<button type="submit" style="margin: 30px" class="change-cover"> <i class="fa fa-upload"></i>
+				</button>
+			</form>
 		</div>
 		<div class="container-fluid">
 			<div class="row">

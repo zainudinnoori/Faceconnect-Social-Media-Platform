@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Like;
+use App\User;
 use App\Post;
+use App\Notifications\PostLiked;
 class likeController extends Controller
 {
 	     
@@ -17,10 +19,14 @@ class likeController extends Controller
 	    	$like= Like::where(['user_id'=> Auth::id() , 'post_id'=> $request['post_id']])->first();
 	    	if(is_null($like))
 	    	{
+	    		// event(new App\Events\StatusLiked(Auth::id()));
 	    		$like= new Like;
 				$like->user_id = $request['user_id'];
 				$like->post_id = $request['post_id'];
 				$like->save();
+				$post::find($request['post_id']);
+				$user=$post->user;
+				$user->notify(new PostLiked('252'));
 				$no_of_likes= Like::where('post_id',$request['post_id'])->count();
 				$response = array(	
 				'status' => 'success',

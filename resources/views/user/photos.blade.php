@@ -6,7 +6,7 @@
 	<ul class="nav" role="tablist">
 		<li class="nav-item">
 			<a class="nav-link" href=/user/{{ $user->id }} role="tab" data-toggle="tab">
-				<span class="nav-link-in">My Posts</span>
+				<span class="nav-link-in">Posts</span>
 			</a>
 		</li>
 		<li class="nav-item">

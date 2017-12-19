@@ -32,14 +32,14 @@
 	</ul>
 	@endsection
 	<article class="box-typical profile-post">
-		<ul style="list-style: none ;padding: 10px">
+		<div style="list-style: none ;padding: 10px">
 			@foreach($photos as $photo)
-				<li  style="display: inline;padding: 20px" >
-					<img  class="img img-responsive" style="padding: 5px; border: 1px solid blue;margin:5px"" src="/images/{{ $photo->photo }}"  height="200px" width="200px" alt="no pic">
+				<div  style="padding: 20px;display: inline;" >
+					<img  class="img img-responsive" style="padding: 3px; border: 1px solid blue;margin:5px"" src="/images/{{ $photo->photo }}"  height="171px" width="171px" alt="no pic">
 					{{-- {{ $photo->created_at->toFormattedDateString() }} --}}
-				</li>
+				</div>
 			@endforeach
-		</ul>
+		</div>
 	</article>
 	
 </div>									
