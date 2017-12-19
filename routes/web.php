@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::resource('profile','profileController');
+Route::resource('profile','profileController')->middleware('auth');
 
 Route::resource('post','postController');
 
@@ -45,9 +45,15 @@ Route::get('followings','followersController@followings')->name('followings');
 
 Route::post('like/store','likeController@store');
 
+Route::get('sign-in',function (){
+
+	return view('auth.sign-in');
+});
+
 Route::get('logout',function(){
 
 	Auth::logout();
+	return view('auth.login');
 });
 
 
