@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use App\User_follow;
+use App\Notifications\FollowUser;
 class followersController extends Controller
 {
     public function index()
@@ -26,13 +27,22 @@ class followersController extends Controller
     	$already_follow= User_follow::where(['user_id' => $_follower->id,'follow_id' => $_userid])->first();
     	if(is_null($already_follow))
     	{
-    	$_follower->follow()->save($_user);
-    	$count_followers= count($_user->followers);
-    	$response = array(	
-			'status' => 'success',
-			'msg' => 'followed',
-			'count' => $count_followers,
-			);
+	    	$_follower->follow()->save($_user);
+	    	$count_followers= count($_user->followers);
+	    	$response = array(	
+				'status' => 'success',
+				'msg' => 'followed',
+				'count' => $count_followers,
+				);
+	  //   	//sending notificaion
+	    	
+	    	$user= User::find($_userid);
+	    	if($user->id != Auth::id())
+	    	{
+			$user->notify(new FollowUser());
+    		
+			}
+			// //end
 			return \Response::json( $response );	
     	}
     	else

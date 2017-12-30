@@ -8,12 +8,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Faceconnect Login</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="background-image: url(/images/social-networking.jpg); background-repeat: no-repeat;> 
+<body style="background-image: url(/image/back.jpg);> 
     
         @yield('content')
 

@@ -9,6 +9,7 @@ use App\Comment;
 Use App\Post;
 use App\User;
 use Auth;
+use App\Notifications\PostComment;
 class commentController extends Controller
 {
     /**
@@ -39,6 +40,9 @@ class commentController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'comment_body'=>'required'
+        ]);
 
         $comment = new Comment;
         $comment::create([
@@ -46,7 +50,15 @@ class commentController extends Controller
             'user_id'=> Auth::id(),
             'post_id'=> $request->input('post_id'),
         ]);
-        // Notification::send(User::first(), new WorkoutAssigned($request->input('post_id')));
+
+        //sending notification
+        $post=Post::find($request->input('post_id'));
+        $user=$post->user;
+        if($user->id != Auth::id())
+        {       
+           $user->notify(new PostComment(request('comment_body'),$request->input('post_id')));
+       }
+        // End 
         return back();
     }
 
@@ -81,7 +93,12 @@ class commentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment=Comment::find($id);
+        $comment->body=$request['commentBody'];
+        $comment->save();
+        return response()->json([
+          'success' => 'Record has been updated successfully!'
+        ]);
     }
 
     /**
@@ -92,6 +109,9 @@ class commentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment=Comment::find($id)->delete();
+        return response()->json([
+          'success' => 'Record has been deleted successfully!'
+        ]);
     }
 }

@@ -55,7 +55,9 @@
    		 width: 200px;
 		}
 
-		
+		#notification{
+			display: none;
+		}
  
 </style>
 </head>

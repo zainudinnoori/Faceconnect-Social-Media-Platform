@@ -7,26 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>{{ Auth::user()->name." ".'Profile' }}</title>
-	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	
-	<script src="js/plugins.js"></script>
-	<script src="js/lib/ion-range-slider/ion.rangeSlider.js"></script>
-	<!-- <script src="https://use.fontawesome.com/fcf4bb6c21.js"></script> -->
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.css">
-	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.skinHTML5.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-
-	<script src="js/app.js"></script>
-	
     <link rel="stylesheet" href=/css/main.css>
 <style type="text/css">
 	#namanyay-search-btn {
@@ -55,11 +39,14 @@
    		 width: 200px;
 		}
 
-		.image-upload > input
+.image-upload > input
 {
     display: none;
 
 }
+#notification{
+			display: none;
+		}
  
 </style>
 </head>
@@ -67,8 +54,7 @@
 <header class="site-header">
 	<div class="container-fluid">
 	    <a href="#" class="site-logo">
-	        <img class="hidden-md-down" src="images/Logo.jpg" alt="logo">
-	        <img class="hidden-lg-up" src="Logo.jpg" alt="">
+	        <img class="hidden-md-down" src="/images/Logo.jpg" alt="logo">
 	    </a>
 
 		
@@ -124,7 +110,7 @@
 				</div>
 			</div>
 				
-			<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
+			<form method="Post" action='profile/profile{{ Auth::id() }}' enctype="multipart/form-data">
 				{{ csrf_field() }}
 				{{ method_field('PUT') }}
 				<button type="button" class="change-cover">
@@ -141,7 +127,7 @@
 					<aside class="profile-side">
 						<section class="box-typical profile-side-user">
 
-							<form method="Post" action='/profile/{{ Auth::id() }}' enctype="multipart/form-data">
+							<form method="Post" action='profile/profile{{ Auth::id() }}'enctype="multipart/form-data">
 								{{ csrf_field() }}
 								{{ method_field('PUT') }}
 								<button type="button" class="avatar-preview avatar-preview-128">
@@ -227,43 +213,7 @@
 						</div><!--.tabs-section-nav-->
 						<div class="tab-content no-styled profile-tabs">
 							@yield('profilecontent')
-								<script>
-									$(document).ready(function(){
-										$("#range-slider-1").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-2").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-3").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-4").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-									});
-								</script>
-								</div>
+						</div>
 							</section>
 <!-- 							<section class="box-typical-section profile-settings-btns">
 								<button type="submit" class="btn btn-rounded">Save Changes</button>
@@ -283,12 +233,13 @@
 	    <span class="pie_progress__number">0%</span> -->
 	<!-- </div> --> 
 	<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
+{{--   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-	<script src="js/lib/salvattore/salvattore.min.js"></script>
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/lib/salvattore/salvattore.min.js"></script> --}}
+	{{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
+	{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 		 <script>
 	   $(document).ready(function() {
 	    src = "{{ route('searchajax') }}";

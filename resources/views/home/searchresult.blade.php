@@ -3,7 +3,7 @@
 
 <div role="tabpanel" class="tab-pane active" id="tabs-2-tab-1">
 		@foreach($users as $user)
-			<article class="box-typical profile-post" style="background-color: lightblue">
+			<article class="box-typical profile-post" style="background-color: #E8E8E8">
 				<div class="profile-post-header">
 					<div class="user-card-row">
 						<div class="tbl-row">

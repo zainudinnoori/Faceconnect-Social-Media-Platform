@@ -17,9 +17,10 @@ class PostLiked extends Notification
      *
      * @return void
      */
-    public function __construct()
+    private $post_id;
+    public function __construct($p_id)
     {
-        //
+         $this->post_id = $p_id;
     }
 
     /**
@@ -57,7 +58,7 @@ class PostLiked extends Notification
     {
         return [
             'user_id'=> Auth::id(),
-            'post_id' => $this->id
+            'post_id'=>$this->post_id,
         ];
     }
 }

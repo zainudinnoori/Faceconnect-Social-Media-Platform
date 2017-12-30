@@ -6,31 +6,32 @@
 	@section('tabheader')
 		<ul class="nav" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link active" href="/profile" role="tab" data-toggle="tab">
+				<a class="nav-link active" href="#" role="tab" data-toggle="tab">
 					<span class="nav-link-in">My Posts</span>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href='/setting' role="tab" data-toggle="tab">
+				<a class="nav-link" href='{{ Route('psetting') }}' role="tab" data-toggle="tab">
 					<span class="nav-link-in">setting</span>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/photos" role="tab" data-toggle="tab">
+				<a class="nav-link" href='{{ Route('pphotos') }}' role="tab" data-toggle="tab">
 					<span class="nav-link-in">Photos</span>
 				</a>
 			</li>
 			<li class="nav-item">
-			<a class="nav-link" href='/followers' role="tab" data-toggle="tab">
+			<a class="nav-link" href='{{ Route('pfollowers') }}'  role="tab" data-toggle="tab">
 				<span class="nav-link-in">Followers</span>
 			</a>
 		</li>
 
 		<li class="nav-item">
-			<a class="nav-link" href='/followings' role="tab" data-toggle="tab">
+			<a class="nav-link" href='{{ Route('pfollowings') }} ' role="tab" data-toggle="tab">
 				<span class="nav-link-in">Followings</span>
 			</a>
 		</li>
+	</ul>
 	@endsection
 	<form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
 		{{ csrf_field() }}
@@ -87,14 +88,39 @@
 					@endforeach
 				</div>
 				<div class="box-typical-footer profile-post-meta">
-					<a href="#" class="meta-item">
-						<i class="fa fa-heart"></i>
-						45 Like
+					<?php
+		       		$like= $Like::where(['user_id'=> Auth::id() , 'post_id'=> $post->id])->first();
+		       		$count_like=count($post->likes);
+			        if(is_null($like))
+			        {
+			           $is_liked = false;
+			        }
+			        else
+			        {
+			           $is_liked = true;
+			        }
+				?>
+
+				<div class="box-typical-footer profile-post-meta">
+
+					<a class="meta-item store_like" data-user_id="{{ \Auth::id() }}" 
+						data-post-id="{{ $post->id }}" id='like_{{ $post->id }}'>
+
+						@if($is_liked == true)
+						<i class="fa fa-heart" style="color:red"></i>
+						@else
+						<i class="fa fa-heart" style="color:gray"></i>
+						@endif
+						
 					</a>
-					<a href="#" class="meta-item">
-						<i class="fa fa-comment"></i>
-						{{ count($post->comments) }}
+					<span style="margin-left: -10px" id="no_of_likes{{ $post->id }}">{{$count_like}}</span> Likes &nbsp&nbsp&nbsp
+
+					<a class="meta-item">
+						<i class="fa fa-comment"></i>&nbsp
+						{{ $cCount=count($post->comments)  }} Comments
 					</a>
+
+				</div>
 				</div>
 				<?php
 					$comments = $post->comments;
@@ -105,7 +131,7 @@
 						<div class="comment-row-item">
 							<div class="avatar-preview avatar-preview-32">
 								<a href="#">
-									<img src= images/{{ $comment->user->image }} alt="noPic">
+									<img src= /images/{{ $comment->user->image }} alt="noPic">
 								</a>
 							</div>
 							<div class="tbl comment-row-item-header">
@@ -170,7 +196,7 @@
 				</div><!--.comment-rows-container-->
 				@endforeach
 
-				<form method="Post" action="comment">
+				<form method="Post" action="/post/comment">
 				{{ csrf_field()}}
 					<textarea class="write-something" placeholder="Leave a comment" name="comment_body"></textarea>
 					<input type="hidden" value={{ $post->id }} name="post_id">
@@ -204,6 +230,39 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
+
+	<script type="text/javascript">
+	$(document).ready(function() {
+			$('.store_like').on('click',function(e) {
+				console.log('this');
+		    var user_id = $(this).attr('data-user_id');
+		    var post_id = $(this).attr('data-post-id');
+		    var data = {user_id:user_id, post_id:post_id, _token:'{{ csrf_token() }}'};
+		    var request = $.ajax({
+		        url: "/like/store",
+		        type: "POST",
+		        data: data,
+		        dataType:"html"
+		        });
+		        request.done(function( msg ) {
+		            var response = JSON.parse(msg);
+		            $('#no_of_likes'+post_id).empty().html(response.no_of_likes);
+		            if(response.msg === "Liked")
+		            {
+		            	$('#like_'+post_id).empty().html('<i class="fa fa-heart" style="color:red">');
+		            }
+		            else
+		            {
+		            	$('#like_'+post_id).empty().html('<i class="fa fa-heart" style="color:gray">');
+		            }
+		        });
+		        request.fail(function( jqXHR, textStatus ) {
+		            console.log( "Request failed: " + testStatus );
+		        });
+		    });
+		});
+
+
      function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

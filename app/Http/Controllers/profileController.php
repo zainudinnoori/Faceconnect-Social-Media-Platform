@@ -8,6 +8,7 @@ use App\Post;
 use App\Comment;
 use App\User;
  use App\Notifications\InvoicePaid;
+ use App\Like;
 class profileController extends Controller
 {
     /**
@@ -17,10 +18,10 @@ class profileController extends Controller
      */
     public function index()
     {
-
+        $Like= new Like;
         $followings=Auth::user()->follow;
         $posts = Post::where('user_id',Auth::id())->get();
-        return view('home.profile',compact('posts','followings'));
+        return view('home.profile',compact('posts','followings','Like'));
     }
 
     public function show()

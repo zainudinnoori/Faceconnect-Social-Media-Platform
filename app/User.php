@@ -8,6 +8,7 @@ use App\Post;
 use App\Comment;
 use App\Photo;
 use App\User;
+use App\Like;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -29,7 +30,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
     public function posts(){
 
         return $this->hasMany(Post::class);

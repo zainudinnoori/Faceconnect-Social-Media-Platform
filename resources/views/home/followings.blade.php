@@ -5,12 +5,12 @@
 	@section('tabheader')
 	<ul class="nav" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link" href="/profile" role="tab" data-toggle="tab">
+			<a class="nav-link" href="profile" role="tab" data-toggle="tab">
 				<span class="nav-link-in">My Posts</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href='/setting' role="tab" data-toggle="tab">
+			<a class="nav-link" href='setting' role="tab" data-toggle="tab">
 				<span class="nav-link-in">setting</span>
 			</a>
 		</li>
@@ -25,7 +25,7 @@
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link active" href='/followings' role="tab" data-toggle="tab">
+			<a class="nav-link active" href='followings' role="tab" data-toggle="tab">
 				<span class="nav-link-in">Followings</span>
 			</a>
 		</li>

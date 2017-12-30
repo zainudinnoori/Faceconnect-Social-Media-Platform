@@ -1,32 +1,18 @@
 <!DOCTYPE html>
 <html>
 
-<!-- Mirrored from themesanytime.com/startui/demo/profile-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Mar 2016 06:51:10 GMT -->
-<head lang="ru">
+<head lang="en">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>{{ Auth::user()->name." ".'Profile' }}</title>
 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	
-	<script src="js/plugins.js"></script>
-	<script src="js/lib/ion-range-slider/ion.rangeSlider.js"></script>
-	<!-- <script src="https://use.fontawesome.com/fcf4bb6c21.js"></script> -->
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.css">
-	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.skinHTML5.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
 
-	<script src="js/app.js"></script>
-	
     <link rel="stylesheet" href=/css/main.css>
 <style type="text/css">
 	#namanyay-search-btn {
@@ -44,7 +30,7 @@
 		}
 		 
 		#namanyay-search-box {
-		margin-left:120px ; 
+		margin-left:80px ; 
 		background: #eee;
 		padding:10px;
 		 border-radius:5px 0 0 5px;
@@ -56,11 +42,44 @@
 		}
 	
 		.image-upload > input
-{
-    display: none;
+		{
+		    display: none;
 
-}
-		
+		}
+
+		#notification{
+			display: none;
+		}
+
+		.text_area_disabled{
+			width: 100%;
+			border: none;
+			resize: none;
+			background-color: transparent;
+			cursor: pointer;
+		}
+
+		.text_area_enabled{
+			width: 100%;
+			border: none;
+			border-radius: 5px; 
+			resize: none;
+			background-color: #f5f2f3;
+			cursor: text;
+			padding: 5px;
+		}
+
+		.text_area_enabled_comment
+		{
+			width: 100%;
+			border: none;
+			resize: none;
+			background-color: #ecffe6;
+			color: black;
+			font-weight: bold;
+			cursor: text;
+			padding: 5px;
+		}
  
 </style>
 </head>
@@ -68,8 +87,7 @@
 <header class="site-header">
 	<div class="container-fluid">
 	    <a href="#" class="site-logo">
-	        <img class="hidden-md-down" src="images/Logo.jpg" alt="logo">
-	        <img class="hidden-lg-up" src="Logo.jpg" alt="">
+	        <img class="hidden-md-down" src="/images/Logo.jpg" alt="logo">
 	    </a>
 
 		
@@ -128,52 +146,10 @@
 						</div><!--.tabs-section-nav-->
 						<div class="tab-content no-styled profile-tabs">
 							@yield('profilecontent')
-								<script>
-									$(document).ready(function(){
-										$("#range-slider-1").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-2").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-3").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-4").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-									});
-
-										$(document).ready(function(){
-										    $('[data-toggle="tooltip"]').tooltip();   
-										});
-								</script>
+							
 								</div>
 							</section>
-<!-- 							<section class="box-typical-section profile-settings-btns">
-								<button type="submit" class="btn btn-rounded">Save Changes</button>
-								<button type="button" class="btn btn-rounded btn-grey">Cancel</button>
-							</section> -->
+
 						</div>
 					</div><!--.tab-pane-->
 				</div><!--.tab-content-->
@@ -183,20 +159,24 @@
 
 
 
-	<!--Progress bar-->
-	<!-- <div class="circle-progress-bar pieProgress" role="progressbar" data-goal="100" data-barcolor="#ac6bec" data-barsize="10" aria-valuemin="0" aria-valuemax="100">
-	    <span class="pie_progress__number">0%</span> -->
-	<!-- </div> --> 
+
 	<script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-	<script src="js/lib/salvattore/salvattore.min.js"></script>
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.1.2/sweetalert2.all.js"></script>
+	
 
-	 <script>
+
+	<script>
+
 	   $(document).ready(function() {
+
 	    src = "{{ route('searchajax') }}";
 	     $("#namanyay-search-box").autocomplete({
 	        source: function(request, response) {
@@ -216,11 +196,25 @@
 	       
 	    });
 	});
-	</script>
+
+    // var auto_refresh = setInterval(
+    //     function() {
+    //         $('#nCount').load('/Cnotification').fadeIn("slow");
+    //     }, 0);
+
+
+	
+
+	  $(document).ready(function(){
+			
+		    $("#click").click(function(){
+		        $("#notification").toggle();
+		    });
+		});
+</script>
 
 	@yield('scripts')
 
 </body>
 
-<!-- Mirrored from themesanytime.com/startui/demo/profile-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Mar 2016 06:51:31 GMT -->
 </html>

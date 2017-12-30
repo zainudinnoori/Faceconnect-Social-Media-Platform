@@ -7,16 +7,19 @@ use App\Post;
 use App\User;
 use Auth;
 use App\User_follow;
+use App\Like;
 class usersController extends Controller
 {
     public function index($id)
     {
+
     	$user = User::find($id);
     	if($user->id === Auth::id())
 		{
+            $Like=new Like;
             $followings=Auth::user()->follow;
 			$posts = Post::where('user_id',Auth::id())->get();
-			return view('home.profile',compact('posts','followings'));
+			return view('home.profile',compact('posts','followings','Like'));
 		}
 		else
 		{
