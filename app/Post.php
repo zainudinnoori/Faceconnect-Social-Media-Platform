@@ -14,7 +14,7 @@ class Post extends Model
     use Notifiable;
 
 	 protected $fillable = [
-        'body', 'user_id',
+        'body', 'user_id','parent_id'
     ];
 
 

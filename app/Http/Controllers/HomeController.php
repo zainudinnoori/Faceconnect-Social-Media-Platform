@@ -7,6 +7,7 @@ use App\Post;
 use Auth;
 use App\Like;
 use Carbon;
+use App\User;
 class HomeController extends Controller
 {
 
@@ -19,7 +20,9 @@ class HomeController extends Controller
     {
         $posts= Post::getfeed();
         $Like= new Like;
-        return view('home.index',compact('posts','Like'));
+        $Post = new Post;
+        $User = new User;
+        return view('home.index',compact('posts','Like','Post','User'));
         
     }
 }

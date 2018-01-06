@@ -64,5 +64,13 @@ class followersController extends Controller
     	$followings=Auth::user()->follow;
     	return view('home.followings',compact('followings','followers'));
     }
-
+    public function unfollow($id)
+    {
+        $_follower= Auth::user();
+        $_user=User::find($id);
+        $_follower->follow()->detach($_user);
+        return response()->json([
+          'success' => 'Unfollowed successfully!'
+        ]);
+    }
 }

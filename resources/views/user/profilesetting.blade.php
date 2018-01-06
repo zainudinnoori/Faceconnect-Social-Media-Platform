@@ -6,7 +6,6 @@
 		padding:5px;
 		
 	}
-
 	.inputs-unbordered{
 		border:none!important;
 		/*padding:5px;*/		
@@ -47,7 +46,6 @@
 				<form method="POST" action="profile/{{ Auth::id() }}">
 					{{ csrf_field() }}
 					{{ method_field('PUT')}}
-
 					<tr>
 						<td>Name:</td>
 						<td>
@@ -73,7 +71,7 @@
 					<tr>
 						<td>Country:</td>
 						<td>
-							<input class="editable-inputs" disabled style="border-color:transparent;" type="" value="{{ Auth::user()->ccountry }}" name="ccountry">
+							@include('home.countries')
 						</td>
 						<td>
 							<button style="border: 0;background-color: transparent;" type="submit" class="comment-row-item-action edit">
@@ -134,15 +132,11 @@
 					</tr>
 					<tr>
 						<td colspan="3">
-							<button onclick="update()" class="btn btn-group btn-warning center-block">Save Changes</button>
+							<button onclick="update()" id="save-changes-button" hidden class="btn btn-group btn-warning center-block">Save Changes</button>
 						</td>
 					</tr>
-
 				</form>
-
-
 			</tbody>
-			
 		</table>
 	</article>
 
@@ -159,20 +153,13 @@
 			$('.editable-inputs').removeAttr('disabled');
 		}
 
-  // window.setTimeout(function() {
-  //   $(".name-bordered").fadeTo(6000, 500).slideUp(500, function(){
-  //     $(this).fadeOut(500); 
-  //     });
-  // });
-
   	function cancleupdate(){
   		$(".editable-inputs").addClass('inputs-unbordered');
 
   		$(".editable-inputs").removeClass('name-bordered');
   		$('.pencle_icon').html('');
   		$('.editable-inputs').Attr('disabled');
-		
-
+  		$('#save-changes-button').removeAttr('hidden');
   	}
 
   $( function() {

@@ -1,7 +1,7 @@
 
 {{-- <input type="text" name="search_text" id="search_text" placeholder='Search Text'> --}}
 <div class="row">
-<form id="searchthis" action="profile/search" style="float: left;" method="get">
+<form id="searchthis" action="/search" style="float: left;" method="get">
 	{{ csrf_field() }}
 	<input id="namanyay-search-box" name="search_text" type="text" placeholder="Search for a friend"/>
 	<input id="namanyay-search-btn" value="Go" type="submit"/>
@@ -12,7 +12,7 @@
 	<img class="img img-circle img-responsive" src=/images/{{ Auth::user()->image }} width="50px" height="50px">
 </div>
 <div style="float: left">&nbsp &nbsp
-	<a href="/profile/profile" style="color: black;">
+	<a href="/profile" style="color: black;">
 		<strong>{{ Auth::user()->name }}</strong>
 	</a>
 </div>&nbsp &nbsp&nbsp &nbsp
@@ -22,12 +22,12 @@
 </span></a>&nbsp &nbsp
 
 <span>
-	<i class="fa fa-comments fa-lg" style="color:red" aria-hidden="true" title="Messages!"></i>
+	<a href="/chatting"><i class="fa fa-comments fa-lg" style="color:red" aria-hidden="true" title="Messages!"></i></a>
 </span>&nbsp &nbsp
 
 <span id="notification-refresh">
 		<?php 
-			$notifications = Auth::user()->unreadnotifications
+			$notifications = Auth::user()->unreadnotifications;
 		?>
       <i class="fa fa-globe fa-lg" style="color:blue" id="click" aria-hidden="true" title="Notifications!">
      
@@ -44,7 +44,7 @@
           @foreach(Auth::user()->notifications as $notification)
             @if($i != 5)
             <?php $i++ ?>
-            <?php $u=App\User::find($notification->data['user_id'])?>
+            <?php $u=App\User::find($notification->data['user_id']);?>
 
             <div class="panel-body"  style="background-color:rgb(248,248,248);margin: 2px">
 
@@ -88,10 +88,6 @@
       </div>
     </div>
   </div>
-
-
-
-
 
 <span class="col-sm-offset-3">
 @if(Auth::check())

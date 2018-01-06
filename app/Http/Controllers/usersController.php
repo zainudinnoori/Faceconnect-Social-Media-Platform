@@ -12,7 +12,9 @@ class usersController extends Controller
 {
     public function index($id)
     {
-
+        $Like= new Like;
+        $Post = new Post;
+        $User = new User;
     	$user = User::find($id);
     	if($user->id === Auth::id())
 		{
@@ -34,7 +36,7 @@ class usersController extends Controller
             }
 			$posts = Post::where('user_id',$id)->get();
             $followings=$user->follow;
-			return view('user.profile',compact('posts','user','status','followings'));
+			return view('user.profile',compact('posts','user','status','followings','Like','User','Post'));
 		}
 
     }

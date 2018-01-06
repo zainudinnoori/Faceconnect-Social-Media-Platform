@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0fcb23c56ef480be4618e6e452900d00",
-    "content-hash": "03842ccf89d5caeac2f56b4ddb5926be",
+    "hash": "6824725bee8b9461cd38105e2a4d2d08",
+    "content-hash": "a005e741cce98d5bf11473738985ff14",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1361,6 +1361,58 @@
                 "shell"
             ],
             "time": "2017-11-16 14:29:51"
+        },
+        {
+            "name": "pusher/pusher-php-server",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pusher/pusher-http-php.git",
+                "reference": "03d3417748fc70a889c97271e25e282ff1ff0ae3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/03d3417748fc70a889c97271e25e282ff1ff0ae3",
+                "reference": "03d3417748fc70a889c97271e25e282ff1ff0ae3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": "^5.4 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8 || ^5.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pusher\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for interacting with the Pusher REST API",
+            "keywords": [
+                "events",
+                "messaging",
+                "php-pusher-server",
+                "publish",
+                "push",
+                "pusher",
+                "real time",
+                "real-time",
+                "realtime",
+                "rest",
+                "trigger"
+            ],
+            "time": "2017-10-20 11:18:01"
         },
         {
             "name": "ramsey/uuid",

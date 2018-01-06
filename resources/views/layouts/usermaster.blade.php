@@ -7,28 +7,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>{{ $user->name." ".'Profile' }}</title>
-	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	
-	<script src="js/plugins.js"></script>
-	<script src="js/lib/ion-range-slider/ion.rangeSlider.js"></script>
-	<!-- <script src="https://use.fontawesome.com/fcf4bb6c21.js"></script> -->
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.css">
-	<link rel="stylesheet" href="css/lib/ion-range-slider/ion.rangeSlider.skinHTML5.css">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-
-	<script src="js/app.js"></script>
-	
     <link rel="stylesheet" href=/css/main.css>
-<style type="text/css">
+    <link rel="stylesheet" href=/css/custom.css>
+	<style type="text/css">
 	#namanyay-search-btn {
 		background:#0099ff;
 		color:white;
@@ -264,21 +251,12 @@
 				</div><!--.tab-content-->
 			</div>
 
-
-
-
-
-	<!--Progress bar-->
-	<!-- <div class="circle-progress-bar pieProgress" role="progressbar" data-goal="100" data-barcolor="#ac6bec" data-barsize="10" aria-valuemin="0" aria-valuemax="100">
-	    <span class="pie_progress__number">0%</span> -->
-	<!-- </div> --> 
-	<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-	<script src="js/lib/salvattore/salvattore.min.js"></script>
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	
+	<script src="/js/app.js"></script>
+
 		 <script>
 	   $(document).ready(function() {
 	    src = "{{ route('searchajax') }}";

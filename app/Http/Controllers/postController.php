@@ -12,8 +12,6 @@ use Image;
 
 class postController extends Controller
 {
-
-
     public function store(Request $request)
     {
         if(is_null(request('post_body')) && is_null(request('images')))
@@ -25,33 +23,32 @@ class postController extends Controller
         $post= new Post;
         $post::create([
             'user_id' => Auth::id(),
-            'body' => request('post_body'),
+            'body' => ucfirst(request('post_body')),
         ]);
-        $postid= Post::latest()->first()->id;
+        $postid= Post::orderBy('id', 'desc')->first()->id;
         if(! is_null(request('images')))
         {
             $photos=request('images');
             foreach ($photos as $photo)
              {
-                // $imageName = time().'.'.$photo->getClientOriginalExtension();
-                // dd($imageName);
-                // $imageTumbnail = time().'_tumbinal'.'.'.$photo->getClientOriginalExtension();
-                // $imagOriginal = time().'_orginal'.'.'.$photo->getClientOriginalExtension();
-           
-                // $destinationPath = public_path('/images');
-                // $img = Image::make($photo->getRealPath());
-                // $img->resize(100, 100, function ($constraint) {
-                //     $constraint->aspectRatio();
-                // })->save($destinationPath.'/'.$imageTumbnail);
+                $imageExtension=$photo->getClientOriginalExtension();
+                $imageName = time();
+   
+                $imageTumbnail = time().'_tumbinal'.'.'.$imageExtension;
+                $imagOriginal = time().'_orginal'.'.'.$imageExtension;
 
-                $imageName = time().'.'.$photo->getClientOriginalExtension();
                 $destinationPath = public_path('/images');
-                $photo->move($destinationPath, $imageName);
-                $photo= new Photo;
-                $photo::create([
+                $imgTumbnail = Image::make($photo->getRealPath());
+                $imgTumbnail->resize(100, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($destinationPath.'/'.$imageTumbnail);
+
+                $photo->move($destinationPath, $imagOriginal);
+                Photo::create([
                     'user_id' => Auth::id(),
                     'post_id' => $postid,
                     'photo' => $imageName,
+                    'extension' => '.'.$imageExtension,
                 ]);
             }
         }
@@ -62,8 +59,10 @@ class postController extends Controller
     public function show($id)
     {
         $Like=new Like;
+        $Post= new Post;
         $post= Post::find($id);
-        return view('home.showpost',compact('post','Like'));
+        $User = new User;
+        return view('home.showpost',compact('post','Like','Post','User'));
     }
 
  
@@ -87,10 +86,21 @@ class postController extends Controller
     public function destroy($id)
     {
         $post= Post::find($id)->delete();
-        // session()->flash('post_deleted','Your post has beed deleted !!!');
         return response()->json([
           'success' => 'Record has been deleted successfully!'
         ]);
 
     }
+
+    public function share($id)
+    {
+        $post= Post::find($id);
+        $post->create([
+            'user_id'=> Auth::id(),
+            'parent_id'=> $id,
+        ]);
+        $post->save();
+        return back()->with('post_shared','Post shared');
+    }
+
 }

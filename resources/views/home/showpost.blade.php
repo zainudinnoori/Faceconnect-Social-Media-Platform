@@ -3,6 +3,7 @@
 
 <div role="tabpanel" class="tab-pane active" id="tabs-2-tab-1">
 			<article class="box-typical profile-post">
+				@if(is_null($post->parent_id))
 				<div class="profile-post-header">
 					<div class="user-card-row">
 						<div class="tbl-row">
@@ -31,8 +32,48 @@
 						<img width="200px" height="200px" class="img img-responsive" src= /images/{{ $photo->photo }}>
 					@endforeach
 				</div>
-
-
+				@else
+				<?php
+					$sharedPost= $Post::find($post->parent_id);
+					$shareUser = $User::find($sharedPost->user_id);
+				?>
+				<div class="profile-post-header">
+					<div class="user-card-row">
+						<div class="tbl-row">
+							<div class="tbl-cell tbl-cell-photo">
+								<a href="#">
+									<img src= /images/{{ $post->user->image }} alt="">
+								</a>
+							</div>
+							<div class="tbl-cell">
+								<div class="user-card-row-name"><a href=user/{{ $post->user->id }}>{{ $post->user->name }}</a> 
+									<span class="color-blue-grey-lighter"> Has Shared </span> 
+									@if($shareUser->id === $post->user->id)
+										His 
+									@else
+										{{ $shareUser->name }}'s
+									@endif
+									<span class="color-blue-grey-lighter"> Post</span>
+								</div>
+								<div class="color-blue-grey-lighter">{{ $post->created_at->diffForHumans() }}</div>
+							</div>
+						</div>
+					</div>
+					<a href="#" class="shared">
+						<i class="fa fa-share-alt"></i>
+					</a>
+				</div>
+				<div class="profile-post-content">
+					<p class="profile-post-content-note">Submited a new post</p>
+					<p>{{ $sharedPost->body }} </p>
+					<?php
+							$photos=$sharedPost->photos;						
+					?>
+					@foreach($photos as $photo)
+						<img width="200px" height="200px" class="img img-responsive" src= /images/{{ $photo->photo }}>
+					@endforeach
+				</div>
+				@endif
 				<?php
 		       		$like= $Like::where(['user_id'=> Auth::id() , 'post_id'=> $post->id])->first();
 		       		$count_like=count($post->likes);

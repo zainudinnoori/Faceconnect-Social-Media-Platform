@@ -10,7 +10,7 @@ use App\User;
 class Photo extends Model
 {
     protected $fillable=[
-    	'user_id','post_id','photo',
+    	'user_id','post_id','photo','extension'
     ];
 
     public function post()
