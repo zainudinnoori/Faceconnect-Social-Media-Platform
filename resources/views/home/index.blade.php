@@ -67,7 +67,14 @@
 					<textarea class="text_area_disabled" id="post_body_{{ $post->id }}" disabled>{{$post->body }}</textarea>
 					<?php $photos=$post->photos;?>
 					@foreach($photos as $photo)
-						<img style="display: inline" width="200px" data-toggle="modal" data-target="#myModal" height="200px" class="img img-responsive" src= "images/{{ $photo->photo.'_tumbinal'.$photo->extension }}">
+						<img style="display: inline" width="200px" data-toggle="modal" data-target="#showimage-{{ $photo->id }}" height="200px" class="img img-responsive show-orginal-image" src= "images/{{ $photo->photo.'_tumbinal'.$photo->extension }}" name="{{ $photo->photo}}" extension="{{ $photo->extension }}">
+						  <div class="modal fade" id="showimage-{{ $photo->id }}" role="dialog">
+						    <div class="modal-dialog">
+						      <div class="modal-content-orginal">
+						      	<img width="130%" src="images/{{ $photo->photo.'_orginal'.$photo->extension }}">
+						      </div>
+						    </div>
+						  </div>
 					@endforeach
 					
 					<div id="disp-images-upload"></div>
@@ -276,6 +283,14 @@
 	       
 	    });
 	});
+
+	   $('.show-orginal-image').click(function(){
+	   			var photoname= $(this).attr('name');
+	   			var extension = $(this).attr('extension');
+	   			$('.modal-content-orginal').empty();
+	   			$('.modal-content-orginal').html('<img width="130%" src="images/'+photoname+'_orginal'+extension+'">');
+			});
+
 </script>
 
     @if(!is_null(session('status')))

@@ -13,7 +13,6 @@ class photoController extends Controller
     		$followings=Auth::user()->follow;
     		$photos=Auth::user()->photos;
     		return view('home.profilephotos',compact('photos','followings'));
-
     }
 
     public function destroy($id)

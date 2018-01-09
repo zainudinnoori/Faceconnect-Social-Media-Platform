@@ -49,5 +49,6 @@ if (token) {
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
+//     key: 'cd05cea8d83c0158f064'
+//     cluster: 'ap2'
 // });

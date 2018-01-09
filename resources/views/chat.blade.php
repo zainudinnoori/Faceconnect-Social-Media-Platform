@@ -1,11 +1,9 @@
 
 <!DOCTYPE html><html class=''>
-<head><script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+<head>
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
-
-<script src="https://use.typekit.net/hoy3lrg.js"></script>
-<script>try{Typekit.load({ async: true });}catch(e){}</script>
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 <style class="cp-pen-styles">body {
   display: flex;
   align-items: center;
@@ -28,7 +26,7 @@
   height: 92vh;
   min-height: 300px;
   max-height: 720px;
-  background: #E6EAEA;
+  background: white;
 }
 @media screen and (max-width: 360px) {
   #frame {
@@ -675,27 +673,13 @@
 #frame .content .message-input .wrap button:focus {
   outline: none;
 }
-</style></head><body>
-<!-- 
-
-A concept for a chat interface. 
-
-Try writing a new message! :)
-
-
-Follow me here:
-Twitter: https://twitter.com/thatguyemil
-Codepen: https://codepen.io/emilcarlsson/
-Website: http://emilcarlsson.se/
-
--->
-
+</style></head><body> 
 <div id="frame">
     <div id="sidepanel">
         <div id="profile">
             <div class="wrap">
                 <img id="profile-img" src="/images/{{ Auth::user()->image }}" class="online" alt="" />
-                <p>{{ Auth::user()->name }}</p>
+                <p>{{ Auth::user()->name}} </p>
                 <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
                 <div id="status-options">
                     <ul>
@@ -717,10 +701,28 @@ Website: http://emilcarlsson.se/
         </div>
         <div id="search">
             <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-            <input type="text" placeholder="Search contacts..." />
+            <input type="text" class="user-search" placeholder="Search contacts..." />    
         </div>
         <div id="contacts">
             <ul>
+              @foreach($users as $user)
+                <li class="contact contact-{{ $user->id }}" id="{{ $user->id }}">
+                    <div class="wrap">
+                        <span class="contact-status online"></span>
+                        <img src="/images/{{ $user->image }}" alt="" />
+                        <div class="meta">
+                            <p class="name">{{ $user->name }}</p>
+                            <p class="preview">
+                              <span>You:</span>
+                                @if(count($messages))
+                                {{ $messages->sortByDesc('created_at')->first()->body}}
+                                @endif
+
+                            </p>
+                        </div>
+                    </div>
+                </li>
+              @endforeach
                 <li class="contact">
                     <div class="wrap">
                         <span class="contact-status online"></span>
@@ -730,17 +732,7 @@ Website: http://emilcarlsson.se/
                             <p class="preview">You just got LITT up, Mike.</p>
                         </div>
                     </div>
-                </li>
-                <li class="contact active">
-                    <div class="wrap">
-                        <span class="contact-status busy"></span>
-                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Ahmad</p>
-                            <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                        </div>
-                    </div>
-                </li>
+                </li>                
             </ul>
         </div>
         <div id="bottom-bar">
@@ -750,8 +742,8 @@ Website: http://emilcarlsson.se/
     </div>
     <div class="content">
         <div class="contact-profile">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>Ahmad</p>
+            <img src="" alt="" id="contact-image"/>
+            <p id="contact-name"></p>
             <div class="social-media">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
                 <i class="fa fa-twitter" aria-hidden="true"></i>
@@ -759,28 +751,25 @@ Website: http://emilcarlsson.se/
             </div>
         </div>
         <div class="messages">
-            <ul>
-                <li class="sent">
-                    <img src="/images/{{ Auth::user()->image }}" alt="" />
-                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>When you're backed against the wall, break the god damn thing down.</p>
-                </li>
+            <ul class="messages-item">
+              <h1 style="font-size: 30px ;margin-top:50px" align="center">No Friend Selected</h1>
+              <h1 style="font-size: 20px" align="center">Select a Friend and start chat</h1>
+              <h1 align="center"><i class="fa fa-comments fa-4x" aria-hidden="true"></i></h1>
             </ul>
         </div>
         <div class="message-input">
             <div class="wrap">
-            <input type="text" placeholder="Write your message..." />
-            <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-            <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+              <input type="text" placeholder="Write your message..." id="chat-text" />
+                 <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+              <button class="submit" id="send-chat"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
             </div>
         </div>
     </div>
 </div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>  
+
 <script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
 
 $("#profile-img").click(function() {
     $("#status-options").toggleClass("active");
@@ -823,18 +812,89 @@ function newMessage() {
     $('.message-input input').val(null);
     $('.contact.active .preview').html('<span>You: </span>' + message);
     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
-};
+  };
 
 $('.submit').click(function() {
-  newMessage();
+        var user_id = $('.activeContact').attr('id');
+        var message = $('#chat-text').val();
+        var data = {_token:'{{ csrf_token() }}',method:'post',message:message};
+        var request = $.ajax({
+        url: "/chatting/"+user_id,
+        type: "POST",
+        data: data,
+        dataType:"html",
+        success: function()
+        { 
+           newMessage();
+        }
+       });
 });
+
+$('.contact').click(function(){
+  var user_id = $(this).attr('id');
+  var data = {_token:'{{ csrf_token() }}',method:'get'};
+  var request = $.ajax({
+  url: "/chatting/"+user_id,
+  type: "get",
+  data: data,
+  dataType:"html",
+  success: function(msg)
+    { 
+        var send="";
+        var replies="";
+        var response = JSON.parse(msg);
+        $('.messages-item').empty();
+        if((response.messages).length != 0)
+        {
+          for(var i=0 ; i<(response.messages).length;i++)
+          {
+              if(response.messages[i].user_id == {{ Auth::id() }})
+              {
+                     // alert('send');
+                   $('.messages-item').append('<li class="sent"><img src="/images/{{ Auth::user()->image }}" alt="" /><p>' + response.messages[i].body +' </p></li>');
+              }
+              else
+              {
+                 // alert('replies');
+                   $('.messages-item').append('<li class="replies"><img src="/images/'+response.user.image+'" alt="" /><p>' + response.messages[i].body +'</p></li>');
+              }
+          }
+
+        }
+        // else{
+        //    $('.messages').html('<ul>'
+        //    +'<h1 style="font-size: 30px ;margin-top:50px" align="center">No Conversation record</h1>'
+        //    +'<h1 style="font-size: 20px" align="center">Start a new Conversation</h1>'
+        //    +'<h1 align="center"><i class="fa fa-comments fa-4x" aria-hidden="true"></i></h1></ul>');
+        // }
+        // $('.messages').append('</ul>');
+        $('#contact-name').text(response.user.name);
+        $('#contact-image').attr('src','/images/'+response.user.image);
+        $('.contact').removeClass('active');
+        $('.contact').removeClass('activeContact');
+        $('.contact-'+user_id).addClass('active');
+        $('.contact-'+user_id).addClass('activeContact');
+    }
+  });
+})
 
 $(window).on('keydown', function(e) {
   if (e.which == 13) {
+  var user_id = $('.activeContact').attr('id');
+  var message = $('#chat-text').val();
+  var data = {_token:'{{ csrf_token() }}',method:'post',message:message};
+  var request = $.ajax({
+  url: "/chatting/"+user_id,
+  type: "POST",
+  data: data,
+  dataType:"html",
+  success: function()
+  { 
     newMessage();
     return false;
   }
 });
+}});
 //# sourceURL=pen.js
 </script>
 </body></html>

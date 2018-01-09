@@ -9,6 +9,7 @@ use App\Comment;
 use App\Photo;
 use App\User;
 use App\Like;
+use App\Message;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -56,5 +57,9 @@ class User extends Authenticatable
     public function followers()
     {
       return $this->belongsToMany(User::class, 'user_follows', 'follow_id', 'user_id');
+    }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
     }
 }

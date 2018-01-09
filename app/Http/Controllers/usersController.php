@@ -8,6 +8,7 @@ use App\User;
 use Auth;
 use App\User_follow;
 use App\Like;
+use App\Message;
 class usersController extends Controller
 {
     public function index($id)

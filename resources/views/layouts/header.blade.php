@@ -1,6 +1,6 @@
 
 {{-- <input type="text" name="search_text" id="search_text" placeholder='Search Text'> --}}
-<div class="row">
+
 <form id="searchthis" action="/search" style="float: left;" method="get">
 	{{ csrf_field() }}
 	<input id="namanyay-search-box" name="search_text" type="text" placeholder="Search for a friend"/>
@@ -89,14 +89,15 @@
     </div>
   </div>
 
-<span class="col-sm-offset-3">
-@if(Auth::check())
-<a href="logout">
-	<b>Logout</b>
-</a>
-</span>
-@endif
-</div>
+  <span class="col-sm-offset-3">
+    @if(Auth::check())
+    <a href="logout">
+      <b>Logout</b>
+    </a>
+    @endif
+  </span>
+
+
 
 
 

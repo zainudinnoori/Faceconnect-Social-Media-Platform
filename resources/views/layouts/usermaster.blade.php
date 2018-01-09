@@ -113,14 +113,8 @@
 				<div class="col-xl-3 col-lg-4">
 					<aside class="profile-side">
 						<section class="box-typical profile-side-user">
-
-
 									<img src="/images/{{ $user->image }}" alt="Your pic" class="avatar-preview avatar-preview-128 img img-circle"/>
-
-
-
-								
-							<span><button class="btn btn-primary" style="margin:5px">Send a message</button></span><br>
+							<span><button class="btn btn-primary send-a-message" style="margin:5px">Send a message</button></span><br>
 
 
 							<span>
@@ -237,8 +231,6 @@
 
 									});
 
-
-					
 								</script>
 								</div>
 							</section>
@@ -250,14 +242,148 @@
 					</div><!--.tab-pane-->
 				</div><!--.tab-content-->
 			</div>
-
+        <div style="position: fixed; right: 50px ; bottom: 20px;width: 350px; " hidden class="chat-widget">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>
+                    	{{ $user->name }}<i style="float: right; color:white"  class="fa fa-window-close-o" aria-hidden="true" id="minimize"></i>
+						<i style="float: right; color:white" class="fa fa-window-minimize minimize">&nbsp &nbsp</i>
+                    </h4>
+                </div>
+                <div class="panel-body chat-widget-body" style="overflow: auto; max-height:300px;overflow-x:hidden;">
+                    <ul class="chat-widget-list">
+                    	{{-- Chat here --}}
+                    </ul>
+                </div>
+                <div class="panel-footer" >
+					<input placeholder="Type a message..." type="text" name="" id='chat-text' style="width: 100% ;height:26px;padding: 15px;border:none">
+					<div class="" style="background-color: white;padding: 5px ; color: lightblue">
+						<i class="fa fa-paperclip">&nbsp</i>
+						<i class="fa fa-camera" aria-hidden="true">&nbsp</i>
+						<i class="fa fa-smile-o" aria-hidden="true">&nbsp</i>
+						<i class="fa fa-paperclip" aria-hidden="true">&nbsp</i>
+					</div>
+                </div>
+            </div>
+        </div>    
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	
 	<script src="/js/app.js"></script>
 
-		 <script>
+	 <script>
+		$('.minimize').click(function(){
+				$('.chat-widget-body').slideToggle("slow");
+				$('.minimize').attr('class','fa fa-window-maximize');
+
+		});
+
+		$('.fa-window-close-o').click(function(){
+			$('.chat-widget').attr('hidden','hidden');
+		})
+
+		$('.send-a-message').click(function(){
+			$('.chat-widget').removeAttr('hidden');
+		})
+
+		function MessageSend() {
+        var message = $('#chat-text').val();
+        var data = {_token:'{{ csrf_token() }}',method:'post',message:message};
+        var request = $.ajax({
+        url: "/chatting/"+{{ $user->id }},
+        type: "POST",
+        data: data,
+        dataType:"html",
+        success: function()
+        { 
+       	$('.chat-widget-list').append('<li>'+
+    		'<div style="float: right">'+
+				'<div style=" border-right:4px solid blue;padding-right: 8px;margin-bottom: 5px">'+
+					'<img src="/images/{{ Auth::user()->image }}" width="30" height="30" style=" float: right"class="img img-circle" alt="NoPic">'+
+					'<span style="float: right;color:red">5 minutes ago&nbsp&nbsp</span><br>'+
+					'<div style="margin-left:30px;word-wrap: break-word;">'+message+'</div>'+
+				'</div> '+
+				'<hr style="margin:5px">'+
+			'</div>'+
+			'</li>'
+			);
+        }
+       });
+	};
+
+
+
+	 $(function() 
+      {
+        $("#chat-text").keydown(function(event)
+        {
+          if(event.keyCode == 13)
+          	{
+          		MessageSend();
+  		        $(this).val('');
+  		        // $('.chat-widget-body').scrollTop = 0;
+          	};
+        });
+      });
+
+	$('.send-a-message').click(function(){
+	  var data = {_token:'{{ csrf_token() }}',method:'get'};
+	  var request = $.ajax({
+	  url: "/chatting/"+{{ $user->id }},
+	  type: "get",
+	  data: data,
+	  dataType:"html",
+	  success: function(msg)
+	    { 
+	        var send="";
+	        var replies="";
+	        '.chat-widget-list'
+	        var response = JSON.parse(msg);
+	        $('.chat-widget-list').empty();
+	        if((response.messages).length != 0)
+	        {
+	          for(var i=0 ; i<(response.messages).length;i++)
+	          {
+	              if(response.messages[i].user_id != {{ Auth::id() }})
+	              {
+	                   // alert('send');
+	                   $('.chat-widget-list').append('<li>'+
+	                		'<div style="float: left">'+
+								'<div style=" border-left:4px solid blue;padding-left: 8px;margin-bottom: 5px">'+
+									'<img src="/images/{{ $user->image }}" width="30" height="30" class="img img-circle" alt="NoPic">'+
+									'&nbsp<i style="color: gray" class="fa fa-clock-o">&nbsp</i>'+
+									'<span style="color:blue">5 minutes ago</span>'+
+									'<div style="margin-left:30px;word-wrap: break-word;">'+response.messages[i].body+'</div>'+
+									'<hr style="margin:5px">'+
+								'</div>'+						
+							'</div>'+
+							'</li>'
+	                   	);
+	              }
+	              else
+	              {
+	                   $('.chat-widget-list').append('<li>'+
+	                		'<div style="float: right">'+
+								'<div style=" border-right:4px solid blue;padding-right: 8px;margin-bottom: 5px">'+
+									'<img src="/images/{{ Auth::user()->image }}" width="30" height="30" style=" float: right"class="img img-circle" alt="NoPic">'+
+									'<span style="float: right;color:red">5 minutes ago&nbsp&nbsp</span><br>'+
+									'<div style="margin-left:30px;word-wrap: break-word;">'+response.messages[i].body+'</div>'+
+								'</div> '+
+								'<hr style="margin:5px">'+
+							'</div>'+
+							'</li>'
+						);
+	              }
+	          }
+
+	        }
+	    }
+	  });
+	});
+
+
+
 	   $(document).ready(function() {
 	    src = "{{ route('searchajax') }}";
 	     $("#namanyay-search-box").autocomplete({

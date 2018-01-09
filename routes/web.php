@@ -64,9 +64,14 @@ Route::get('Cnotification',function(){
 	return $notifications;
 });
 
-Route::get('chatting',function(){
- return view('chat');
+Route::get('chatting','messageController@index');
+Route::Post('chatting/{id}','messageController@store');
+Route::get('chatting/{id}','messageController@getChats');
+
+Route::get('chatw',function(){
+	return view('chatwidget');
 });
+
 
 
 

@@ -228,9 +228,9 @@
                     <h1 style="color: red" align="center">{{ $user->name }} Didn't Post Anything Yet</h1>
                     <h1 align="center"><i class="fa fa-bars fa-1x" aria-hidden="true"></i></h1>
                     <h3  style="color: #999" align="center">He has joined <span style="color: blue">faceconnet</span> {{ $user->created_at->diffForHumans() }}</h3>
-
                 </article>
             @endif
 
-        </div>                                  
+        </div> 
+                             
 @endsection
