@@ -96,9 +96,16 @@
 				{{-- <p class="profile-post-content-note">Subminted a new post</p> --}}
 				<textarea class="text_area_disabled" id="post_body_{{ $post->id }}" disabled>{{$post->body }}</textarea>
 				<?php $photos=$post->photos;?>
-				@foreach($photos as $photo)
-					<img style="display: inline" width="200px" data-toggle="modal" data-target="#myModal" height="200px" class="img img-responsive" src= '/images/{{ $photo->photo.'_tumbinal'.$photo->extension }}'>
-				@endforeach
+					@foreach($photos as $photo)
+						<img style="display: inline" width="200px" data-toggle="modal" data-target="#showimage-{{ $photo->id }}" height="200px" class="img img-responsive show-orginal-image" src= "images/{{ $photo->photo.'_tumbinal'.$photo->extension }}" name="{{ $photo->photo}}" extension="{{ $photo->extension }}">
+						  <div class="modal fade" id="showimage-{{ $photo->id }}" role="dialog">
+						    <div class="modal-dialog">
+						      <div class="modal-content-orginal">
+						      	
+						      </div>
+						    </div>
+						  </div>
+					@endforeach
 				
 				<div id="disp-images-upload"></div>
 				<br>

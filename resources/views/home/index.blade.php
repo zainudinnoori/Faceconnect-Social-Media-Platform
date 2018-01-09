@@ -71,7 +71,6 @@
 						  <div class="modal fade" id="showimage-{{ $photo->id }}" role="dialog">
 						    <div class="modal-dialog">
 						      <div class="modal-content-orginal">
-						      	<img width="130%" src="images/{{ $photo->photo.'_orginal'.$photo->extension }}">
 						      </div>
 						    </div>
 						  </div>
@@ -283,13 +282,6 @@
 	       
 	    });
 	});
-
-	   $('.show-orginal-image').click(function(){
-	   			var photoname= $(this).attr('name');
-	   			var extension = $(this).attr('extension');
-	   			$('.modal-content-orginal').empty();
-	   			$('.modal-content-orginal').html('<img width="130%" src="images/'+photoname+'_orginal'+extension+'">');
-			});
 
 </script>
 

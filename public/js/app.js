@@ -4,6 +4,15 @@ $.ajaxSetup({
   }
 });
 
+//modal to show single orginal image
+$('.show-orginal-image').click(function(){
+    var photoname= $(this).attr('name');
+    var extension = $(this).attr('extension');
+    $('.modal-content-orginal').empty();
+    $('.modal-content-orginal').html('<img width="130%" src="images/'+photoname+'_orginal'+extension+'">');
+});
+
+
 $('.delete_post').click(function(e){
   var post_id = $(this).attr('data-post-id');
   var data={post_id:post_id,method:'DELETE'}
