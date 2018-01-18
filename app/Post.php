@@ -31,9 +31,7 @@ class Post extends Model
            array_push($arr,$follower['id']);
         }
         array_push($arr, Auth::id());
-
-        return Post::all()->whereIn('user_id', $arr)->sortByDesc('created_at');
-
+        return Post::whereIn('user_id', $arr);
     }
 
     public function comments()

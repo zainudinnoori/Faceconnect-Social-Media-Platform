@@ -15,37 +15,8 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href=/css/main.css>
     <link rel="stylesheet" href=/css/custom.css>
-	<style type="text/css">
-	#namanyay-search-btn {
-		background:#0099ff;
-		color:white;
-		font: 'trebuchet ms', trebuchet;
-		padding:10px 20px;
-		border-radius:0 5px 5px 0;
-		-moz-border-radius:0 5px 5px 0;
-		-webkit-border-radius:0 5px 5px 0;
-		-o-border-radius:0 5px 5px 0;
-		border:0 none;
-		font-weight:bold;
+<style type="text/css">
 
-		}
-		 
-		#namanyay-search-box {
-		margin-left:120px ; 
-		background: #eee;
-		padding:10px;
-		 border-radius:5px 0 0 5px;
-		-moz-border-radius:5px 0 0 5px;
-		-webkit-border-radius:5px 0 0 5px;
-		-o-border-radius:5px 0 0 5px;
-		border: 0 none;
-   		 width: 200px;
-		}
-
-		#notification{
-			display: none;
-		}
- 
 </style>
 </head>
 <body>
@@ -53,13 +24,9 @@
 	<div class="container-fluid">
 	    <a href="#" class="site-logo">
 	        <img class="hidden-md-down" src="/images/Logo.jpg" alt="logo">
-	        <!-- <img class="hidden-lg-up" src="/images/Logo.jpg" alt=""> -->
 	    </a>
 
-	    <button class="hamburger hamburger--htla">
-	        <span>toggle menu</span>
-	    </button>
-	    <div class="site-header-content">
+	    <div class="site-header-content" style="padding: 0px" >
             <div class="site-header-content-in">
 				@include('layouts.header')
 	        </div><!--site-header-content-in-->
@@ -69,7 +36,7 @@
 <div class="page-content">
 		<div class="profile-header-photo">
 			<div class="profile-header-photo-in">
-				<div class="tbl-cell" style="background-image: url(/images/{{ $user->image }});">
+				<div class="tbl-cell" style="background-image: url(/images/{{ Auth::user()->cover_image }});  background-position: center;	background-repeat: no-repeat; background-size: cover;">
 					<div class="info-block">
 						<div class="container-fluid">
 							<div class="row">
@@ -78,7 +45,6 @@
 										<div class="tbl-row">
 											<div class="tbl-cell">
 												<p class="title">{{ $user->name }}</p>
-												<p>Company Founder</p>
 											</div>
 											<div class="tbl-cell tbl-cell-stat">
 												<div class="inline-block">
@@ -106,7 +72,6 @@
 					</div>
 				</div>
 			</div>
-				<!-- <button>send a mess</button> -->
 		</div>
 		<div class="container-fluid">
 			<div class="row">
@@ -115,8 +80,6 @@
 						<section class="box-typical profile-side-user">
 									<img src="/images/{{ $user->image }}" alt="Your pic" class="avatar-preview avatar-preview-128 img img-circle"/>
 							<span><button class="btn btn-primary send-a-message" style="margin:5px">Send a message</button></span><br>
-
-
 							<span>
 								<button class="btn btn-success" id="follow-me"  style="margin:2px">
 									{{ $status }}
@@ -141,12 +104,12 @@
 						</section>
 
 						<section class="box-typical">
-							<header class="box-typical-header-sm bordered">About</header>
+							<header class="box-typical-header-sm bordered">Status</header>
 							<div class="box-typical-inner">
 								<p>{{ $user->about }}</p>
 							</div>
 						</section>
-
+{{-- 
 						<section class="box-typical">
 							<header class="box-typical-header-sm bordered">Recommendation</header>
 							<div class="box-typical-inner">
@@ -155,7 +118,7 @@
 								<p>Photos</p>
 								<p>Most recent</p>
 							</div>
-						</section>
+						</section> --}}
 
 						<section class="box-typical">
 							<header class="box-typical-header-sm bordered">Info</header>
@@ -184,10 +147,8 @@
 
 							</div>
 						</section>
-
 					</aside><!--.profile-side-->
 				</div>
-
 				<div class="col-xl-9 col-lg-8">
 					<section class="tabs-section">
 						<div class="tabs-section-nav tabs-section-nav-left">
@@ -195,82 +156,48 @@
 						</div><!--.tabs-section-nav-->
 						<div class="tab-content no-styled profile-tabs">
 							@yield('profilecontent')
-								<script>
-									$(document).ready(function(){
-										$("#range-slider-1").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-2").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-3").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-										$("#range-slider-4").ionRangeSlider({
-											min: 0,
-											max: 100,
-											from: 30,
-											hide_min_max: true,
-											hide_from_to: true
-										});
-
-									});
-
-								</script>
-								</div>
-							</section>
-<!-- 							<section class="box-typical-section profile-settings-btns">
-								<button type="submit" class="btn btn-rounded">Save Changes</button>
-								<button type="button" class="btn btn-rounded btn-grey">Cancel</button>
-							</section> -->
 						</div>
-					</div><!--.tab-pane-->
-				</div><!--.tab-content-->
-			</div>
-        <div style="position: fixed; right: 50px ; bottom: 20px;width: 350px; " hidden class="chat-widget">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h4>
-                    	{{ $user->name }}<i style="float: right; color:white"  class="fa fa-window-close-o" aria-hidden="true" id="minimize"></i>
-						<i style="float: right; color:white" class="fa fa-window-minimize minimize">&nbsp &nbsp</i>
-                    </h4>
-                </div>
-                <div class="panel-body chat-widget-body" style="overflow: auto; max-height:300px;overflow-x:hidden;">
-                    <ul class="chat-widget-list">
-                    	{{-- Chat here --}}
-                    </ul>
-                </div>
-                <div class="panel-footer" >
-					<input placeholder="Type a message..." type="text" name="" id='chat-text' style="width: 100% ;height:26px;padding: 15px;border:none">
-					<div class="" style="background-color: white;padding: 5px ; color: lightblue">
-						<i class="fa fa-paperclip">&nbsp</i>
-						<i class="fa fa-camera" aria-hidden="true">&nbsp</i>
-						<i class="fa fa-smile-o" aria-hidden="true">&nbsp</i>
-						<i class="fa fa-paperclip" aria-hidden="true">&nbsp</i>
-					</div>
-                </div>
+					</section>
+				</div>
+			</div><!--.tab-pane-->
+		</div><!--.tab-content-->
+	</div>
+	{{-- chat widget --}}
+    <div style="position: fixed; right: 50px ; bottom: 20px;width: 350px; " hidden class="chat-widget">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>
+                	{{ $user->name }}<i style="float: right; color:white"  class="fa fa-window-close-o" aria-hidden="true" id="minimize"></i>
+					<i style="float: right; color:white" class="fa fa-window-minimize minimize">&nbsp &nbsp</i>
+                </h4>
             </div>
-        </div>    
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <div class="panel-body chat-widget-body" style="overflow: auto; max-height:300px;overflow-x:hidden;">
+                <ul class="chat-widget-list">
+                	{{-- Chat here --}}
+                </ul>
+            </div>
+            <div class="panel-footer" >
+				<input placeholder="Type a message..." type="text" name="" id='chat-text' style="width: 100% ;height:26px;padding: 15px;border:none">
+				<div class="" style="background-color: white;padding: 5px ; color: lightblue">
+					<i class="fa fa-paperclip">&nbsp</i>
+					<i class="fa fa-camera" aria-hidden="true">&nbsp</i>
+					<i class="fa fa-smile-o" aria-hidden="true">&nbsp</i>
+					<i class="fa fa-paperclip" aria-hidden="true">&nbsp</i>
+				</div>
+            </div>
+        </div>
+    </div> 
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.1.2/sweetalert2.all.js"></script>
 	<script src="/js/app.js"></script>
+
+
 
 	 <script>
 		$('.minimize').click(function(){
@@ -311,7 +238,6 @@
         }
        });
 	};
-
 
 
 	 $(function() 
@@ -382,63 +308,59 @@
 	  });
 	});
 
+   $(document).ready(function() {
+    src = "{{ route('searchajax') }}";
+     $("#namanyay-search-box").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: src,
+                dataType: "json",
+                data: {
+                    term : request.term
+                },
+                success: function(data) {
+                    response(data);    
+                }
+            });
+        },
+        minLength: 2,
+       
+    });
+});
 
+	$(document).ready(function() {
+	$('#follow-me').on('click',function(e) {
 
-	   $(document).ready(function() {
-	    src = "{{ route('searchajax') }}";
-	     $("#namanyay-search-box").autocomplete({
-	        source: function(request, response) {
-	            $.ajax({
-	                url: src,
-	                dataType: "json",
-	                data: {
-	                    term : request.term
-	                },
-	                success: function(data) {
-	                    response(data);    
-	                }
-	            });
-	        },
-	        minLength: 2,
-	       
-	    });
-	});
-
-		$(document).ready(function() {
-		$('#follow-me').on('click',function(e) {
-
-			var following_user_id =  {{ $user->id }} ;
-			var data = {following_user_id:following_user_id, _token:'{{ csrf_token() }}'};
-			var request = $.ajax({
-				url: "/follow/store",
-				type: "POST",
-				data: data,
-				dataType:"html"
-				});
-			request.done(function( msg ) {
-			    var response = JSON.parse(msg);
-			    if(response.msg == "followed")
-			    {
-			    	$('#follow-me').empty().html("Un follow");
-			    	$('.followers-count').empty().html(response.count);
-			    }
-			    if(response.msg == "unfollowed")
-			    {
-			    	$('#follow-me').empty().html("Follow");
-			    	$('.followers-count').empty().html(response.count);
-			    }
+		var following_user_id =  {{ $user->id }} ;
+		var data = {following_user_id:following_user_id, _token:'{{ csrf_token() }}'};
+		var request = $.ajax({
+			url: "/follow/store",
+			type: "POST",
+			data: data,
+			dataType:"html"
 			});
-			request.fail(function( jqXHR, textStatus ) {
-			    console.log( "Request failed: " + testStatus );
-			    // var response = JSON.parse(msg);
-
-			});
+		request.done(function( msg ) {
+		    var response = JSON.parse(msg);
+		    if(response.msg == "followed")
+		    {
+		    	$('#follow-me').empty().html("Un follow");
+		    	$('.followers-count').empty().html(response.count);
+		    }
+		    if(response.msg == "unfollowed")
+		    {
+		    	$('#follow-me').empty().html("Follow");
+		    	$('.followers-count').empty().html(response.count);
+		    }
+		});
+		request.fail(function( jqXHR, textStatus ) {
+		    console.log( "Request failed: " + testStatus );
 		});
 	});
-	</script>
+});
+</script>
+
 	@yield('scripts')
 
 </body>
 
-<!-- Mirrored from themesanytime.com/startui/demo/profile-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Mar 2016 06:51:31 GMT -->
 </html>

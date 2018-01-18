@@ -32,7 +32,6 @@ class messageController extends Controller
     }
 
     public function getChats($id){
-
     	$messages= Message::where('user_id',$id)->Where('to_user_id', Auth::id())
         ->orWhere('user_id',Auth::id())->Where('to_user_id', $id)->get();
         $user= User::find($id);

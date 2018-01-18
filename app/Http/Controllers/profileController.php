@@ -13,25 +13,29 @@ use App\User;
 class profileController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $Like= new Like;
         $Post = new Post;
         $User = new User;
         $followings=Auth::user()->follow;
-        $posts = Post::where('user_id',Auth::id())->orderBy('created_at','des')->get();
+        $posts = Post::where('user_id',Auth::id())->orderBy('created_at','des')->paginate(4);
+        if ($request->ajax()) {
+            $view = view('home.posts',compact('posts','followings','Like','Post','User'))->render();
+            return response()->json(['html'=>$view]);
+        }
         return view('home.profile',compact('posts','followings','Like','Post','User'));
     }
 
     public function show()
     {
         $followings=Auth::user()->follow;
-        return view('home.profilesetting',compact('followings'));
+        $block_users=Auth::user()->block_users;
+        return view('home.profilesetting',compact('followings','block_users'));
     }
  
     public function update(Request $request, $id)
     {
-        
         if($request->image != null)
         {
             $imagename= time().".".$request->image->getClientOriginalExtension();
@@ -71,13 +75,38 @@ class profileController extends Controller
              $user->save();
              return back();
          }
+
+         if(request('oldpassword')!=null)
+         {  
+            $request->validate([
+                'oldpassword' =>'required|max:255|min:6',
+                'password' => 'required|max:255|min:6|confirmed',
+            ]);
+            $user= new User;
+            $user = User::find(Auth::id());
+            $oldPasswordDB = $user->password;
+            if(password_verify(request('oldpassword'), $user->password))
+            {
+
+                $user->password = bcrypt(request('password'));
+                $user->save();
+                session()->flash('passwordChangeAlertDone','Password changed.');
+
+                return back();
+            }
+            else
+            {
+                session()->flash('passwordChangeAlertWrongOldPassword','Wrong Old password.');
+                return back();
+            }
+         }
          return back();
     }
 
     public function search()
     {
-       $query=request('search_text');
-        $users = User::where('name', 'LIKE', '%' . $query . '%')->get();
+        $query=request('search_text');
+        $users = User::where('name', 'LIKE', '%' . $query . '%')->paginate(10);;
         // dd($user);
         return view('home.searchresult',compact('users'));
     }

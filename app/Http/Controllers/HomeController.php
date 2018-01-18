@@ -16,13 +16,17 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function home()
+    public function home(Request $request)
     {
-        $posts= Post::getfeed();
+        $posts= Post::getfeed()->orderBy('created_at','desc')->paginate(5);
         $Like= new Like;
         $Post = new Post;
         $User = new User;
-        return view('home.index',compact('posts','Like','Post','User'));
+        if ($request->ajax()) {
+            $view = view('home.posts',compact('posts','Like','Post','User'))->render();
+            return response()->json(['html'=>$view]);
+        }
+         return view('home.index',compact('posts','Like','Post','User'));
         
     }
 }

@@ -56,8 +56,10 @@
 								</div>
 							</div>
 							@endforeach
+
 							</div>
 						</div>
+						<center>{{ $followings->links() }}</center>
 				@else
 					<div class="col-sm-6 col-md-6 col-lg-6 col-md-offset-3" style="padding:10px">
 						<h3>Welcome</h3>

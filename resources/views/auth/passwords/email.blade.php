@@ -1,11 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.loginmaster')
 
 @section('content')
 <div class="container">
+    <img src="/images/Logo.jpg" style="margin:30px">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-sm-6 col-md-5 col-lg-4 col-sm-offset-3 col-md-offset-3 col-lg-offset-4">
             <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+                <div class="panel-heading">Reset Your Password</div>
 
                 <div class="panel-body">
                     @if (session('status'))

@@ -64,11 +64,12 @@ class RegisterController extends Controller
     {
         $dob = $data['birthday_year']."-".$data['birthday_month']."-".$data['birthday_day'];
         return User::create([
-            'name' => $data['name'],
+            'name' => ucfirst($data['name']),
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'dob' => $dob,
             'gender' =>$data['gender'],
+            'image'=>'menprofilepic.png',
         ]);
     }
 }

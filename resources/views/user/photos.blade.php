@@ -18,14 +18,21 @@
 	@endsection
 	<article class="box-typical profile-post">
 		@if(count($photos))
-		<ul style="list-style: none ;padding: 10px">
-			@foreach($photos as $photo)
-				<li  style="display: inline;padding: 20px" >
-					<img  class="img img-responsive" style="padding: 5px; border: 1px solid blue;margin:5px"" src="/images/{{ $photo->photo.'_tumbinal'.$photo->extension }}"  height="200px" width="200px" alt="no pic">
-					{{-- {{ $photo->created_at->toFormattedDateString() }} --}}
-				</li>
-			@endforeach
-		</ul>
+		<div class="container">
+			<div class="col-md-12">
+				<div class="row">
+					@foreach($post->photos as $photo)
+						<img style="display: inline" width="200px" data-toggle="modal" data-target="#showimage-{{ $photo->id }}" height="200px" class="img img-responsive show-orginal-image" src= "/images/{{ $photo->photo.'_tumbinal'.$photo->extension }}" name="{{ $photo->photo}}" extension="{{ $photo->extension }}">
+						  <div class="modal fade" id="showimage-{{ $photo->id }}" role="dialog">
+						    <div class="modal-dialog">
+						      <div class="modal-content-orginal">
+						      </div>
+						    </div>
+						  </div>
+					@endforeach
+				</div>
+			</div>
+		</div>
         @else
                 <h1 style="color: red" align="center">No photo posted by {{ $user->name }} </h1>
                 <h1 align="center"><i style="color: blue" class="fa fa-picture-o fa-1x"></i>

@@ -3,15 +3,47 @@ $.ajaxSetup({
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
+//if a post is sharing by a user
 
+//load according scroll
+  function loadMoreData(page){
+    $.ajax(
+          {
+              url: '?page=' + page,
+              type: "get",
+              beforeSend: function()
+              {
+                  $('.ajax-load').show();
+              }
+          })
+          .done(function(data)
+          {
+         
+              if(data.html == ""){
+                  $('.ajax-load').html("No more records found");
+                  return;
+              }
+              $('.ajax-load').hide();
+              $("#FollowingPosts").append(data.html);
+          })
+          .fail(function(jqXHR, ajaxOptions, thrownError)
+          {
+                alert('server not responding...');
+          });
+  }
 //modal to show single orginal image
 $('.show-orginal-image').click(function(){
     var photoname= $(this).attr('name');
     var extension = $(this).attr('extension');
     $('.modal-content-orginal').empty();
-    $('.modal-content-orginal').html('<img width="130%" src="images/'+photoname+'_orginal'+extension+'">');
+    $('.modal-content-orginal').html('<img width="130%" src="/images/'+photoname+'_orginal'+extension+'">');
 });
 
+$(document).ready(function(){
+    $("#click").click(function(){
+        $("#notification").toggle();
+    });
+});
 
 $('.delete_post').click(function(e){
   var post_id = $(this).attr('data-post-id');
@@ -362,6 +394,102 @@ $('.likers').click(function(){
         });
       // console.log("It failed");
 });
+
+
+$('.block-user').click(function(e){
+  var user_id = $(this).attr('user_id');
+  var data={user_id:user_id,method:'POST'}
+  e.preventDefault();
+  swal({
+      title: 'Really ?',
+      text: "Do you want to block this user",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Block!'
+    }).then((result) => {
+      if (result.value) {
+      $.ajax(
+      {
+        url:'blockuser/'+user_id,
+        type: 'post',
+        dataType: "JSON",
+        data: data,
+            success: function ()
+            { 
+            $('.user-'+user_id).fadeOut("slow");
+            Command: toastr["success"]("User blocked, To see the block list Goto Settings->Block list !!! ", "Success..")
+            toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+          }
+        }); 
+      }
+  })
+});
+
+$('.unblock-user').click(function(e){
+  var blockid = $(this).attr('blockid');
+  var data={blockid:blockid,method:'get'}
+  e.preventDefault();
+  swal({
+      title: 'Really ?',
+      text: "Do you want to unblock this user",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Unblock!'
+    }).then((result) => {
+      if (result.value) {
+      $.ajax(
+      {
+        url:'unblockuser/'+blockid,
+        type: 'get',
+        dataType: "JSON",
+        data: data,
+            success: function ()
+            { 
+            $('.unblock-user-row-'+blockid).fadeOut("slow");
+            Command: toastr["success"]("User unblocked, no he can see your posts", "Success..")
+            toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+          }
+          }
+        }); 
+      }
+  })
+});
+
 
 
      //   var counter= $('#disp-images-upload').length;

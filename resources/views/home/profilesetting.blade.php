@@ -52,7 +52,7 @@
 	                 <center><i class="fa fa-users fa-2x" aria-hidden="true"></i><br/>Followers</center>
 	                </a>
 	                <a href="#" class="list-group-item text-center">
-	                <center> <i class=" fa fa-lock fa-2x" aria-hidden="true"></i><br/>Blocking</center>
+	                <center> <i class=" fa fa-lock fa-2x" aria-hidden="true"></i><br/>Block List</center>
 	                </a>
 	              </div>
 	            </div>
@@ -96,14 +96,14 @@
 									<tr>
 										<td>Country:</td>
 										<td id="cCountries">
-											<input type="text" class="inputs-unbordered" id="currentCountry" name=""
+											<input type="text" disabled class="inputs-unbordered" id="currentCountry" name=""
 												 style="border-color:none;" value="{{ Auth::user()->ccountry }}">
 											@include('home.countries')
 										</td>
 										<td>
 											<button style="border: 0;background-color: transparent;" type="submit" class="comment-row-item-action edit">
 											</button>
-												<span class="pencle_icon" style="color :gray"></span>
+											<span class="pencle_icon" style="color :gray"></span>
 										</td>
 									</tr>
 									<tr>
@@ -201,17 +201,66 @@
 	                </div>
 	                <!-- train section -->
 	                <div class="bhoechie-tab-content">
-	                    <center>
-	                      
-	                      <h2 style="margin-top: 0;color:#55518a">Coming Soon Security options</h2>
-	                    </center>
+	                    <div class="row">
+	                    	<div class="col-md-5 col-md-offset-3">
+	                    		<form action="profile/{{ Auth::id() }}" method="Post">
+	                    			{{ csrf_field() }}
+	                    			{{ method_field('PUT') }}
+		                    		<div class="form-group">
+		                    		    <label>Old password*</label><br>
+		                    		    <div class="input-group">
+									      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+									      <input id="old-password" type="password" class="form-control" name="oldpassword" placeholder="Password" required min="6" max="6">
+									    </div>
+										<hr>
+			                    		<label>New password*</label>
+			                    		<input id="password" type="password" class="form-control" name="password" required ><br>
+			                    		<label>Retype new password*</label>
+			                    		<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+			                    		<hr>
+			                    		<button align="center" class="btn btn-success">Change password</button>
+		                    		</div>
+	                    		</form>
+	                    	</div>
+	                    </div>
 	                </div>
-	    
+	    			@include('layouts.errors')
 	                <!-- hotel search -->
 	                <div class="bhoechie-tab-content">
-	                    <center>
-	                      <h2 style="margin-top: 0;color:#55518a">Coming Soon Privacy</h2>
-	                    </center>
+	                    <div class="row">
+	                    	<div class="col-md-9">
+	                    		<table class="table table-condensed">
+	                    			<thead>
+	                    				<tr>
+	                    					<th colspan="2">
+	                    						Your pricacy 
+	                    					</th>
+	                    				</tr>
+	                    			</thead>
+	                    			<tr>
+	                    				<td>Who can see your posts </td>
+	                    				<td><select>
+	                    					<option>Me onlyd </i></option>
+	                    					<option>Every one<i class="fa fa-globe"></i></option>
+	                    					<option>Followings only <i class="fa fa-user"></i> </option>
+	                    				</select></td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>Who can follow you </td>
+	                    				<td><i class="fa fa-lock"></i> </td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>Who can send you messages </td>
+	                    				<td>Me only </td>
+	                    			</tr>
+	                    			<tr>
+	                    				<td>Who can access to your mobile phone and email address provided by you </td>
+	                    				<td>Me only </td>
+	                    			</tr>
+
+	                    		</table>
+	                    	</div>
+	                    </div>
 	                </div>
 	                <div class="bhoechie-tab-content">
 	                    <center>
@@ -219,9 +268,59 @@
 	                    </center>
 	                </div>
 	                <div class="bhoechie-tab-content">
-	                    <center>
-	                      <h2 style="margin-top: 0;color:#55518a">Coming Soon Blocking users</h2>
-	                    </center>
+                	@if(count($block_users))
+                		<div class="row">
+						<div class="col-md-5">
+							<h2>
+								About block list
+							</h2>
+							<p>User Blocking is a feature that allows you to deal with trolls, spammers, and other unwanted content on Disqus. The tool allows users to hide all comments from another account that they no longer wish to view or engage with. The blocked account will not receive a notification or indication that they have been blocked by you.</p>
+						</div>
+						<div class="col-md-5">
+	                    	<table class="table table-responsive" align="center">
+	                    		<thead>
+	                    			<tr class="default">
+	                    				<th colspan="3" align="center">
+	                    					Block contacts <span style="color:red;font-weight: bold">{{ count($block_users) }}</span> <i class="fa fa-user"></i>
+	                    				</th>
+	                    			</tr>
+	                    			<tr class="success">
+	                    				<th>No.</th>
+		                    			<th>Name</th>
+		                    			<th>Action</th>
+	                    			</tr>
+	                    		</thead>
+	                    		<?php $blockcounter=0;?>
+								@foreach($block_users as $block_user)
+									<tr class="unblock-user-row-{{ $block_user->id }}">
+										<td>
+											{{ $blockcounter+=1 }}.
+										</td>
+										<td>
+											{{ $block_user->user->name }}
+										</td>
+										<td>
+											<button class="btn-link unblock-user " blockid="{{ $block_user->id }}">Unblock</button>
+										</td>
+									</tr>
+								@endforeach
+							</table>
+						</div>
+						</div>
+						@else
+						<div class="row">
+						<div class="col-md-5">
+							<h2>
+								About block list
+							</h2>
+							<p>User Blocking is a feature that allows you to deal with trolls, spammers, and other unwanted content on Disqus. The tool allows users to hide all comments from another account that they no longer wish to view or engage with. The blocked account will not receive a notification or indication that they have been blocked by you.</p>
+						</div>
+						<div class="col-md-5">
+							<h1 style="color: darkred">You haven't block anyone.</h1>
+							<h1><i class="fa fa-ban" aria-hidden="true"></i></h1>
+						</div>
+						</div>
+						@endif
 	                </div>
 	            </div>
 	        </div>
@@ -232,8 +331,7 @@
 </div>									
 @endsection
 @section('scripts')
-	
-	<script type="text/javascript">
+<script type="text/javascript">
 	$('#edit-button').click(function(){
 			$(".editable-inputs").removeClass('inputs-unbordered');
 			$(".editable-inputs").addClass('name-bordered');
@@ -251,24 +349,7 @@
 			$('#date-of-birth').attr('hidden','hidden');
 
 		})
-
-  // 	$('#cancle-edit').click(function(event){
-  // 		event.preventDefault();
-  // 		$(".editable-inputs").removeClass('name-bordered');
-  // 		$(".editable-inputs").addClass('inputs-unbordered');
-  // 		$('.pencle_icon').html('');
-  // 		$('.editable-inputs').attr('disabled');
-  // 		$('#oprations').attr('hidden','hidden');
-		// $('#currentCountry').removeAttr('hidden');
-		// $('#edit-button').removeAttr('hidden');
-		// $('#cCountry').attr('hidden','hidden');
-		// $('#gender-select').attr('hidden','hidden');
-		// $('#gender').removeAttr('hidden');
-		// $('.inputs-unbordered').attr('disabled','disabled');
-
-
-  // 	})
-
+//working for tabs 
   	$(document).ready(function() {
 	 $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
         e.preventDefault();
@@ -280,10 +361,28 @@
     });
 });
 
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
+</script>
+    @if(Session::has('passwordChangeAlertDone'))
+    {
+		<script type="text/javascript">
+        	swal(
+			  'Done!',
+			  '{{ session('passwordChangeAlertDone') }}',
+			  'success'
+			)
+		</script>
+	}
+	@endif
 
-	</script>
-
+    @if(Session::has('passwordChangeAlertWrongOldPassword'))
+    {
+		<script type="text/javascript">
+        	swal(
+			  'Oops!',
+			  '{{ session('passwordChangeAlertWrongOldPassword') }}',
+			  'error'
+			)
+		</script>
+	}
+	@endif
 @endsection

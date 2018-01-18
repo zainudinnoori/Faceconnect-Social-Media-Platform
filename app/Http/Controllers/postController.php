@@ -13,7 +13,7 @@ use Image;
 class postController extends Controller
 {
     public function store(Request $request)
-    {
+    {   $i=0;
         if(is_null(request('post_body')) && is_null(request('images')))
         {
             session()->flash('status','Opps.... Write something or Upload an image !!!');
@@ -31,25 +31,27 @@ class postController extends Controller
             $photos=request('images');
             foreach ($photos as $photo)
              {
-                $imageExtension=$photo->getClientOriginalExtension();
-                $imageName = time();
-   
-                $imageTumbnail = time().'_tumbinal'.'.'.$imageExtension;
-                $imagOriginal = time().'_orginal'.'.'.$imageExtension;
+                    
+                    $imageExtension=$photo->getClientOriginalExtension();
+                    $i+=1;
+                    $imageName = time().$i;
+       
+                    $imageTumbnail = time().$i.'_tumbinal'.'.'.$imageExtension;
+                    $imagOriginal = time().$i.'_orginal'.'.'.$imageExtension;
 
-                $destinationPath = public_path('/images');
-                $imgTumbnail = Image::make($photo->getRealPath());
-                $imgTumbnail->resize(100, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($destinationPath.'/'.$imageTumbnail);
+                    $destinationPath = public_path('/images');
+                    $imgTumbnail = Image::make($photo->getRealPath());
+                    $imgTumbnail->resize(100, 100, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($destinationPath.'/'.$imageTumbnail);
 
-                $photo->move($destinationPath, $imagOriginal);
-                Photo::create([
-                    'user_id' => Auth::id(),
-                    'post_id' => $postid,
-                    'photo' => $imageName,
-                    'extension' => '.'.$imageExtension,
-                ]);
+                    $photo->move($destinationPath, $imagOriginal);
+                    Photo::create([
+                        'user_id' => Auth::id(),
+                        'post_id' => $postid,
+                        'photo' => $imageName,
+                        'extension' => '.'.$imageExtension,
+                    ]);
             }
         }
         return back();
@@ -100,7 +102,8 @@ class postController extends Controller
             'parent_id'=> $id,
         ]);
         $post->save();
-        return back()->with('post_shared','Post shared');
+        session()->flash('PostShared','Post shared successfully.');
+        return back();
     }
 
 }

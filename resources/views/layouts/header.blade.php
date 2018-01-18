@@ -9,7 +9,7 @@
 
 
 <div class="col-md-1">
-	<img class="img img-circle img-responsive" src=/images/{{ Auth::user()->image }} width="50px" height="50px">
+	<img class="img img-circle" src="/images/{{ Auth::user()->image }}" width="50px" height="50px">
 </div>
 <div style="float: left">&nbsp &nbsp
 	<a href="/profile" style="color: black;">

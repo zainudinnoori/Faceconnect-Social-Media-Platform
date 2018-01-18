@@ -19,10 +19,7 @@ class usersController extends Controller
     	$user = User::find($id);
     	if($user->id === Auth::id())
 		{
-            $Like=new Like;
-            $followings=Auth::user()->follow;
-			$posts = Post::where('user_id',Auth::id())->get();
-			return view('home.profile',compact('posts','followings','Like'));
+            return redirect('profile');            
 		}
 		else
 		{
@@ -35,7 +32,11 @@ class usersController extends Controller
             {
                 $status= "Un follow";
             }
-			$posts = Post::where('user_id',$id)->get();
+			$posts = Post::where('user_id',$id)->orderBy('created_at','desc')->paginate(4);
+            if (request()->ajax()) {
+            $view = view('home.posts',compact('posts','followings','Like','Post','User'))->render();
+            return response()->json(['html'=>$view]);
+             }
             $followings=$user->follow;
 			return view('user.profile',compact('posts','user','status','followings','Like','User','Post'));
 		}

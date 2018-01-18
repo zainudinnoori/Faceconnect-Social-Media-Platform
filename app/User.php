@@ -10,6 +10,7 @@ use App\Photo;
 use App\User;
 use App\Like;
 use App\Message;
+use App\Blockuser;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -61,5 +62,10 @@ class User extends Authenticatable
 
     public function messages(){
         return $this->hasMany(Message::class);
+    }
+
+    public function block_users()
+    {
+      return $this->hasMany(Blockuser::class);
     }
 }

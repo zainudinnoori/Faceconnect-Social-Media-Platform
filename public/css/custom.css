@@ -39,6 +39,7 @@
 		resize: none;
 		background-color: transparent;
 		cursor: pointer;
+		height: auto;
 	}
 
 	.text_area_enabled{

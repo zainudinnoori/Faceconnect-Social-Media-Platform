@@ -11,48 +11,66 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
 
 
 Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->group(function () {
-
+	//commentting resource
 	Route::prefix('post')->group(function () {
 		Route::resource('comment','commentController');
 	});
-
+	//home page
+	Route::get('/','HomeController@home');
+	//profile and post resources
 	Route::resource('profile','profileController');
+	Route::resource('post','postController');
+	//home page(index)
+	Route::get('home','HomeController@home')->name('home');
+	//profile setting,photos,followers,followings 
 	Route::get('/setting','profileController@show')->name('psetting');
 	Route::get('/photos','photoController@index')->name('pphotos');
 	Route::get('/followers','followersController@index')->name('pfollowers');
 	Route::get('/followings','followersController@followings')->name('pfollowings');
-	Route::get('search','profileController@search');
-	Route::resource('post','postController');
+	//block , unblock a user
+	Route::Post('blockuser/{id}','followersController@blockUser');
+	Route::get('/unblockuser/{id}','followersController@unblockUser');
+
+	//delete profile photos
+	Route::delete('photo/delete/{id}','photoController@destroy');
+	//share, like posts
 	Route::Post('share/{id}','postController@share');
 	Route::post('like/store','likeController@store');   
-	Route::get('home','HomeController@home')->name('home');
-	Route::get('/user/{id}','usersController@index');
-	Route::get('/user/{id}/photos','usersController@showphotos');
+	//getting likers
+	Route::get('post/likers/{id}','likeController@likers');
+	//follow,unfollow user
 	Route::Post('/follow/store','followersController@follow');
 	Route::Post('/unfollow/{id}','followersController@unfollow');
-	Route::delete('photo/delete/{id}','photoController@destroy');
+	//User home pag,photos
+	Route::get('/user/{id}','usersController@index');
+	Route::get('/user/{id}/photos','usersController@showphotos');
+	//ajax user search (header)
+	Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'AutoCompleteController@index'));
+	Route::get('searchajax',array('as'=>'searchajax','uses'=>'AutoCompleteController@autoComplete'));
+	Route::get('search','profileController@search');
+	//chatting,store, getchats
+	Route::Post('chatting/{id}','messageController@store');
+	Route::get('chatting','messageController@index');
+	Route::get('chatting/{id}','messageController@getChats');
+	//logout user
+	Route::get('logout',function(){
+	//simple serach!!
+	Route::get('search','profileController@search');
+		Auth::logout();
+		return view('auth.login');
+	});
 
 });
+	//!!!
+	Route::get('sign-in',function (){
+		return view('auth.sign-in');
+	});
 
-Route::get('post/likers/{id}','likeController@likers');
-Route::get('autocomplete',array('as'=>'autocomplete','uses'=>'AutoCompleteController@index'));
-Route::get('searchajax',array('as'=>'searchajax','uses'=>'AutoCompleteController@autoComplete'));
-Route::get('sign-in',function (){
-	return view('auth.sign-in');
-});
-
-Route::get('logout',function(){
-	Auth::logout();
-	return view('auth.login');
-});
 
 
 Route::get('/welcome',function(){
@@ -62,14 +80,6 @@ Route::get('/welcome',function(){
 Route::get('Cnotification',function(){
 	$notifications = Auth::user()->unreadnotifications->count();
 	return $notifications;
-});
-
-Route::get('chatting','messageController@index');
-Route::Post('chatting/{id}','messageController@store');
-Route::get('chatting/{id}','messageController@getChats');
-
-Route::get('chatw',function(){
-	return view('chatwidget');
 });
 
 

@@ -8,6 +8,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+	<link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+	{{-- <link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>	 --}}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -25,7 +27,7 @@
 		        <img class="hidden-md-down" src="/images/Logo.jpg" alt="logo">
 		    </a>
 		    <div class="site-header-content">
-		        <div class="site-header-content-in">
+		        <div class="site-header-content-in" style="position:relative;top:-10px">
 		        	@include('layouts.header')
 		        </div><!--site-header-content-in-->
 		    </div><!--.site-header-content-->
@@ -90,7 +92,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.1.2/sweetalert2.all.js"></script>
-	<script src="js/app.js"></script>
+	<script src="/js/app.js"></script>
 
 	<script>
 	   $(document).ready(function() {
@@ -118,11 +120,6 @@
 	//         $('#nCount').load('/Cnotification').fadeIn("slow");
 	//     }, 0);
 
-	$(document).ready(function(){
-	    $("#click").click(function(){
-	        $("#notification").toggle();
-	    });
-	});
 	</script>
 		@yield('scripts')
 	</body>

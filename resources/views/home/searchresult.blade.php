@@ -30,6 +30,7 @@
 				</div>
 			</article>
 			@endforeach
+			{{ $users->links() }}
 			@else
 				
 			@endif

@@ -51,7 +51,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1><strong><u>Lets get connected socially</u></strong></h1><br>
+                {{-- <h1>Faceconnect helps you to build a social life</h1><br> --}}
 
             </div>
 

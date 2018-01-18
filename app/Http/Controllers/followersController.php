@@ -7,13 +7,14 @@ use App\User;
 use Auth;
 use App\User_follow;
 use App\Notifications\FollowUser;
+use App\Blockuser;
 class followersController extends Controller
 {
     public function index()
     {
     	
     	$user = Auth::user();
-    	$followers = $user->followers;
+    	$followers = $user->followers()->paginate(20);
     	$followings=Auth::user()->follow;
     	return view('home.followers',compact('followers','followings'));
     }
@@ -61,7 +62,7 @@ class followersController extends Controller
     public function followings()
     {
     	$followers = Auth::user()->followers;
-    	$followings=Auth::user()->follow;
+    	$followings=Auth::user()->follow()->paginate(20);
     	return view('home.followings',compact('followings','followers'));
     }
     
@@ -74,4 +75,28 @@ class followersController extends Controller
           'success' => 'Unfollowed successfully!'
         ]);
     }
+
+    public function blockUser($id){
+
+        $blockuser=Blockuser::where('user_id',Auth::id())->where('block_user_id',$id)->first();
+        if(!count($blockuser))
+        {
+            Blockuser::create([
+                'user_id'=>Auth::id(),
+                'block_user_id' => $id,
+            ]);
+        }
+        return response()->json([
+             'success' => 'user is blocked now',
+        ]);
+    }
+
+    public function unblockUser($id)
+    {
+           Blockuser::find($id)->first()->delete();
+            return response()->json([
+                'success'=>'user unblocked', 
+            ]);
+    }
+
 }
