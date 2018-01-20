@@ -57,7 +57,15 @@ class User extends Authenticatable
 
     public function followers()
     {
+      $blockUsers = $this->hasMany(Blockuser::class)->get()->toArray();
       return $this->belongsToMany(User::class, 'user_follows', 'follow_id', 'user_id');
+
+
+      // dd($blockUsers);
+      // foreach($followers as $follower)
+      {
+
+      }
     }
 
     public function messages(){

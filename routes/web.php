@@ -11,10 +11,14 @@
 |
 */
 
+//selecting language
+Route::get('locale/{locale}', 'languageController@switchLanguage');
 
 
 Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
+
+
 Route::middleware('auth')->group(function () {
 	//commentting resource
 	Route::prefix('post')->group(function () {
@@ -73,8 +77,8 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/welcome',function(){
-	return view('welcome');
+Route::get('/welcome/{locale}',function($locale){
+	return view('welcome',compact('locale'));
 });
 
 Route::get('Cnotification',function(){

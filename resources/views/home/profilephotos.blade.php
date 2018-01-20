@@ -32,37 +32,39 @@
 	</ul>
 	@endsection
 	<article class="box-typical profile-post">
-		<div class="row" style="margin-bottom:25px">
-			@if(count($photos))
-			@foreach($photos as $photo)
-				<div class="col-md-2" style="height: 200px;" id="photo-block-{{ $photo->id }}">
-					<img  class="img img-thumbnail image " id="myImg-{{$photo->id}}" photo-id="{{$photo->id}}"  style="padding: 3px; border:5px groove lightblue ;margin:5px" height="171px" width="171px" src="/images/{{ $photo->photo.'_tumbinal'.$photo->extension }}"  alt="no pic">
-					<div  style="position: relative; margin-left: 45%">
-						<a class="photo-delete" photo-id="{{ $photo->id }}" title="Delete photo">
-							<i style="color: red" class="fa fa-trash"></i>
-						</a>
-					</div>
-				</div>
-			@endforeach
-			{{-- if there are no images --}}
-			@else
-				<div class="col-md-10 col-lg-10">
-					<h1 style="color:red" align="center">No Photos <i class="fa fa-picture-o" style="color: blue"></i></h1>
-					<h4 align="center">It looks you haven't post any photos yet </h4>
-				    <form method="post" action="post" enctype="multipart/form-data">
-			    		{{csrf_field()}}
-						<div class="image-upload" align="center">
-						    <label for="file-input">
-							        <i style="color:lightblue" class="fa fa-plus fa-4x" title="Add photo to your gallery"></i>
-						    </label>
-						    <input type="file" id="file-input" name="images[]" multiple ><br>
-					   		 <button style="margin-bottom:10px" class="btn btn-sm btn-default">Post</button>
+		<div class="container">
+			<div class="row" style="margin-bottom:25px">
+				@if(count($photos))
+				@foreach($photos as $photo)
+					<div class="col-md-2" style="height: 200px;" id="photo-block-{{ $photo->id }}">
+						<img  class="img img-thumbnail image " id="myImg-{{$photo->id}}" photo-id="{{$photo->id}}"  style="padding: 3px; border:5px groove lightblue ;margin:5px" height="171px" width="171px" src="/images/{{ $photo->photo.'_tumbinal'.$photo->extension }}"  alt="no pic">
+						<div  style="position: relative; margin-left: 45%">
+							<a class="photo-delete" photo-id="{{ $photo->id }}" title="Delete photo">
+								<i style="color: red" class="fa fa-trash"></i>
+							</a>
 						</div>
-						</form>
-						<h5 align="center">Click on '+' sign and add images to your gallery</h5>
-				</div>
-			@endif
-			
+					</div>
+				@endforeach
+				{{-- if there are no images --}}
+				@else
+					<div class="col-md-10 col-lg-10">
+						<h1 style="color:red" align="center">No Photos <i class="fa fa-picture-o" style="color: blue"></i></h1>
+						<h4 align="center">It looks you haven't post any photos yet </h4>
+					    <form method="post" action="post" enctype="multipart/form-data">
+				    		{{csrf_field()}}
+							<div class="image-upload" align="center">
+							    <label for="file-input">
+								        <i style="color:lightblue" class="fa fa-plus fa-4x" title="Add photo to your gallery"></i>
+							    </label>
+							    <input type="file" id="file-input" name="images[]" multiple ><br>
+						   		 <button style="margin-bottom:10px" class="btn btn-sm btn-default">Post</button>
+							</div>
+							</form>
+							<h5 align="center">Click on '+' sign and add images to your gallery</h5>
+					</div>
+				@endif
+				
+			</div>
 		</div>
 		{{-- modal for images  --}}
 		<div id="myModal" class="modal">

@@ -34,7 +34,7 @@
 	<article class="box-typical profile-post">
 		<table class="table table-striped">
 			@if(count($followers))
-			<div class="">
+			<div class="container">
 				<div class="row">
 					@foreach($followers as $follower)
 						<div class="col-sm-3 col-md-3 col-lg-3 user-{{ $follower->id }}">

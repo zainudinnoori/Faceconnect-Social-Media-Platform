@@ -1,22 +1,31 @@
 @extends('layouts.loginmaster')
 
 @section('content')
-<div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
+<div id="app">
+
+        <nav class="navbar navbar-default navbar-static-top">
+            <div  class="col-md-1">
+                    <br>
+                   <a href="/locale/fa"><img src="/images/afgflag.gif" height="20px" width="30px"> فارسی</a><br>
+                   <a href="/locale/en"><img src="/images/engflag.png" height="25px" width="30px"> English</a>
+            </div>
+            <div class="container">
+
+                <div class="navbar-header">
                     <img style="margin: 25px" src="images/Logo.jpg" alt="logo">
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <header class="site-header col-md-offset-6">
                         <div class="container-fluid" style="margin: 20px; right: 20px">
+
                             <form method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
                             <div class="col-md-5">
-                                Email:<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                {{ trans('lang.Email') }}<input id="emailsignin" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 
+                                @lang('lang.Remember_Me')
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -25,9 +34,9 @@
                                 @endif
                             </div>
                             <div class="col-md-5">
-                                Password:<input id="password" type="password" class="form-control" name="password" required>
+                               @lang('lang.Password') <input id="passwordsignin" type="password" class="form-control" name="password" required>
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
+                                    @lang('lang.Forgot_Your_Password?')
                                 </a>
 
                                 @if ($errors->has('password'))
@@ -39,7 +48,7 @@
                             </div>
                               <br>
                               <button type="submit" class="btn btn-primary">
-                                    Login
+                                    @lang('lang.Login')
                             </button>
                         </form>
                         </div>
@@ -58,7 +67,7 @@
 
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1>Get started - it's free !</h1>
+                    <div class="panel-heading"><h1>@lang('lang.Get_started_its_free')</h1>
                        
                     </div>
 
@@ -67,7 +76,7 @@
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name" class="col-md-4 control-label">Name</label>
+                                <label for="name" class="col-md-4 control-label">@lang('lang.Name')</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -81,7 +90,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <label for="email" class="col-md-4 control-label">@lang('lang.E_Mail_Address')</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -95,7 +104,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label">@lang('lang.Password')</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" required>
@@ -109,14 +118,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+                                <label for="password-confirm" class="col-md-4 control-label">@lang('lang.Confirm_Password')</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                 </div>
                             </div>
                              <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Date of Birth 
+                                <label for="password-confirm" class="col-md-4 control-label">@lang('lang.Date_of_Birth') 
                                 </label>
                                 <span class="_5k_4" data-type="selectors" data-name="birthday_wrapper" id="u_0_z"><span>
                                     &nbsp &nbsp &nbsp
@@ -147,19 +156,19 @@
                                     </select>
                                     </div>
                                      <div class="form-group">
-                                <label for="Gender" class="col-md-4 control-label">Gender</label>
+                                <label for="Gender" class="col-md-4 control-label">@lang('lang.Gender')</label>
                                 &nbsp &nbsp
                                     <input id="male" type="radio" class="col-md-offset-0" value="male" name="gender" required>
-                                    Male &nbsp &nbsp
+                                    @lang('lang.Male') &nbsp &nbsp
                                       <input id="female" type="radio" class="col-md-offset-0" value="female" name="gender" required>
-                                    Female
+                                    @lang('lang.Female')
                                 </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-success btn-block">
                                         <strong>
-                                        Join now
+                                        @lang('lang.Join_now')
                                         </strong>
                                     </button>
                                 </div>
@@ -168,12 +177,14 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>   
 </div>
 
 
 
+
+@endsection
+@section('scripts')
 
 @endsection

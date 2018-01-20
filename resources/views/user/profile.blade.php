@@ -21,7 +21,7 @@
            @include('home.posts')
         </div>
         <div class="ajax-load text-center">
-            <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
+            <p style='background-color:white'><img src="/images/loading.gif">Loading More post</p>
         </div>
     @else
         <article class="box-typical profile-post">

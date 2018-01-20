@@ -12,7 +12,6 @@ class followersController extends Controller
 {
     public function index()
     {
-    	
     	$user = Auth::user();
     	$followers = $user->followers()->paginate(20);
     	$followings=Auth::user()->follow;
@@ -35,7 +34,7 @@ class followersController extends Controller
 				'msg' => 'followed',
 				'count' => $count_followers,
 				);
-	  //   	//sending notificaion
+	     	//sending notificaion
 	    	
 	    	$user= User::find($_userid);
 	    	if($user->id != Auth::id())
@@ -43,7 +42,7 @@ class followersController extends Controller
 			$user->notify(new FollowUser());
     		
 			}
-			// //end
+			 //end
 			return \Response::json( $response );	
     	}
     	else
@@ -76,8 +75,8 @@ class followersController extends Controller
         ]);
     }
 
-    public function blockUser($id){
-
+    public function blockUser($id)
+    {
         $blockuser=Blockuser::where('user_id',Auth::id())->where('block_user_id',$id)->first();
         if(!count($blockuser))
         {

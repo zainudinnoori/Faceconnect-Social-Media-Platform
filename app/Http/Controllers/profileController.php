@@ -36,6 +36,7 @@ class profileController extends Controller
  
     public function update(Request $request, $id)
     {
+        // dd($request->image);
         if($request->image != null)
         {
             $imagename= time().".".$request->image->getClientOriginalExtension();
@@ -43,9 +44,7 @@ class profileController extends Controller
             $user= Auth::user();
             $user->image=$imagename;
             $user->save();
-            return response()->json([
-                'success'=>$imagename,
-            ]);
+            return back();
         }
 
         if($request->coverimage != null)

@@ -25,7 +25,7 @@
 			</button> 
 			@endif
 			<a href="/post/{{ $post->id }}" title="Post Desc.." style="margin-right:20px" class="shared">
-				Post description
+				{{ trans('lang.Post_description') }}
 			</a>
 			<form method="POST" action="/share/{{ $post->id }}">
 				{{ csrf_field()	}}

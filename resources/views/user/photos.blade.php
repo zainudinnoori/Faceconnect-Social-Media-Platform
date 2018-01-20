@@ -21,7 +21,7 @@
 		<div class="container">
 			<div class="col-md-12">
 				<div class="row">
-					@foreach($post->photos as $photo)
+					@foreach($photos as $photo)
 						<img style="display: inline" width="200px" data-toggle="modal" data-target="#showimage-{{ $photo->id }}" height="200px" class="img img-responsive show-orginal-image" src= "/images/{{ $photo->photo.'_tumbinal'.$photo->extension }}" name="{{ $photo->photo}}" extension="{{ $photo->extension }}">
 						  <div class="modal fade" id="showimage-{{ $photo->id }}" role="dialog">
 						    <div class="modal-dialog">

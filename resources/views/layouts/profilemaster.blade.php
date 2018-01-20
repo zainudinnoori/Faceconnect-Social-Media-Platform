@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href=/css/main.css>
     <link rel="stylesheet" href=/css/custom.css>
+    <link rel="stylesheet" href=/css/pace.css>
+	<script src="/js/pace.js"></script>
 
 <style type="text/css">
 	
@@ -129,7 +131,7 @@
 	        <span>toggle menu</span>
 	    </button>
 	    <div class="site-header-content">
-      		<div class="site-header-content-in" style="padding:0px">
+      		<div class="site-header-content-in" style='padding:0px ; position:relative;top:-8px'>
 				@include('layouts.header')
 	        </div><!--site-header-content-in-->
 	    </div><!--.site-header-content-->
@@ -198,13 +200,19 @@
 								<button type="button" class="avatar-preview avatar-preview-128">
 									<img id="pImage" src="/images/{{ Auth::user()->image }}" alt="Your pic"/>
 									<a>
+								<form method="Post" action='profile/profile{{ Auth::id() }}' enctype="multipart/form-data">
+									{{ csrf_field() }}
+									{{ method_field('PUT') }}		
 									<span class="update">
+										<input type="file" name="image" class="profileimage"/>
 										<i class="icon-picture"></i>
 										Update photo
 									</span>
 									</a>
-										
+									<button type="submit" hidden id="UploadProfileImage"> <i class="fa fa-upload" style="padding: 0px 10px 0px 10px" title="Upload selected image"></i></button>
 								</button>
+								</form>
+									
 							{{-- <button>send a meesage</button> --}}
 						</section>
 						<section class="box-typical profile-side-stat">
@@ -295,7 +303,10 @@
 	<script src="/js/app.js"></script>
 	
 	 <script>
-	 	
+	 	$('.profileimage').on('change', function(){
+			$('#UploadProfileImage').removeAttr('hidden');
+	 	});	
+
 	   $(document).ready(function() {
 	    src = "{{ route('searchajax') }}";
 	     $("#namanyay-search-box").autocomplete({

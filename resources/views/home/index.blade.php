@@ -5,20 +5,22 @@
 	<form method="POST" action="/post" enctype="multipart/form-data" class="box-typical">
 		{{ csrf_field() }}
 		<textarea class="write-something" name="post_body" rows="3" placeholder="What`s on your mind"></textarea>
+		<div class="gallery">
+			{{-- preview images --}}
+		</div>
 		<div class="box-typical-footer">
 			<div class="tbl">
 				<div class="tbl-row">
-					<div class="tbl-cell">
-
+					<div class="tbl-cell">	
 						<div class="image-upload">
 						    <label for="file-input">
 							        <i style="color:lightblue" class="font-icon fa fa-picture-o"></i>
 						    </label>
-						    <input type="file" id="file-input" name="images[]" multiple accept="image/*" >
+						    <input type="file" id="file-input" class="gallery-photo-add" name="images[]" multiple accept="image/*">
 						</div>
 					</div>
 					<div class="tbl-cell tbl-cell-action">
-						<button type="submit" class="btn btn-rounded">Post</button>
+						<button type="submit" class="btn btn-rounded">{{ trans('lang.Post') }}</button>
 					</div>
 				</div>
 			</div>
@@ -29,7 +31,7 @@
 		@include('home.posts')
 		</div>
 		<div class="ajax-load text-center">
-			<p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Loading More post</p>
+			<p style='background-color:white'><img src="/images/loading.gif">Loading More post</p>
 		</div>
 		@else
 		<article class="box-typical profile-post">
@@ -67,6 +69,31 @@
 	        loadMoreData(page);
 	    }
 	});
+
+$(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img class="img img-responsive" style="float:left" width="150px">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('.gallery-photo-add').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+});
 
 @if(Session::has('PostShared'))
     swal(

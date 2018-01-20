@@ -91,8 +91,8 @@
 
   <span class="col-sm-offset-3">
     @if(Auth::check())
-    <a href="logout">
-      <b>Logout</b>
+    <a href="/logout">
+      <b>{{ trans('lang.Logout') }}</b>
     </a>
     @endif
   </span>

@@ -10,12 +10,18 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
 	<link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
 	{{-- <link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>	 --}}
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href=/css/main.css>
-    <link rel="stylesheet" href=/css/custom.css>
+    <link rel="stylesheet" href=/css/custom.css>    
+    <link rel="stylesheet" href=/css/pace.css>
+	<script src="/js/pace.js"></script>
+
+	
+
 <style type="text/css">
  
 </style>
@@ -83,7 +89,14 @@
 			</div><!--.tab-pane-->
 		</div><!--.tab-content-->
 	</div>
+	<div style="width: 100% ;position: fixed; height: 50px;background-color:white;bottom:0px;border-top:1px solid lightgray " >
+		<span style="float:left; margin:10px"><i class="fa fa-copyright" aria-hidden="true"></i>Created by Zainudin Noori - 2018 </span>
+		<span style="float:right; margin:10px">
+	       <a href="/locale/fa"><img src="/images/afgflag.gif" height="20px" width="30px"> فارسی</a>
+	       <a href="/locale/en"><img src="/images/engflag.png" height="25px" width="30px"> English</a>
+  		</span>
 
+	</div>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -93,6 +106,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.1.2/sweetalert2.all.js"></script>
 	<script src="/js/app.js"></script>
+
 
 	<script>
 	   $(document).ready(function() {
