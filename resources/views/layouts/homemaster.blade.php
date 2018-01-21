@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-	<link rel="shortcut icon" type="image/png" href="/images/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="/image/favicon.png"/>
 	{{-- <link rel="shortcut icon" type="image/png" href="http://eg.com/favicon.png"/>	 --}}
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,7 +30,7 @@
 	<header class="site-header">
 		<div class="container-fluid">
 		    <a href="#" class="site-logo">
-		        <img class="hidden-md-down" src="/images/Logo.jpg" alt="logo">
+		        <img class="hidden-md-down" src="/image/Logo.jpg" alt="logo">
 		    </a>
 		    <div class="site-header-content">
 		        <div class="site-header-content-in" style="position:relative;top:-10px">
@@ -92,8 +92,8 @@
 	<div style="width: 100% ;position: fixed; height: 50px;background-color:white;bottom:0px;border-top:1px solid lightgray " >
 		<span style="float:left; margin:10px"><i class="fa fa-copyright" aria-hidden="true"></i>Created by Zainudin Noori - 2018 </span>
 		<span style="float:right; margin:10px">
-	       <a href="/locale/fa"><img src="/images/afgflag.gif" height="20px" width="30px"> فارسی</a>
-	       <a href="/locale/en"><img src="/images/engflag.png" height="25px" width="30px"> English</a>
+	       <a href="/locale/fa"><img src="/image/afgflag.gif" height="20px" width="30px"> فارسی</a>
+	       <a href="/locale/en"><img src="/image/engflag.png" height="25px" width="30px"> English</a>
   		</span>
 
 	</div>

@@ -7,8 +7,8 @@
         <nav class="navbar navbar-default navbar-static-top">
             <div  class="col-md-1">
                     <br>
-                   <a href="/locale/fa"><img src="/images/afgflag.gif" height="20px" width="30px"> فارسی</a><br>
-                   <a href="/locale/en"><img src="/images/engflag.png" height="25px" width="30px"> English</a>
+                   <a href="/locale/fa"><img src="/image/afgflag.gif" height="20px" width="30px"> فارسی</a><br>
+                   <a href="/locale/en"><img src="/image/engflag.png" height="25px" width="30px"> English</a>
             </div>
             <div class="container">
 
