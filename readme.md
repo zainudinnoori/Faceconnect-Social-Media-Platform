@@ -1,53 +1,50 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+
+ <h1 align="center">Faceconnent</h1>
+
+
+## About Faceconnect
+<p>
+  Faceconnect is an afghanistan online social media and social networking service created to connect people all around the world, devolaped in two different languages.
 </p>
+<ol>
+  <li>English</li>
+  <li>Persian (فارسی)</li>
+</ol>
 
-## About Laravel
+Faceconnect may be accessed by a large range of devices with Internet connectivity, such as desktop, laptop and tablet computers, and smartphones. After registering to use the site, users can create a customized profile indicating their name, occupation, schools attended and so on. Users can add other users as "followers", exchange messages, post status updates, share photos, and receive notifications of activity.
+Faceconnect is devolaped in Laravel 5.5v (2018) [Laravel documentation](https://laravel.com/docs)  and mySql database.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+<h3>Features</h3>
+<ul>
+ <li>Creating account</li>
+ <li>sigining in</li>
+ <li>Profile</li>
+ <li>Followers & Follwings</li>
+ <li>Blocking</li>
+ <li>Timeline</li>
+ <li>Likes</li>
+ <li>Comments</li>
+ <li>Messages and inbox</li>
+ <li>Notifications</li>
+ <li>Gallery</li>
+</ul>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
-
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+## Installation
+<b>step 1: </b><p> Open your terminal and Clone the project. Run: <code>git clone https://github.com/zainudinnory/faceconnect.git</code></p>
+<b>step 2: </b> <p>Create your .env file and specify your database</p>
+<b>step 3: </b> <p>Run: <code>composer install</code></p>
+<b>step 4: </b> <p>Create a key. Run:<code>php artisan key:generate</code></p>
+<b>step 5: </b> <p>Run the website. <code>php artisan serve</code></p>
+<b>step 6: </b> <p>Creating tables using migration. Run:<code>php artisan migrate</code></p>
+<b>step 6: </b> <p>Open your browser and and run the project. Like:<code>localhost:8000</code><br>
+<b>Note:</b>
+<p> Factories are also created to generate fake records. you can create n number of records using factories. like: 
+  <code>$ factory('App\User',50)->create()</code><br>
+  <code>$ factory('App\Post',200)->create()</code><br>
+  <code>$ factory('App\Like',500)->create()</code><br>
+  <code>$ factory('App\Comment',200)->create()</code><br>
+  <code>$ factory('App\Message',2000)->create()</code><br>
+  <code>$ factory('App\Userfollow',2000)->create()</code> This creates 2000 relations(Followers & Followings) to users. 
+<p>
