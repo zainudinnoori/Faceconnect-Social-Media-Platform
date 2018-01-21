@@ -3,8 +3,8 @@
 
 <form id="searchthis" action="/search" style="float: left;" method="get">
 	{{ csrf_field() }}
-	<input id="namanyay-search-box" name="search_text" type="text" placeholder="Search for a friend"/>
-	<input id="namanyay-search-btn" value="Go" type="submit"/>
+	<input id="namanyay-search-box" name="search_text" type="text" placeholder='{{ trans('lang.Search_for_a_friend') }}'/>
+	<input id="namanyay-search-btn" value=@lang('lang.Go') type="submit"/>
 </form>
 
 
@@ -18,7 +18,7 @@
 </div>&nbsp &nbsp&nbsp &nbsp
 
 <span>
-	<a href="/home"><i class="fa fa-home fa-lg" style="color:blue" aria-hidden="true" title="Home"></i>
+	<a href="/home"><i class="fa fa-home fa-lg" style="color:blue" aria-hidden="true" title="{{ trans('lang.Home') }}"></i>
 </span></a>&nbsp &nbsp
 
 <span>
@@ -37,7 +37,7 @@
     <div class="row col-md-4 col-md-offset-5">
       <div class="panel panel-default">
         <div class="panel-heading"><b>
-          {{Auth::user()->name}}</b> look your notifications 
+          {{Auth::user()->name}}</b> @lang('lang.notifications') 
         </div>
         <div class="panel-body">
             <?php $i=0 ?>

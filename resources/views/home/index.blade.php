@@ -31,7 +31,7 @@
 		@include('home.posts')
 		</div>
 		<div class="ajax-load text-center">
-			<p style='background-color:white'><img src="/images/loading.gif">Loading More post</p>
+			<p style='background-color:white'><img src="/images/loading.gif">@lang('lang.Loading_More_post')</p>
 		</div>
 		@else
 		<article class="box-typical profile-post">

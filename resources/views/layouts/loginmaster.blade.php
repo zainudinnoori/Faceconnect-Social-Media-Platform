@@ -22,7 +22,9 @@
 <body style="background-image: url(/image/back.jpg)";> 
     
         @yield('content')
-
+        <div style="width: 100% ;position: fixed; height: 50px;background-color:white;bottom:0px;border-top:1px solid lightgray " >
+        <span style="float:left; margin:10px"><i class="fa fa-copyright" aria-hidden="true"></i>Created by Zainudin Noori - 2018 </span>
+    </div>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}

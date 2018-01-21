@@ -50,8 +50,8 @@
 			
 			<div id="disp-images-upload"></div>
 			<br>
-			<button class="btn btn-sm btn-primary btn-group post-update" id="btn-update-post-{{ $post->id }}" hidden style="margin-top: 8px" data-post-id="{{ $post->id }}" >Update post</button>
-			<button class="btn btn-sm btn-danger btn-group cancel-edit" btn-cancle-post-id='{{ $post->id }}' id="btn-cancel-edit-{{ $post->id }}" hidden style="margin-top: 8px">Cancle editing</button>
+			<button class="btn btn-sm btn-primary btn-group post-update" id="btn-update-post-{{ $post->id }}" hidden style="margin-top: 8px" data-post-id="{{ $post->id }}" >@lang('lang.Update_post')</button>
+			<button class="btn btn-sm btn-danger btn-group cancel-edit" btn-cancle-post-id='{{ $post->id }}' id="btn-cancel-edit-{{ $post->id }}" hidden style="margin-top: 8px">@lang('lang.Cancle_editing')</button>
 		</div>
 		@else
 		<?php
@@ -82,12 +82,12 @@
 				</div>
 			</div>
 			@if($post->user_id === Auth::id())
-			<button data-post-id="{{ $post->id }}" title="Delete Post" style="background:none ;margin-right: 145px" class="shared delete_post">
+			<button data-post-id="{{ $post->id }}" title="{{ trans('lang.Delete_Post') }}" style="background:none ;margin-right: 145px" class="shared delete_post">
 				<i class="fa fa-trash-o"></i>
 			</button> 
 			@endif
 			<a href="post/{{ $post->id }}" title="Post Desc.." style="margin-right:20px" class="shared">
-				Post description
+				@lang('lang.Post_description')
 			</a>
 		</div>
 		<div class="profile-post-content">
@@ -105,8 +105,8 @@
 			
 			<div id="disp-images-upload"></div>
 			<br>
-			<button class="btn btn-sm btn-primary btn-group post-update" id="btn-update-post-{{ $post->id }}" hidden style="margin-top: 8px" data-post-id="{{ $post->id }}" >Update post</button>
-			<button class="btn btn-sm btn-danger btn-group cancel-edit" btn-cancle-post-id='{{ $post->id }}' id="btn-cancel-edit-{{ $post->id }}" hidden style="margin-top: 8px">Cancle editing</button>
+			<button class="btn btn-sm btn-primary btn-group post-update" id="btn-update-post-{{ $post->id }}" hidden style="margin-top: 8px" data-post-id="{{ $post->id }}" >@lang('lang.Update_post')</button>
+			<button class="btn btn-sm btn-danger btn-group cancel-edit" btn-cancle-post-id='{{ $post->id }}' id="btn-cancel-edit-{{ $post->id }}" hidden style="margin-top: 8px">@lang('lang.Cancle_editing')</button>
 		</div>
 		@endif
 
@@ -134,7 +134,7 @@
 
 			</a>
 			<span class="likers" post-id='{{ $post->id }}' data-toggle="modal" data-target="#likeModal-{{ $post->id }}" style="margin-left: -10px;cursor: pointer" id="no_of_likes{{ $post->id }}">
-				{{$count_like}}  Likes
+				{{$count_like}}  @lang('lang.Likes')
 			</span> 
 			&nbsp&nbsp&nbsp
 			  <div class="modal fade"  id="likeModal-{{ $post->id }}" role="dialog">
@@ -159,7 +159,7 @@
 			  </div>					
 			<a class="meta-item">
 				<i class="fa fa-comment"></i>&nbsp
-				{{ $cCount=count($post->comments)  }} Comments
+				{{ $cCount=count($post->comments)  }} @lang('lang.Comments')
 			</a>
 		</div>
 		@foreach($post->comments->take(4) as $comment )
@@ -179,7 +179,7 @@
 				<div class="comment-row-item-content">
 					<textarea class="text_area_disabled" disabled id="comment-{{ $comment->id }}">{{ $comment->body }}</textarea>
 					@if($comment->user->id === Auth::id())
-					<button id="update-comment-{{ $comment->id }}" comment-id="{{ $comment->id }}" hidden class="btn btn-sm btn-default comment-update" style="margin-top: 5px" >Update</button>
+					<button id="update-comment-{{ $comment->id }}" comment-id="{{ $comment->id }}" hidden class="btn btn-sm btn-default comment-update" style="margin-top: 5px" >@lang('lang.Update')</button>
 					<button id="cancle-comment-{{ $comment->id }}" comment-id="{{ $comment->id }}" hidden class="btn btn-sm btn-danger comment-cancle" style="margin-top: 5px">X</button>
 
 					<button comment-id="{{ $comment->id }}" class="comment-row-item-action edit edit-comment">
@@ -195,17 +195,17 @@
 		</div><!--.comment-rows-container-->
 		@endforeach
 		@if(count($post->comments)>4)
-		<div style="margin-left: 25px;padding:10px;" ><a href="post/{{ $post->id }}" >{{ $cCount-4  }}&nbspother comments</a></div>
+		<div style="margin-left: 25px;padding:10px;" ><a href="post/{{ $post->id }}" >{{ $cCount-4  }}&nbsp @lang('lang.other_comments')</a></div>
 		@endif
 		<form method="Post" action="/post/comment">
 		{{ csrf_field()}}
-			<textarea class="text_area_enabled_comment 	" placeholder="Leave a comment" required  name="comment_body"></textarea>
+			<textarea class="text_area_enabled_comment 	" placeholder="{{ trans('lang.Leave_a_comment') }}" required  name="comment_body"></textarea>
 			<input type="hidden" value={{ $post->id }} name="post_id">
 			<div class="box-typical-footer">
 				<div class="tbl">
 					<div class="tbl-row">
 						<div class="tbl-cell tbl-cell-action">
-							<button type="submit" class="btn btn-rounded btn-danger">Post a comment</button>
+							<button type="submit" class="btn btn-rounded btn-danger">@lang('lang.Post_a_comment')</button>
 						</div>
 					</div>
 				</div>

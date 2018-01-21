@@ -17,6 +17,32 @@
       'Male' => 'Male',
       'Female' => 'Female',
       'Get_started_its_free'=> 'Get started - its free !',
+      'Go' => 'Go',
+      'Search_for_a_friend' => 'Search for a friend',
+      'Home'=> 'Home',
+      'notifications' => 'notifications',
+      'Post_description' => 'Post description',
+      'Delete_Post' =>'Delete Post',
+      'Cancle_editing' => 'Cancle Editing',
+      'Update_post' => 'Update post',
+      'Likes' => 'Likes',
+      'Comments' => 'Comments',
+      'Leave_a_comment' => 'Leave a comment',
+      'Post_a_comment' => 'Post a comment',
+      'Update' => 'Update',
+      'other_comments' =>'Other comments',
+      'Loading_More_post' => 'Loading More post',
+      
+
+
+
+
+
+
+
+
+
+
 
 
    ];
