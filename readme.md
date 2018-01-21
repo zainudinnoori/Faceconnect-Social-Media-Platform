@@ -46,5 +46,5 @@ Faceconnect is devolaped in Laravel 5.5v (2018) [Laravel documentation](https://
   <code>$ factory('App\Like',500)->create()</code><br>
   <code>$ factory('App\Comment',200)->create()</code><br>
   <code>$ factory('App\Message',2000)->create()</code><br>
-  <code>$ factory('App\Userfollow',2000)->create()</code> last one will create 2000 relations(Followers & Followings) to users. 
+  <code>$ factory('App\Userfollow',2000)->create()</code> This creates 2000 relations(Followers & Followings) to users. 
 <p>
