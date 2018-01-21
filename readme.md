@@ -1,7 +1,7 @@
 
-<p align="center">
- <b>Faceconnent</b>
-</p>
+
+ <h1 align="center">Faceconnent</h1>
+
 
 ## About Faceconnect
 <p>
@@ -32,19 +32,19 @@ Faceconnect is devolaped in Laravel 5.5v (2018) [Laravel documentation](https://
 
 
 ## Installation
-<b>step 1: </b><p> Open your terminal and Clone the project. like: <code>git clone https://github.com/zainudinnory/faceconnect.git</code></p>
+<b>step 1: </b><p> Open your terminal and Clone the project. Run: <code>git clone https://github.com/zainudinnory/faceconnect.git</code></p>
 <b>step 2: </b> <p>Create your .env file and specify your database</p>
-<b>step 3: </b> <p>Run <code>composer install</code></p>
-<b>step 4: </b> <p>Create a key.<code>php artisan key:generate</code></p>
+<b>step 3: </b> <p>Run: <code>composer install</code></p>
+<b>step 4: </b> <p>Create a key. Run:<code>php artisan key:generate</code></p>
 <b>step 5: </b> <p>Run the website. <code>php artisan serve</code></p>
 <b>step 6: </b> <p>Creating tables using migration. Run:<code>php artisan migrate</code></p>
-<b>step 6: </b> <p>Open your browser and and run the project. like:<code>localhost:8000</code>
+<b>step 6: </b> <p>Open your browser and and run the project. Like:<code>localhost:8000</code><br>
 <b>Note:</b>
-<p> Factories are also created to create fake datas. you can create n number of records using factory. like: 
+<p> Factories are also created to generate fake records. you can create n number of records using factories. like: 
   <code>$ factory('App\User',50)->create()</code><br>
   <code>$ factory('App\Post',200)->create()</code><br>
   <code>$ factory('App\Like',500)->create()</code><br>
   <code>$ factory('App\Comment',200)->create()</code><br>
   <code>$ factory('App\Message',2000)->create()</code><br>
-  <code>$ factory('App\Userfollow',2000)->create()</code><br> Last one will create 2000 relations(Followers & Followings) to users. 
+  <code>$ factory('App\Userfollow',2000)->create()</code> last one will create 2000 relations(Followers & Followings) to users. 
 <p>
