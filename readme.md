@@ -25,6 +25,7 @@ Faceconnect is devolaped in Laravel 5.5v (2018) [Laravel documentation](https://
  <li>Timeline</li>
  <li>Likes</li>
  <li>Comments</li>
+ <li>Sharing a post</li>
  <li>Messages and inbox</li>
  <li>Notifications</li>
  <li>Gallery</li>
