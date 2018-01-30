@@ -12,6 +12,7 @@ use Image;
 
 class postController extends Controller
 {
+
     public function store(Request $request)
     {   $i=0;
         if(is_null(request('post_body')) && is_null(request('images')))
@@ -31,14 +32,11 @@ class postController extends Controller
             $photos=request('images');
             foreach ($photos as $photo)
              {
-                    
                     $imageExtension=$photo->getClientOriginalExtension();
                     $i+=1;
                     $imageName = time().$i;
-       
                     $imageTumbnail = time().$i.'_tumbinal'.'.'.$imageExtension;
                     $imagOriginal = time().$i.'_orginal'.'.'.$imageExtension;
-
                     $destinationPath = public_path('/images');
                     $imgTumbnail = Image::make($photo->getRealPath());
                     $imgTumbnail->resize(100, 100, function ($constraint) {

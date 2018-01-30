@@ -238,16 +238,6 @@
 						</section>
 					@endif
 
-{{-- 						<section class="box-typical">
-							<header class="box-typical-header-sm bordered">Recommendation</header>
-							<div class="box-typical-inner">
-								<p>All stream</p>
-								<p>Connected Apps</p>
-								<p>Photos</p>
-								<p>Most recent</p>
-							</div>
-						</section> --}}
-
 						<section class="box-typical">
 							<header class="box-typical-header-sm bordered">Info</header>
 							<div class="box-typical-inner">
@@ -296,10 +286,16 @@
 	{{-- <script src="https://code.jquery.com/jquery-3.2.1.js"></script> --}}
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    	if($.fn.button.noConflict) {
+$.fn.btn = $.fn.button.noConflict();
+}
+    </script>
 	{{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
 	{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> --}}
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.1.2/sweetalert2.all.js"></script>
 	<script src="/js/app.js"></script>
 	

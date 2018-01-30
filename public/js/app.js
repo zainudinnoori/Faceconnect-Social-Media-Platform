@@ -50,7 +50,7 @@ $('.delete_post').click(function(e){
   var data={post_id:post_id,method:'DELETE'}
   e.preventDefault();
   swal({
-      title: 'Are you sure?',
+      title: 'Are You Sure?',
       text: "You won't be able to revert this post again!",
       type: 'warning',
       showCancelButton: true,
@@ -156,7 +156,6 @@ $('.cancel-edit').click(function updated(){
 
 
 $('.post-update').click(function(e){
-
 var post_id = $(this).attr('data-post-id');
 var post_content= $('#post_body_'+post_id).val();
 var data={

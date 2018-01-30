@@ -12,7 +12,12 @@ use App\User;
  use Carbon\Carbon;
 class profileController extends Controller
 {
+     public $searchtext = "";
 
+    public function __construct(){
+        $a = request('search_text');
+        $this->searchtext = $a;
+    }
     public function index(Request $request)
     {
         $Like= new Like;
@@ -105,8 +110,7 @@ class profileController extends Controller
     public function search()
     {
         $query=request('search_text');
-        $users = User::where('name', 'LIKE', '%' . $query . '%')->paginate(10);;
-        // dd($user);
+        $users = User::where('name', 'LIKE', '%' . $query . '%')->paginate(10);
         return view('home.searchresult',compact('users'));
     }
 }

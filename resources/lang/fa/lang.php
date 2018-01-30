@@ -31,6 +31,7 @@
       'Post_a_comment' => 'ثبت نظر',
       'Update' => 'ثبت',
       'other_comments' =>'دیگر نظریات',
-      'Loading_More_post' => 'جستجوی دیگر پوست ها',
+      'Loading_More_post' => 'جستجوی دیگر پوست ها...',
+      'amdin_panel'=>'ادمین',
    ];
 ?>

@@ -1,3 +1,6 @@
+		@extends('admin.layouts.adminmaster')
+		@section('content')
+		<div class="col-md-7 col-md-offset-3">
 		@if(is_null($post->parent_id))
 			<article class="box-typical profile-post" id="post-content{{ $post->id }}" >
 				<div class="profile-post-header">
@@ -9,7 +12,7 @@
 								</a>
 							</div>
 							<div class="tbl-cell">
-								<div class="user-card-row-name"><a href=/user/{{ $post->user->id }}>{{ $post->user->name }}</a></div>
+								<div class="user-card-row-name">{{ $post->user->name }}<a href="/Impersonate/user/{{ $post->user->id }}" style="color: blue"> &nbsp&nbsp ->Impersonate user</a></div>
 								<div class="color-blue-grey-lighter">{{ $post->created_at->diffForHumans() }}</div>
 							</div>
 						</div>
@@ -178,19 +181,7 @@
 					</div><!--.comment-row-item-->
 				</div><!--.comment-rows-container-->
 				@endforeach
-				<form method="Post" action="/post/comment">
-				{{ csrf_field()}}
-					<textarea class="text_area_enabled_comment 	" placeholder="Leave a comment" required  name="comment_body"></textarea>
-					<input type="hidden" value={{ $post->id }} name="post_id">
-					<div class="box-typical-footer">
-						<div class="tbl">
-							<div class="tbl-row">
-								<div class="tbl-cell tbl-cell-action">
-									<button type="submit" class="btn btn-rounded btn-danger">Post a comment</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
 			</article>
 	</article>
+	</div>
+	@endsection

@@ -91,9 +91,31 @@
 
   <span class="col-sm-offset-3">
     @if(Auth::check())
-    <a href="/logout">
-      <b>{{ trans('lang.Logout') }}</b>
-    </a>
+      @if($impersonateStart ?? '')
+        <a href="/stopImpersonate">
+        <b>Stop Impersonate</b>
+      </a>
+      @else
+      <div class="btn-group">
+        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account&nbsp&nbsp<i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/profile">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp
+                My Profile
+          </a>
+          <a class="dropdown-item" href="/setting"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp
+Profile Settings</a>
+          <a class="dropdown-item" href="/photos"><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp
+            My Gallery
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout" style="color: red"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp
+{{ trans('lang.Logout') }}</a>
+        </div>
+      </div>
+            @endif
     @endif
   </span>
 

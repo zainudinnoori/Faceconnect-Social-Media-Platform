@@ -14,7 +14,6 @@
 //selecting language
 Route::get('locale/{locale}', 'languageController@switchLanguage');
 
-
 Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 
@@ -70,15 +69,31 @@ Route::middleware('auth')->group(function () {
 	});
 
 });
-	//!!!
-	Route::get('sign-in',function (){
-		return view('auth.sign-in');
+
+	Route::get('/admin/login','adminController@login');
+	Route::get('/admin','adminController@index');
+	Route::get('admin/records/users','adminController@userRecords');
+	Route::get('admin/records/posts','adminController@postRecords');
+	Route::get('/Impersonate/user/{id}','adminController@impersonate');
+	Route::get('/stopImpersonate','adminController@stopimpersonate');
+	Route::get('/admin/delete/user/{id}','adminController@deleteaccount');
+	Route::get('/admin/delete/post/{id}','adminController@deletePost');
+	Route::get('/admin/showpost/{id}','adminController@showPost');
+	Route::get('/admin/user/search','adminController@userSearch');
+	Route::get('/admin/logout',function(){
+	Auth::logout();
+	return view('admin.login');
 	});
 
 
 
-Route::get('/welcome/{locale}',function($locale){
-	return view('welcome',compact('locale'));
+//!!!	
+Route::get('sign-in',function (){
+	return view('auth.sign-in');
+});
+
+Route::get('/welcome',function(){
+	return view('welcome');
 });
 
 Route::get('Cnotification',function(){

@@ -31,8 +31,10 @@
       'Post_a_comment' => 'Post a comment',
       'Update' => 'Update',
       'other_comments' =>'Other comments',
-      'Loading_More_post' => 'Loading More post',
-      
+      'Loading_More_post' => 'Loading More posts...',
+      'Are_You_sure'=>'Are You Sure ?',
+    'amdin_panel'=>'Admin Panel',
+
 
 
 
