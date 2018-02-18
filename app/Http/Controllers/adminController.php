@@ -22,8 +22,7 @@ class adminController extends Controller
 
     public function postRecords(){
     	$noOfPosts = count(Post::all());
-    	$posts = Post::all()->sortByDesc('created_at');
-   
+    	$posts = Post::paginate(20)->sortByDesc('created_at');
     	return view('admin.records.postrecords',compact('noOfPosts','posts'));	
     }
 

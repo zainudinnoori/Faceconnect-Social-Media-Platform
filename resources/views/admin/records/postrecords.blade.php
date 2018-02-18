@@ -27,6 +27,7 @@
                             {{-- <td><a href="/Impersonate/user/{{ $user->id }}">Impersonate</a> </td> --}}
                         </tr>
                     @endforeach
+                    {{-- {{ $posts->links() }} --}}
                   </tbody>
                 </table>
             </div>

@@ -18,8 +18,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-flipped.css">
     @endif
 
+    <style>
+
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+
+/* ---- particles.js container ---- */
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #b61924;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  z-index: 0;
+}
+</style>
 </head>
-<body style="background-image: url(/image/back.jpg)";> 
+ <div id="particles-js"></div>
+<body> 
     
         @yield('content')
         <div style="width: 100% ;position: fixed; height: 50px;background-color:white;bottom:0px;border-top:1px solid lightgray " >
@@ -33,6 +55,13 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.1.2/sweetalert2.all.js"></script>
     <script src="/js/app.js"></script>
+
+    <script src="/js/particles.js-master/particles.js"></script>
+    <script>
+        particlesJS.load('particles-js', '/js/particlesjs.json', function() {
+      console.log('callback - js/particles.js config loaded');
+    });
+    </script>
     @yield('scripts')
     
 </body>
