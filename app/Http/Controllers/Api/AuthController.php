@@ -9,7 +9,7 @@ use JWTAuthException;
 use App\User;
 use Validator;
 
-class ApiController extends Controller
+class AuthController extends Controller
 {
 
     // public function __construct()
@@ -29,13 +29,9 @@ class ApiController extends Controller
         return response()->json($token);
     }
 
-    public function ForgotPassword(Request $request) {
-    	return response() -> json(['forgot' =>'Password']);
-    }
-
-
-
- public function register(Request $request){
+   
+ public function register(Request $request)
+    {
         $user = new User();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
