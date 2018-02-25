@@ -32,11 +32,21 @@ class AuthController extends Controller
    
  public function register(Request $request)
     {
-        $user = new User();
-        $user->name = $request->get('name');
-        $user->email = $request->get('email');
-        $user->password = \Hash::make($request->get('password'));
-        $user->save();
+        
+        $name = $request->get('name');
+        $email = $request->get('email');
+        $user = User::where('email', '=', $request->get('email'))->first();
+        if ($user === null) {
+            $user = new User();
+            $user->name = $name;
+            $user->email = $email;
+            $user->dob=request('dob');
+            $user->password = bcrypt($request->get('password'));
+            $user->save();
+            } else {
+                return response()->json(['error' => 'User already exists!'], 400);
+            }
+        
         return response()->json(['message' => 'Registered Successfully'], 200);
     }
 }

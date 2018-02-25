@@ -23,14 +23,15 @@ class Post extends Model
     	return $this->belongsTo(User::class)->orderBy('created_at','asc');
     }
 
-    public static function getfeed()
+    public static function getfeed($uid)
     {
-        $followers = Auth::user()->follow->toArray();
+        $user= User::find($uid);
+        $followers = $user->follow->toArray();
         $arr = [];
         foreach ($followers as $follower) {
            array_push($arr,$follower['id']);
         }
-        array_push($arr, Auth::id());
+        array_push($arr, $user->id);
         return Post::whereIn('user_id', $arr);
     }
 

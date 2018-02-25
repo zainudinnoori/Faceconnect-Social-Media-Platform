@@ -24,10 +24,10 @@ Route::group(['middleware' => ['api']], function () {
 	Route::post('register','\App\Http\Controllers\Api\AuthController@register');
 
 	//UserController
-	Route::get('users/{id}/info','\App\Http\Controllers\Api\UsersController@userInformation');
-	Route::get('users/{id}/followers', '\App\Http\Controllers\Api\UsersController@followers');
-	Route::get('users/{id}/followings', '\App\Http\Controllers\Api\UsersController@followings');
-	Route::get('users/{id}/posts', '\App\Http\Controllers\Api\UsersController@posts');
+	Route::get('user/{id}/info','\App\Http\Controllers\Api\UsersController@userInformation');
+	Route::get('user/{id}/followers', '\App\Http\Controllers\Api\UsersController@followers');
+	Route::get('user/{id}/followings', '\App\Http\Controllers\Api\UsersController@followings');
+	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\UsersController@posts');
 
 
 	//PhotoController
@@ -36,6 +36,7 @@ Route::group(['middleware' => ['api']], function () {
 	//postController
 	Route::get('post/{pid}/likes','\App\Http\Controllers\Api\PostController@likes');
 	Route::get('post/{pid}/comments','\App\Http\Controllers\Api\PostController@comments');
+	Route::get('user/{id}/followings/post', '\App\Http\Controllers\Api\PostController@followingPosts');
 
 
 	//MessageController

@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function home(Request $request)
     {
-        $posts= Post::getfeed()->orderBy('created_at','desc')->paginate(5);
+        $posts= Post::getfeed(Auth::id())->orderBy('created_at','desc')->paginate(5);
         $Like= new Like;
         $Post = new Post;
         $User = new User;

@@ -9,7 +9,9 @@ use JWTAuth;
 use JWTAuthException;
 use App\User;
 use App\Post;
-
+use App\like;
+use App\Comment;
+use Auth;
 
 class PostController extends Controller
 {
@@ -25,4 +27,17 @@ class PostController extends Controller
     $comments= $post->comments;
     return response()->json(['comments' => $comments]);
 	}
+
+
+    public function followingPosts($uid){
+
+        $user= User::find($uid);
+        $posts = $user->posts;
+        $Follwingsposts= Post::getfeed($uid)->get();
+
+        return response()->json(['posts' => $posts,
+            '-------------------f Posts ' => $Follwingsposts
+        ]);
+    }
+
 }
