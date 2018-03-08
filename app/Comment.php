@@ -20,6 +20,10 @@ class Comment extends Model
     	return $this->belongsTo(User::class);
     }
 
+    public function commentUser(){
+    	return $this->belongsTo(User::class,'user_id','id')->
+    		select('id','name','image');
+    }
 
 
 }

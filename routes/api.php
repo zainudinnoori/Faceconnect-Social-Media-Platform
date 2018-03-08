@@ -29,7 +29,6 @@ Route::group(['middleware' => ['api']], function () {
 	Route::get('user/{id}/followings', '\App\Http\Controllers\Api\UsersController@followings');
 	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\UsersController@posts');
 
-
 	//PhotoController
 	Route::get('users/{id}/photos','\App\Http\Controllers\Api\PhotoController@photos');
 
@@ -37,17 +36,20 @@ Route::group(['middleware' => ['api']], function () {
 	Route::get('post/{pid}/likes','\App\Http\Controllers\Api\PostController@likes');
 	Route::get('post/{pid}/comments','\App\Http\Controllers\Api\PostController@comments');
 	Route::get('user/{id}/followings/post', '\App\Http\Controllers\Api\PostController@followingPosts');
+	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\PostController@myPosts');
+	Route::post('/post/store', '\App\Http\Controllers\Api\PostController@storeNewPost');
+	Route::post('/post/{postId}/like', '\App\Http\Controllers\Api\PostController@storeNewLike');
+	Route::post('/post/{postId}/comment/store', '\App\Http\Controllers\Api\PostController@storeNewComment');
+
+
+	
+
 
 
 	//MessageController
-
 	Route::post('message/write/{fromUserId}/{toUserId}/{body}','\App\Http\Controllers\Api\MessageController@write');
+	
 	// Route::get('message/recieve','\App\Http\Controllers\Api\MessageController@message');
-
-
-
-
-
     Route::group(['middleware' => 'jwt.auth'], function () {
         Route::get('user', 'ApiController@getAuthUser');
     

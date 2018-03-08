@@ -13,8 +13,6 @@ use Auth;
 
 class UsersController  extends Controller
 {
-
-
     public function userInformation($id)
     {
         $user= User::find($id);
@@ -42,11 +40,6 @@ class UsersController  extends Controller
         return response()->json(['photos' => $photos]);
     }
 
-    public function posts($id)
-    {
-        $user= User::find($id);
-        $posts= $user->posts;
-        return response()->json(['posts' => $posts  ]);
-    }
+
 
 }    
