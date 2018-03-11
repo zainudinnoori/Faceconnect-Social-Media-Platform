@@ -46,7 +46,13 @@ class UsersController  extends Controller
     {
         $user= User::find($id);
         $posts= $user->posts;
-        return response()->json(['posts' => $posts  ]);
+        foreach ($posts as $post) {
+
+            // $likeCount = $post->likes->count();
+            $post->comments;
+            $post->photos;
+        }
+        return response()->json(['post' => $posts ]);
     }
 
 }    

@@ -37,6 +37,7 @@ Route::group(['middleware' => ['api']], function () {
 	Route::get('post/{pid}/likes','\App\Http\Controllers\Api\PostController@likes');
 	Route::get('post/{pid}/comments','\App\Http\Controllers\Api\PostController@comments');
 	Route::get('user/{id}/followings/post', '\App\Http\Controllers\Api\PostController@followingPosts');
+	Route::get('post/{pid}', '\App\Http\Controllers\Api\PostController@post');
 
 
 	//MessageController

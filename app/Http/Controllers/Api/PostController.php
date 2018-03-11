@@ -31,13 +31,26 @@ class PostController extends Controller
 
     public function followingPosts($uid){
 
-        $user= User::find($uid);
-        $posts = $user->posts;
-        $Follwingsposts= Post::getfeed($uid)->get();
+        $posts =Post::getfeed($uid);
+        
+        $followingsposts= Post::getfeed($uid)->get();
+        return response()->json(['followingsposts' => $followingsposts,'posts'=> $posts]);
 
-        return response()->json(['posts' => $posts,
-            '-------------------f Posts ' => $Follwingsposts
-        ]);
+    }
+
+    public function post($pid){
+
+        $post = Post::find($pid);
+        $likeCount = $post->likes->count();
+        $commentCount = $post->comments->count();
+        $comments = $post->comments()->orderBy('id','desc')->get();
+        foreach ($comments as $comment) {
+           $comment->user;
+        }
+
+        $user = $post->user;
+        return response()->json(['post' => $post ,'likeCount' => $likeCount, 'commentCount' => $commentCount ,
+            'comments'=> $comments,'user'=>$user]);
     }
 
 }

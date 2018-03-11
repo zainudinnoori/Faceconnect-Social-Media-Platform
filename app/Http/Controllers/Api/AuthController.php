@@ -8,6 +8,7 @@ use JWTAuth;
 use JWTAuthException;
 use App\User;
 use Validator;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -26,7 +27,10 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        return response()->json($token);
+        return response()->json([
+            'token'=>$token,
+            'id'=>auth()->Id()
+        ]);
     }
 
    
