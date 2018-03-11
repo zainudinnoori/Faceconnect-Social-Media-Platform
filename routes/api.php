@@ -40,9 +40,9 @@ Route::group(['middleware' => ['api']], function () {
 	Route::post('/post/store', '\App\Http\Controllers\Api\PostController@storeNewPost');
 	Route::post('/post/{postId}/like', '\App\Http\Controllers\Api\PostController@storeNewLike');
 	Route::post('/post/{postId}/comment/store', '\App\Http\Controllers\Api\PostController@storeNewComment');
+	Route::get('/post/{pId}/{uId}/delete', '\App\Http\Controllers\Api\PostController@deletePost');
+	Route::post('/post/{pId}/{uId}/update', '\App\Http\Controllers\Api\PostController@editPost');
 
-
-	
 
 
 

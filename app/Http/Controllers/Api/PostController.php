@@ -91,4 +91,37 @@ class PostController extends Controller
         ]);
         return response()->json(['status'=>'Done']);
     }
+
+    public function deletePost($pId,$uId){
+        $post = Post::find($pId);
+        if($post){
+            if($post->user->id != $uId)
+            {
+                return response()->json(['status'=> 'faild']);
+            }
+            else
+            {
+                $post->delete();
+                return response()->json(['status'=> 'done']);
+            }
+        }
+        return response()->json(['status'=> 'faild post doesnt exist']);
+    }
+
+    public function editPost($pId,$uId){
+        $post = Post::find($pId);
+        if($post){
+            if($post->user->id != $uId)
+            {
+                return response()->json(['status'=> 'faild']);
+            }
+            else
+            {
+                $post->body = request('postBody');
+                $post->save();
+                return response()->json(['status'=> 'done']);
+            }
+        }
+        return response()->json(['status'=> 'faild post doesnt exist']);
+    }
 }
