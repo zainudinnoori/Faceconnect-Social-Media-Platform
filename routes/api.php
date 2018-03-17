@@ -28,20 +28,24 @@ Route::group(['middleware' => ['api']], function () {
 	Route::get('user/{id}/followers', '\App\Http\Controllers\Api\UsersController@followers');
 	Route::get('user/{id}/followings', '\App\Http\Controllers\Api\UsersController@followings');
 	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\UsersController@posts');
+	Route::post('/user/follow', '\App\Http\Controllers\Api\UsersController@follow');
 
 	//PhotoController
 	Route::get('users/{id}/photos','\App\Http\Controllers\Api\PhotoController@photos');
 
 	//postController
-	Route::get('post/{pid}/likes','\App\Http\Controllers\Api\PostController@likes');
-	Route::get('post/{pid}/comments','\App\Http\Controllers\Api\PostController@comments');
-	Route::get('user/{id}/followings/post', '\App\Http\Controllers\Api\PostController@followingPosts');
-	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\PostController@myPosts');
 	Route::post('/post/store', '\App\Http\Controllers\Api\PostController@storeNewPost');
+	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\PostController@myPosts');
+	Route::get('user/{id}/followings/post', '\App\Http\Controllers\Api\PostController@followingPosts');
+	Route::get('/post/{pId}/show', '\App\Http\Controllers\Api\PostController@showPost');
+	Route::get('post/{pid}/likes','\App\Http\Controllers\Api\PostController@likes');
 	Route::post('/post/{postId}/like', '\App\Http\Controllers\Api\PostController@storeNewLike');
+	Route::get('post/{pid}/comments','\App\Http\Controllers\Api\PostController@comments');
 	Route::post('/post/{postId}/comment/store', '\App\Http\Controllers\Api\PostController@storeNewComment');
 	Route::get('/post/{pId}/{uId}/delete', '\App\Http\Controllers\Api\PostController@deletePost');
 	Route::post('/post/{pId}/{uId}/update', '\App\Http\Controllers\Api\PostController@editPost');
+	Route::Post('/post/{pId}/share', '\App\Http\Controllers\Api\PostController@share');
+
 
 
 

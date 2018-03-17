@@ -124,4 +124,23 @@ class PostController extends Controller
         }
         return response()->json(['status'=> 'faild post doesnt exist']);
     }
+
+    public function showPost($pId){
+        $post= Post::where('id',$pId)
+            ->with(['postUser','comments.commentUser'])
+            ->withCount('likes')
+            ->withCount('comments')
+            ->first();
+        return response()->json(['post' => $post]);
+    }
+
+    public function share($pId)
+    {
+        $uId = request('userId');
+        Post::create([
+            'user_id'=> $uId,
+            'parent_id'=> $pId,
+        ]);
+        return response()->json(['status' => 'done']);
+    }
 }

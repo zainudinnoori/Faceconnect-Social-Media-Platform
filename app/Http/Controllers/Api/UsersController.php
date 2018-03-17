@@ -40,6 +40,25 @@ class UsersController  extends Controller
         return response()->json(['photos' => $photos]);
     }
 
+    public function follow()
+    {
+        $follower = request('authId');
+        $userid = request('userId');
+        $user = User::find($userid);
+        $userfollower = User::find($follower);
+        // $already_follow = User_follow::where(['user_id' => $follower,'follow_id' => $userid])->first();
+        $already_follow = User_follow::whereUserId($follower)->whereFollowId($userid)->first();
+        if(is_null($already_follow))
+        {
+            $userfollower->follow()->save($user);
+            return response()->json(['status' => 'followed']);
+        }
+        else
+        {
+            $userfollower->follow()->detach($user);
+            return response()->json(['status' => 'unfollowed']);
+        }
+    }
 
 
 }    

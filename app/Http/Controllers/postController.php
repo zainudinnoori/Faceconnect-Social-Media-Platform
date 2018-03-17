@@ -78,7 +78,7 @@ class postController extends Controller
         $post->body= $request['post_content'];
         $post->save();
         return response()->json([
-          'success' => 'Record has been updated successfully!'
+          'status' => 'updated'
         ]);
     }
 
