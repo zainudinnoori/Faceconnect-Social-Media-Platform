@@ -8,7 +8,9 @@ use JWTAuth;
 use JWTAuthException;
 use App\User;
 use Validator;
+use Hash;
 use Auth;
+
 class AuthController extends Controller
 {
 
@@ -26,19 +28,20 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+
         return response()->json(['token'=> $token,'authId'=> Auth::id() ,'authName' => Auth::user()->name ]);
+
     }
 
    
  public function register(Request $request)
     {
-        
         $name = $request->get('name');
         $email = $request->get('email');
         $user = User::where('email', '=', $request->get('email'))->first();
         if ($user === null) {
             $user = new User();
-            $user->name = $name;
+            $user->name = $napacme;
             $user->email = $email;
             $user->dob=request('dob');
             $user->password = bcrypt($request->get('password'));

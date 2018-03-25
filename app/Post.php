@@ -22,6 +22,11 @@ class Post extends Model
     	return $this->belongsTo(User::class);
     }
 
+        public function postuser(){
+
+        return $this->belongsTo(User::class,'user_id','id')->select('id','name','image');
+    }
+
     public static function getfeed($uid)
     {
         $user= User::find($uid);
@@ -39,14 +44,16 @@ class Post extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class);
-    }
+    	return $this->hasMany(Comment::class, 'post_id','id')->orderBy('id','desc');
 
+    }
+     
     public function photos()
     {
         return $this->hasMany(Photo::class);
     }
-     public function likes()
+
+    public function likes()
     {
         return $this->hasMany(Like::class);
     }

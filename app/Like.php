@@ -17,6 +17,10 @@ class Like extends Model
 		return $this->belongsTo(User::class);
 	}
 
+  public function likeUser(){
+    return $this->belongsTo(User::class, 'user_id','id')->select('id','name','image');
+  }
+
 	public static function likers($id){
 		
 		$post=Post::find($id);

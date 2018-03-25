@@ -19,13 +19,17 @@ class PostController extends Controller
     public function likes($pid) {
        	$post= Post::find($pid);
         $likes= $post->likes()->with('likeUser')->get();
+
+
         return response()->json(['likes' => $likes]);
     }
 
     public function comments($pid){
+
         $post= Post::find($pid);
         $comments= $post->comments()->with('commentUser')->get();
         return response()->json(['comments' => $comments]);
+
 	}
 
 
@@ -38,6 +42,7 @@ class PostController extends Controller
             ->get();
         return response()->json(['posts' => $posts]);
     }
+
 
     public function myPosts($uid){
         $user= User::find($uid);
@@ -88,6 +93,7 @@ class PostController extends Controller
             'post_id' => $postId,
         ]);
         return response()->json(['status'=>'Done']);
+
     }
 
     public function deletePost($pId,$uId){

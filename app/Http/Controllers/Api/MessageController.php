@@ -20,7 +20,7 @@ class MessageController extends Controller
     		'to_user_id' => $toUserId,
     		'body' => $body,
     	]);
-    	return response()-> json(['status' =>'Mesage sent successfullyu']);
+    	return response()-> json(['status' =>'Message sent successfully']);
     }
 
 }
