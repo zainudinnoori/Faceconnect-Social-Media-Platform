@@ -33,4 +33,9 @@ class Like extends Model
    		}
    		return $likerarr;
    	}
+
+    public function likeUser(){
+        return $this->belongsTo(User::class,'user_id','id')->
+        select('id','name','image');
+    }
 }

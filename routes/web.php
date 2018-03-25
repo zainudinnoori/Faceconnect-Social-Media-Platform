@@ -62,11 +62,12 @@ Route::middleware('auth')->group(function () {
 	Route::get('chatting/{id}','messageController@getChats');
 	//logout user
 	Route::get('logout',function(){
-	//simple serach!!
-	Route::get('search','profileController@search');
 		Auth::logout();
 		return view('auth.login');
 	});
+
+	//simple serach!!
+	Route::get('search','profileController@search');
 
 });
 

@@ -12,7 +12,6 @@ use Auth;
 class Post extends Model
 {
     use Notifiable;
-
 	 protected $fillable = [
         'body', 'user_id','parent_id'
     ];
@@ -20,7 +19,7 @@ class Post extends Model
 
     public function user(){
 
-    	return $this->belongsTo(User::class)->orderBy('created_at','asc');
+    	return $this->belongsTo(User::class);
     }
 
         public function postuser(){
@@ -37,17 +36,24 @@ class Post extends Model
            array_push($arr,$follower['id']);
         }
         array_push($arr, $user->id);
-        return Post::whereIn('user_id', $arr);
+        return Post::whereIn('user_id', $arr)->orderBy('created_at','desc');
     }
 
+    public function latestComments(){
+        return $this->comments()->latest()->nPerGroup('post_id',2);
+    }
     public function comments()
     {
+<<<<<<< HEAD
     	return $this->hasMany(Comment::class, 'post_id','id')->orderBy('id','desc');
+=======
+        return $this->hasMany(Comment::class);
+>>>>>>> d697d93c4a2686bc001c4899a59a17ded504c96f
     }
      
     public function photos()
     {
-    	return $this->hasMany(Photo::class);
+        return $this->hasMany(Photo::class);
     }
 
     public function likes()
@@ -56,9 +62,28 @@ class Post extends Model
     }
 
 
+<<<<<<< HEAD
     // public function latestComments()
     // {
     //     return $this->comments()->limit(2);
     // }
+=======
+    public function commentSummary()
+    {
+        return $this->comments()->select('post_id','body','user_id','created_at');
+        
+    }
+
+    public function CountOflikes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function postUser(){
+
+        return $this->belongsTo(User::class,'user_id','id')
+            ->select('id','name','image');
+    }
+>>>>>>> d697d93c4a2686bc001c4899a59a17ded504c96f
 
 }
