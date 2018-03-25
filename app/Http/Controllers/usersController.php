@@ -11,7 +11,7 @@ use App\Like;
 use App\Message;
 class usersController extends Controller
 {
-    
+
     public function index($id)
     {
         $Like= new Like;

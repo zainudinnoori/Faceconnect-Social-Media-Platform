@@ -29,20 +29,21 @@ class AuthController extends Controller
 
         return response()->json([
             'token'=>$token,
-            'id'=>auth()->Id()
+            'id'=>auth()->Id(),
+            'user'=>auth()->user()
+
         ]);
     }
 
    
  public function register(Request $request)
     {
-        
         $name = $request->get('name');
         $email = $request->get('email');
         $user = User::where('email', '=', $request->get('email'))->first();
         if ($user === null) {
             $user = new User();
-            $user->name = $name;
+            $user->name = $napacme;
             $user->email = $email;
             $user->dob=request('dob');
             $user->password = bcrypt($request->get('password'));

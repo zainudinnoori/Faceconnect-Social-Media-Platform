@@ -95,13 +95,3 @@ class postController extends Controller
     public function share($id)
     {
         $post= Post::find($id);
-        $post->create([
-            'user_id'=> Auth::id(),
-            'parent_id'=> $id,
-        ]);
-        $post->save();
-        session()->flash('PostShared','Post shared successfully.');
-        return back();
-    }
-
-}

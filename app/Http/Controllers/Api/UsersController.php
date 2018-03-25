@@ -10,6 +10,8 @@ use App\User;
 use App\User_follow;
 use App\Me;
 use Auth;
+use Storage;
+use App\Photo;
 
 class UsersController  extends Controller
 {
@@ -35,24 +37,5 @@ class UsersController  extends Controller
         return response()->json(['followings' => $followings]);
     }
 
-    public function photos($id)
-    {
-        $user= User::find($id);
-        $photos= $user->photos;
-        return response()->json(['photos' => $photos]);
-    }
-
-    public function posts($id)
-    {
-        $user= User::find($id);
-        $posts= $user->posts;
-        foreach ($posts as $post) {
-
-            // $likeCount = $post->likes->count();
-            $post->comments;
-            $post->photos;
-        }
-        return response()->json(['post' => $posts ]);
-    }
 
 }    

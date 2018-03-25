@@ -27,6 +27,7 @@ Route::group(['middleware' => ['api']], function () {
 	Route::get('user/{id}/info','\App\Http\Controllers\Api\UsersController@userInformation');
 	Route::get('user/{id}/followers', '\App\Http\Controllers\Api\UsersController@followers');
 	Route::get('user/{id}/followings', '\App\Http\Controllers\Api\UsersController@followings');
+	Route::get('user/{id}/photos', '\App\Http\Controllers\Api\UsersController@photos');
 	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\UsersController@posts');
 
 
