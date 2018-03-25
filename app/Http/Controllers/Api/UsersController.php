@@ -16,7 +16,9 @@ class UsersController  extends Controller
     public function userInformation($id)
     {
         $user= User::find($id);
-        return response()->json(['userInfo' => $user]);
+        $path = url('/images/'.$user->image);
+
+        return response()->json(['userInfo' => $user,'path' => $path]);
     }
 
     public function followers($id)
@@ -33,13 +35,6 @@ class UsersController  extends Controller
         return response()->json(['followings' => $followings]);
     }
 
-    public function photos($id)
-    {
-        $user= User::find($id);
-        $photos= $user->photos;
-        return response()->json(['photos' => $photos]);
-    }
-
     public function follow()
     {
         $follower = request('authId');
@@ -51,13 +46,20 @@ class UsersController  extends Controller
         if(is_null($already_follow))
         {
             $userfollower->follow()->save($user);
-            return response()->json(['status' => 'followed']);
+            return response('Hello World', 401)->json(['status' => 'followed']);
         }
         else
         {
             $userfollower->follow()->detach($user);
-            return response()->json(['status' => 'unfollowed']);
+            return response('Hello World', 200)->json(['status' => 'unfollowed']);
         }
+    }
+
+    public function notifications($userId)
+    {
+        $user = User::find($userId);
+        $notifications = $user->unreadnotifications;
+        return response()->json(['notifications' => $notifications]);
     }
 
 

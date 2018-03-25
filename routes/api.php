@@ -29,9 +29,10 @@ Route::group(['middleware' => ['api']], function () {
 	Route::get('user/{id}/followings', '\App\Http\Controllers\Api\UsersController@followings');
 	Route::get('user/{id}/posts', '\App\Http\Controllers\Api\UsersController@posts');
 	Route::post('/user/follow', '\App\Http\Controllers\Api\UsersController@follow');
+	Route::get('/user/{userId}/notifications', '\App\Http\Controllers\Api\UsersController@notifications');
 
 	//PhotoController
-	Route::get('users/{id}/photos','\App\Http\Controllers\Api\PhotoController@photos');
+	Route::get('user/{id}/photos','\App\Http\Controllers\Api\PhotoController@photos');
 
 	//postController
 	Route::post('/post/store', '\App\Http\Controllers\Api\PostController@storeNewPost');
@@ -58,6 +59,10 @@ Route::group(['middleware' => ['api']], function () {
         Route::get('user', 'ApiController@getAuthUser');
     
 	    });
+	Route::get('/response', function (){
+		$data  = 'jan';
+		return response()->json($data, 200);
+	});
 
 });
 

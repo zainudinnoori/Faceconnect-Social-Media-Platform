@@ -18,13 +18,13 @@ class PostController extends Controller
 
     public function likes($pid) {
        	$post= Post::find($pid);
-        $likes= $post->likes;
+        $likes= $post->likes()->with('likeUser')->get();
         return response()->json(['likes' => $likes]);
     }
 
     public function comments($pid){
         $post= Post::find($pid);
-        $comments= $post->comments;
+        $comments= $post->comments()->with('commentUser')->get();
         return response()->json(['comments' => $comments]);
 	}
 
@@ -52,8 +52,9 @@ class PostController extends Controller
     public function storeNewPost()
     {
         $postBody = request('body');
+        $userId = request('userId');
         Post::create([
-            'user_id'=> 59,
+            'user_id'=> $userId,
             'body' => $postBody,
        ]);
         return response()->json(['status' => 'Done']);
@@ -81,9 +82,6 @@ class PostController extends Controller
 
     public function storeNewComment($postId)
     {
-        // $request->validate([
-        //     'comment_body'=>'required'
-        // ]);
         Comment::create([
             'body' => request('comment_body'),
             'user_id' => request('userId'),

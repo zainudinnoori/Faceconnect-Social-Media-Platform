@@ -81,7 +81,15 @@ class User extends Authenticatable implements JWTSubject
       return $this->hasMany(Blockuser::class);
     }
 
+    public function getImagePathAttribute()
+    {
+        return url('images/'.$this->attributes['image']);
       // Rest omitted for brevity
+    }
+    protected $appends =
+    [
+        'image_path'
+    ];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -102,4 +110,5 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
 }

@@ -11,11 +11,12 @@ use App\User;
 class PhotoController extends Controller
 {
 
-public function photos($id)
+    public function photos($id)
     {
         $user= User::find($id);
         $photos= $user->photos;
-        return response()->json(['photos' => $photos]);
+        $photosPath = public_path().'/images/'.$photos;
+        return response()->json(['photos' => $photosPath]);
     }
     
 
