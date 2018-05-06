@@ -95,3 +95,5 @@ class postController extends Controller
     public function share($id)
     {
         $post= Post::find($id);
+    }
+}
