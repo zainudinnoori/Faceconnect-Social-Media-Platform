@@ -70,10 +70,4 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
 
-    public function postUser(){
-
-        return $this->belongsTo(User::class,'user_id','id')
-            ->select('id','name','image');
-    }
-
 }

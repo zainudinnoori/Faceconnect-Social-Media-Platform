@@ -19,18 +19,9 @@ class Comment extends Model
     	return $this->belongsTo(User::class);
     }
 
-<<<<<<< HEAD
     public function commentUser()
     {
         return $this->belongsTo(User::class,'user_id','id')->select('id','name','image');
     }
-
-=======
-    public function commentUser(){
-    	return $this->belongsTo(User::class,'user_id','id')->
-    		select('id','name','image');
-    }
->>>>>>> d697d93c4a2686bc001c4899a59a17ded504c96f
-
 
 }
