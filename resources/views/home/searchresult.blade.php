@@ -24,8 +24,8 @@
 					</div>
 					<div>
 						<b>{{ $user->clocation}}&nbsp&nbsp{{ $user->ccountry }}</b><br>
-						<small>Followers:&nbsp&nbsp&nbsp{{ count($user->follow) }}&nbsp<i class="fa fa-user"></i></small><br>
-						<small>Followings:&nbsp&nbsp{{ count($user->followings) }}&nbsp<i class="fa fa-user"></i></small>
+						{{-- <small>Followers:&nbsp&nbsp&nbsp{{ count($user->follow) }}&nbsp<i class="fa fa-user"></i></small><br> --}}
+						{{-- <small>Followings:&nbsp&nbsp{{ count($user->followings) }}&nbsp<i class="fa fa-user"></i></small> --}}
 					</div>
 				</div>
 			</article>
