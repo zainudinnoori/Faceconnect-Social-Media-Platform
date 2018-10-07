@@ -95,5 +95,11 @@ class postController extends Controller
     public function share($id)
     {
         $post= Post::find($id);
+        Post::create([
+            'user_id' => auth::id(),
+            'parent_id' => $post->id
+        ]);
+
+        return back();
     }
 }

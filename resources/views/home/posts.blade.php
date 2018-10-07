@@ -27,7 +27,7 @@
 			<a href="/post/{{ $post->id }}" title="Post Desc.." style="margin-right:20px" class="shared">
 				{{ trans('lang.Post_description') }}
 			</a>
-			<form method="POST" action="/share/{{ $post->id }}">
+			<form method="POST" action={{ route('sharepost',$post->id) }}>
 				{{ csrf_field()	}}
 				<button title="Share" style="background: transparent;" class="shared">
 					<i class="fa fa-share-alt"></i>

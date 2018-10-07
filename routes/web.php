@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 	//delete profile photos
 	Route::delete('photo/delete/{id}','photoController@destroy');
 	//share, like posts
-	Route::Post('share/{id}','postController@share');
+	Route::Post('/share/{id}','postController@share')->name('sharepost');
 	Route::post('like/store','likeController@store');   
 	//getting likers
 	Route::get('post/likers/{id}','likeController@likers');
