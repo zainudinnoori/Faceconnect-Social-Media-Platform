@@ -33,7 +33,7 @@ Faceconnect is devolaped in Laravel 5.5v (2018) [Laravel documentation](https://
 
 
 ## Installation
-<b>step 1: </b><p> Open your terminal and Clone the project. Run: <code>git clone https://github.com/zainudinnory/faceconnect.git</code></p>
+<b>step 1: </b><p> Open your terminal and Clone the project. Run: <code>https://github.com/zainudinnoori/faceconnect-social-media-application.git</code></p>
 <b>step 2: </b> <p>Create your .env file and specify your database</p>
 <b>step 3: </b> <p>Run: <code>composer install</code></p>
 <b>step 4: </b> <p>Create a key. Run:<code>php artisan key:generate</code></p>
